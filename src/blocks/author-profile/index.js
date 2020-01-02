@@ -4,6 +4,7 @@ import { __ } from "@wordpress/i18n";
 import { RichText } from "@wordpress/editor";
 import edit from "./edit.js";
 import classnames from "classnames";
+import SocialLinks from "./social.js";
 
 const attributes = {
 	author_name: {
@@ -173,36 +174,93 @@ registerBlockType("guteblock/author-profile", {
 			author_image,
 			alignment,
 			paddingTop,
-			paddingBottom
+			paddingBottom,
+			social_facebook,
+			social_twitter,
+			social_instagram,
+			social_pinterest,
+			social_linkedin,
+			social_youtube,
+			backgroundColor,
+			imageBorderColor,
+			titleColor,
+			textColor
 		} = attributes;
 
 		const classes = classnames({
 			[`align-${alignment}`]: alignment
 		});
 
+		const isStyle = RegExp(/is-style-/)
+		const styleName = isStyle.test(attributes.className)
+			? attributes.className.replace(isStyle, '')
+			: null
+		
+		console.log(styleName);
+
 		return (
 			<div
 				className={classes}
 				style={{
 					paddingTop: paddingTop,
-					paddingBottom: paddingBottom
+					paddingBottom: paddingBottom,
+					backgroundColor: backgroundColor
 				}}
 			>
-				<img src={author_image} alt={author_name} />
-				<RichText.Content
-					className={
-						"wp-block-guteblock-author-profile__authorName"
-					}
-					tagName="h4"
-					value={author_name}
-				/>
-				<RichText.Content
-					className={
-						"wp-block-guteblock-author-profile__authorDescription"
-					}
-					tagName="p"
-					value={author_description}
-				/>
+				<div className="wp-block-guteblock-author-profile__container">
+					
+					<div
+						className="wp-block-guteblock-author-profile__avatarOuter"
+						style={{
+							borderColor: imageBorderColor
+						}}
+					>
+						<img
+							src={author_image}
+							alt={author_name}
+						/>
+					</div>
+
+					{(styleName != 2) && (
+						<SocialLinks 
+							social_facebook={social_facebook}
+							social_twitter={social_twitter}
+							social_instagram={social_instagram}
+							social_pinterest={social_pinterest}
+							social_youtube={social_youtube}
+							social_linkedin={social_linkedin}									  
+						/>
+					)}								
+					<div className="wp-block-guteblock-author-profile__contentOuter">
+						<RichText.Content
+							className={
+								"wp-block-guteblock-author-profile__authorName"
+							}
+							tagName="h4"							
+							value={author_name}
+							style={{ color: titleColor }}
+						/>								
+						<RichText.Content
+							className={
+								"wp-block-guteblock-author-profile__authorDescription"
+							}
+							tagName="p"
+							value={author_description}
+							style={{ color: textColor }}
+						/>
+						{(styleName == 2) && (
+							<SocialLinks 
+								social_facebook={social_facebook}
+								social_twitter={social_twitter}
+								social_instagram={social_instagram}
+								social_pinterest={social_pinterest}
+								social_youtube={social_youtube}
+								social_linkedin={social_linkedin}									  
+							/>
+						)}
+					</div>
+					<div className="clear"></div>
+				</div>
 			</div>
 		);
 	}

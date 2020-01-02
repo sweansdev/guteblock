@@ -16,6 +16,7 @@ import {
 } from "@wordpress/components";
 import classnames from "classnames";
 import { withSelect } from "@wordpress/data";
+import SocialLinks from "./social.js";
 
 class AuthorProfileEdit extends Component {
 	onChangeAuthorName = author_name => {
@@ -55,6 +56,7 @@ class AuthorProfileEdit extends Component {
 			author_details,
 			setAttributes
 		} = this.props;
+
 		const {
 			is_first_load,
 			author_name,
@@ -75,6 +77,13 @@ class AuthorProfileEdit extends Component {
 			titleColor,
 			textColor
 		} = attributes;
+
+		const isStyle = RegExp(/is-style-/)
+		const styleName = isStyle.test(attributes.className)
+			? attributes.className.replace(isStyle, '')
+			: null
+		
+		console.log(styleName);
 
 		const classes = classnames(className, {
 			[`align-${alignment}`]: alignment
@@ -227,137 +236,92 @@ class AuthorProfileEdit extends Component {
 						backgroundColor: backgroundColor
 					}}
 				>
-					<MediaUpload
-						onSelect={this.onSelectAuthorImage}
-						allowedTypes={["image"]}
-						value={author_image_id} // To highlight the selected image in the Media Library
-						render={({ open }) => {
-							return (
-								<>
-									{author_image ? (
-										<div
-											className="wp-block-guteblock-author-profile__avatarOuter"
-											style={{
-												borderColor: imageBorderColor
-											}}
-										>
-											<img
-												src={author_image}
-												alt={author_name}
+					<div className="wp-block-guteblock-author-profile__container">
+						<MediaUpload
+							onSelect={this.onSelectAuthorImage}
+							allowedTypes={["image"]}
+							value={author_image_id}
+							render={({ open }) => {
+								return (
+									<>
+										{author_image ? (
+											<div
+												className="wp-block-guteblock-author-profile__avatarOuter"
+												style={{
+													borderColor: imageBorderColor
+												}}
+											>
+												<img
+													src={author_image}
+													alt={author_name}
+													onClick={open}
+													data-id={
+														author_image_id
+													}
+												/>
+											</div>
+										) : (
+											<IconButton
+												className="components-icon-button-components-toolbar__control"
+												label={__(
+													"Edit Image",
+													"guteblock"
+												)}
 												onClick={open}
-												data-id={
-													author_image_id
-												}
+												icon="format-image"
 											/>
-										</div>
-									) : (
-										<IconButton
-											className="components-icon-button-components-toolbar__control"
-											label={__(
-												"Edit Image",
-												"guteblock"
-											)}
-											onClick={open}
-											icon="format-image"
-										/>
-									)}
-								</>
-							);
-						}}
-					/>
-					{(social_facebook ||
-						social_twitter ||
-						social_instagram ||
-						social_pinterest ||
-						social_youtube ||
-						social_linkedin) && (
-						<div className="wp-block-guteblock-author-profile__socialOuter">
-							{social_facebook && (
-								<a
-									className="social_links social_facebook"
-									href={social_facebook}
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									<i className="icon-facebook"></i>
-								</a>
-							)}
-							{social_twitter && (
-								<a
-									className="social_links social_twitter"
-									href={social_twitter}
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									<i className="icon-twitter"></i>
-								</a>
-							)}
-							{social_instagram && (
-								<a
-									className="social_links social_instagram"
-									href={social_instagram}
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									<i className="icon-instagram"></i>
-								</a>
-							)}
-							{social_pinterest && (
-								<a
-									className="social_links social_pinterest"
-									href={social_pinterest}
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									<i className="icon-pinterest"></i>
-								</a>
-							)}
-							{social_youtube && (
-								<a
-									className="social_links social_youtube"
-									href={social_youtube}
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									<i className="icon-youtube"></i>
-								</a>
-							)}
-							{social_linkedin && (
-								<a
-									className="social_links social_linkedin"
-									href={social_linkedin}
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									<i className="icon-linkedin-squared"></i>
-								</a>
+										)}
+									</>
+								);
+							}}
+						/>
+						{(styleName != 2) && (
+							<SocialLinks 
+								social_facebook={social_facebook}
+								social_twitter={social_twitter}
+								social_instagram={social_instagram}
+								social_pinterest={social_pinterest}
+								social_youtube={social_youtube}
+								social_linkedin={social_linkedin}									  
+							/>
+						)}								
+						<div className="wp-block-guteblock-author-profile__contentOuter">
+							<RichText
+								className={
+									"wp-block-guteblock-author-profile__authorName"
+								}
+								tagName="h4"
+								onChange={this.onChangeAuthorName}
+								value={author_name}
+								placeholder={__("Author Name", "guteblock")}
+								style={{ color: titleColor }}
+							/>								
+							<RichText
+								className={
+									"wp-block-guteblock-author-profile__authorDescription"
+								}
+								tagName="p"
+								onChange={this.onChangeAuthorDescription}
+								value={author_description}
+								placeholder={__(
+									"Author Description",
+									"guteblock"
+								)}
+								style={{ color: textColor }}
+							/>
+							{(styleName == 2) && (
+								<SocialLinks 
+									social_facebook={social_facebook}
+									social_twitter={social_twitter}
+									social_instagram={social_instagram}
+									social_pinterest={social_pinterest}
+									social_youtube={social_youtube}
+									social_linkedin={social_linkedin}									  
+								/>
 							)}
 						</div>
-					)}
-					<div className="wp-block-guteblock-author-profile__contentOuter">
-						<RichText
-							className={
-								"wp-block-guteblock-author-profile__authorName"
-							}
-							tagName="h4"
-							onChange={this.onChangeAuthorName}
-							value={author_name}
-							placeholder={__("Author Name", "guteblock")}
-							style={{ color: titleColor }}
-						/>
-						<RichText
-							className={
-								"wp-block-guteblock-author-profile__authorDescription"
-							}
-							tagName="p"
-							onChange={this.onChangeAuthorDescription}
-							value={author_description}
-							placeholder={__(
-								"Author Description",
-								"guteblock"
-							)}
-							style={{ color: textColor }}
-						/>
+						<div className="clear"></div>
+
 					</div>
 				</div>
 			</>
