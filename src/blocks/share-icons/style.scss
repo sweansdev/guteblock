@@ -1,0 +1,25 @@
+.wp-block-guteblock-share-icons {
+	&__icon {
+		display: inline-block;
+		height: 50px;
+		border-radius: 100%;
+		background: #403f3f;
+		line-height: 50px;
+		font-size: 24px;
+		width: 50px;
+		color: #fff;
+		margin: 0 5px;
+		text-align: center;
+
+		i {
+			color: #fff;
+		}
+	}
+
+	&.align-center {
+		text-align: center;
+	}
+	&.align-right {
+		text-align: right;
+	}
+}

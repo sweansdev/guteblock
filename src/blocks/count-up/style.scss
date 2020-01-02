@@ -1,0 +1,19 @@
+.wp-block-guteblock-count-up {
+	&__container > div {
+		display: inline-block;
+	}
+
+	&.align-center {
+		text-align: center;
+	}
+	&.align-right {
+		text-align: right;
+	}
+
+	&__prefix {
+		margin: 0 !important;
+	}
+	&__number {
+		margin: 0 !important;
+	}
+}
