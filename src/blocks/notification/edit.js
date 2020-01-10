@@ -150,7 +150,7 @@ class NotificationEdit extends Component {
 								value: bgcolor,
 								onChange: this.onChangeBgColor,
 								label: __(
-									"Social Icons Color",
+									"Background Color",
 									"guteblock"
 								),
 								colors: [

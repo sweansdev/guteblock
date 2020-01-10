@@ -8,6 +8,8 @@ import "./blocks/drop-cap";
 import "./blocks/notification";
 import "./blocks/share-icons";
 import "./blocks/author-profile";
+import "./blocks/cta";
+import "./blocks/spacer-divider";
 
 import "./common/css/style.editor.scss";
 

@@ -8,5 +8,7 @@ import "./blocks/drop-cap/script";
 import "./blocks/notification/script";
 import "./blocks/share-icons/script";
 import "./blocks/author-profile/script";
+import "./blocks/cta/script";
+import "./blocks/spacer-divider/script";
 
 //import "./blocks/count-up/script";

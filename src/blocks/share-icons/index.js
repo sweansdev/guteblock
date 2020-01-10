@@ -13,7 +13,7 @@ const attributes = {
 	},
 	align: {
 		type: "string",
-		default: "center"
+		default: "wide"
 	},
 	alignment: {
 		type: "string",
@@ -21,6 +21,26 @@ const attributes = {
 	},
 	url: {
 		type: "string"
+	},
+	facebook: {
+		type: 'boolean',
+		default: true
+	},
+	twitter: {
+		type: 'boolean',
+		default: true
+	},
+	linkedin: {
+		type: 'boolean',
+		default: true
+	},
+	pinterest: {
+		type: 'boolean',
+		default: true
+	},
+	reddit: {
+		type: 'boolean',
+		default: true
 	}
 };
 
@@ -166,31 +186,132 @@ registerBlockType("guteblock/share-icons", {
 	},
 	attributes,
 	edit,
+	styles: [
+		{
+			name: "round",
+			label: __("Round", "guteblock"),
+			isDefault: true
+		},
+		{
+			name: "square",
+			label: __("Square", "guteblock"),
+			isDefault: false
+		},
+		{
+			name: "modern",
+			label: __("Modern", "guteblock"),
+			isDefault: false
+		}
+	],
 	save: ({ attributes }) => {
-		const { alignment, url } = attributes;
 
+		const { alignment, url, facebook, twitter, linkedin, pinterest, reddit } = attributes;
+
+		const isStyle = RegExp(/is-style-/)
+		const styleName = isStyle.test(attributes.className)
+			? attributes.className.replace(isStyle, '')
+			: null
+			
 		const classes = classnames({
-			[`align-${alignment}`]: alignment
+			[`align-${alignment}`]: alignment,
+			[`is-style-round`]: !styleName // Setting style class if the style is not chosen.
 		});
 
 		return (
 			<div className={classes}>
-				<a
-					className="wp-block-guteblock-share-icons__icon wp-block-guteblock-share-icons__facebook"
-					href={"https://www.facebook.com/share.php?u=" + url}
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<i className={`icon-facebook`}></i>
-				</a>
-				<a
-					className="wp-block-guteblock-share-icons__icon wp-block-guteblock-share-icons__twitter"
-					href={"https://twitter.com/share?url=" + url}
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<i className={`icon-twitter`}></i>
-				</a>
+
+				{(styleName != 'modern') && (
+					<>
+						{facebook &&
+							<a
+								className="icon-button facebook"
+								href={
+									"https://www.facebook.com/share.php?u=" + url
+								}
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<i className={`icon-facebook`}></i><span></span>
+							</a>
+						}
+						{twitter &&
+							<a
+								className="icon-button twitter"
+								href={"https://twitter.com/share?url=" + url}
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<i className={`icon-twitter`}></i><span></span>
+							</a>
+						}
+						{linkedin &&
+							<a
+								className="icon-button linkedin"
+								href={"https://www.linkedin.com/sharing/share-offsite/?url=" + url}
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<i className={`icon-linkedin`}></i><span></span>
+							</a>
+						}
+
+						{pinterest &&
+							<a
+								className="icon-button pinterest"
+								href={"http://pinterest.com/pin/create/button/?url=" + url}
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<i className={`icon-pinterest`}></i><span></span>
+							</a>
+						}
+						{reddit &&
+							<a
+								className="icon-button reddit"
+								href={"http://www.reddit.com/submit?url=" + url}
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<i className='icon-reddit-alien'></i><span></span>
+							</a>
+						}
+					</>
+				)}
+
+				{(styleName == 'modern') && (
+					<div className="btn__container">
+						{facebook &&
+							<a href={"https://www.facebook.com/share.php?u=" + url} className="gb-btn gb-btn-facebook" target="_blank" rel="noopener noreferrer">
+								<i className="icon-facebook"></i>
+								<span>facebook</span>
+							</a>
+						}
+						{twitter &&
+							<a href={"https://twitter.com/share?url=" + url} className="gb-btn gb-btn-twitter" target="_blank" rel="noopener noreferrer">
+								<i className="icon-twitter"></i>
+								<span>twitter</span>
+							</a>
+						}
+						{linkedin &&
+							<a href={"https://www.linkedin.com/sharing/share-offsite/?url=" + url} className="gb-btn gb-btn-linkedin" target="_blank" rel="noopener noreferrer">
+								<i className="icon-linkedin-squared"></i>
+								<span>linkedin</span>
+							</a>
+						}
+						{pinterest &&
+							<a href={"http://pinterest.com/pin/create/button/?url=" + url} className="gb-btn gb-btn-pinterest" target="_blank" rel="noopener noreferrer">
+								<i className="icon-pinterest"></i>
+								<span>pinterest</span>
+							</a>
+						}
+						{reddit &&
+							<a href={"http://www.reddit.com/submit?url=" + url} className="gb-btn gb-btn-reddit" target="_blank" rel="noopener noreferrer">
+								<i className="icon-reddit-alien"></i>
+								<span>reddit</span>
+							</a>
+						}
+					</div>					
+				)}
 			</div>
 		);
 	}

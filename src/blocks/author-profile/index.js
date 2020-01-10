@@ -196,8 +196,6 @@ registerBlockType("guteblock/author-profile", {
 			? attributes.className.replace(isStyle, '')
 			: null
 		
-		console.log(styleName);
-
 		return (
 			<div
 				className={classes}

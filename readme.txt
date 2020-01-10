@@ -20,7 +20,7 @@ This is our first ever launch and rapid developments are on its way. In case of 
 
 Guteblock gives you: 
 
-- 7 creative Building Blocks for Gutenberg to design and customize your pages as per your needs
+- 12 creative Building Blocks for Gutenberg to design and customize your pages as per your needs
 - Unique styles available for blocks
 - Amazing customization features
 - Exclusive container block for Team Members, which permits the users to rearrange the team members.
@@ -37,16 +37,17 @@ Guteblock gives you:
 - Number Box Block
 - Drop Cap Block
 - Notification
+- CTA
+- Author Profile
 - Sharing Icons
+- Spacer and Divider Block
 
 ## Guteblock Coming Soon
 
 - Accordion
 - Advanced Columns
-- Author Profile
 - Blockquote
 - Button
-- CTA
 - Cards
 - Count Up
 - Feature Grid
@@ -57,9 +58,9 @@ Guteblock gives you:
 - Inline Notice
 - Newsletter
 - Pricing Table
-- Spacer Divider
 - Video Box
 - Video Popup
+
 
 == Installation ==
 
@@ -84,14 +85,40 @@ Definitely! You can use Guteblock with other block plugins.
 
 == Screenshots ==
 
-1. Team Members Block
-2. Team Members Block - Different Styles
-3. Drop Cap
-4. Separator
-5. Testimonials
+1. Author Profile
+2. Post Grid
+3. Spacer and Divider
+4. Share Icons
+5. Notifications
+6. Team Members Block
+7. Team Members Block - Different Styles
+8. Drop Cap
+9. Separator
+10. Testimonials
+
 
 
 == Changelog ==
+
+= 1.0.4 =
+
+* New: Social Sharing Block
+* New: Spacer and Divider Block
+* Edit: Notification Block
+* Edit: Post Grid Block
+
+= 1.0.3 =
+
+* New: Author Profile Block
+* New: Call To Action Block
+
+= 1.0.2 =
+
+* New: Notification Block
+
+= 1.0.1 =
+
+Bug Fixes
 
 = 1.0.0 =
 
