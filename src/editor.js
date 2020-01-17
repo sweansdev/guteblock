@@ -10,6 +10,7 @@ import "./blocks/share-icons";
 import "./blocks/author-profile";
 import "./blocks/cta";
 import "./blocks/spacer-divider";
+import "./blocks/accordion";
 
 import "./common/css/style.editor.scss";
 
