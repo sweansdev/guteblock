@@ -84,8 +84,8 @@ const attributes = {
 };
 
 registerBlockType("guteblock/count-up", {
-	title: __("Counter", "guteblock"),
-	description: __("Count Up Block", "guteblock"),
+	title: __("Count Up", "guteblock"),
+	description: __("Block for adding counters", "guteblock"),
 	icon: (
 		<svg
 			id="prefix__Layer_1"
