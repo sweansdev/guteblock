@@ -4,7 +4,7 @@ Tags: Guteblock, blocks, block editor, gutenberg blocks, page builder, gutenberg
 Requires at least: 5.0
 Tested up to: 5.3
 Requires PHP: 5.3
-Stable tag: 1.0.0
+Stable tag: 1.0.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -100,6 +100,10 @@ Definitely! You can use Guteblock with other block plugins.
 
 == Changelog ==
 
+= 1.0.5 =
+
+* Bug Fixes
+
 = 1.0.4 =
 
 * New: Social Sharing Block
@@ -118,7 +122,7 @@ Definitely! You can use Guteblock with other block plugins.
 
 = 1.0.1 =
 
-Bug Fixes
+* Bug Fixes
 
 = 1.0.0 =
 

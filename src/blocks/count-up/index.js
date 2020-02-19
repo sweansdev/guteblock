@@ -4,14 +4,14 @@ import { __ } from "@wordpress/i18n";
 import { RichText } from "@wordpress/editor";
 import edit from "./edit.js";
 import classnames from "classnames";
-import { useCountUp } from "react-countup";
-import CountUp from "react-countup";
+
+import "./parent";
 
 const attributes = {
 	title: {
 		type: "string",
 		source: "html",
-		selector: "h4"
+		selector: "h2"
 	},
 	prefix: {
 		type: "string"
@@ -21,11 +21,70 @@ const attributes = {
 	},
 	alignment: {
 		type: "string"
+	},
+	titlecolor: {
+		type: "string",
+		default: "#333333"
+	},
+	textColor: {
+		type: "string",
+		default: "#333333"
+	},
+	prefixColor: {
+		type: "string",
+		default: "#333333"
+	},
+	showTitle: {
+		type: "boolean",
+		default: true
+	},
+	showPrefix: {
+		type: "boolean",
+		default: true
+	},
+	titleFontSize: {
+		type: "number",
+		default: '35'
+	},
+	prefixFontSize: {
+		type: "number",
+		default: '35'
+	},
+	numberFontSize: {
+		type: "number",
+		default: '35'
+	},
+	backgroundColor: {
+		type: "string"
+	},
+	borderRadius: {
+		type: "number",
+		default: 0
+	},
+	boxShadow: {
+		type: "number",
+		default: 0
+	},
+	boxShadowColor: {
+		type: "string"
+	},
+	mainTitle: {
+		type: "string",
+		selector: "h2",
+		source: "html",
+	},
+	titlePadding:{
+		type: "number",
+		default: 0
+	},
+	counterPadding:{
+		type: "number",
+		default: 0
 	}
 };
 
 registerBlockType("guteblock/count-up", {
-	title: __("Count Up", "guteblock"),
+	title: __("Counter", "guteblock"),
 	description: __("Count Up Block", "guteblock"),
 	icon: (
 		<svg
@@ -104,6 +163,7 @@ registerBlockType("guteblock/count-up", {
 		__("counter", "guteblock"),
 		__("count", "guteblock")
 	],
+	parent: ["guteblock/count-ups"], // Make the count up block available only inside the parent "Count Up" block.
 	supports: {
 		reusable: false,
 		html: false,
@@ -112,61 +172,64 @@ registerBlockType("guteblock/count-up", {
 	attributes,
 	edit,
 	save: ({ attributes }) => {
-		const { title, prefix, number } = attributes;
+		const { title, 
+				alignment, 
+				prefix, 
+				number,
+				textColor, 
+				prefixColor,
+				titlecolor, 
+				showTitle, 
+				showPrefix, 
+				backgroundColor, 
+				boxShadowColor, 
+				borderRadius, 
+				boxShadow, 
+				titleFontSize, 
+				prefixFontSize,
+				numberFontSize, 
+				titlePadding, 
+				counterPadding } = attributes;
+
 		const classes = classnames({
-			//	'some-class-name': condition,
+			[`align-${alignment}`]: alignment
 		});
+		
 
-		const CompleteHook = () => {
-			const {
-				countUp,
-				start,
-				pauseResume,
-				reset,
-				update
-			} = useCountUp({
-				start: 0,
-				end: 1234567,
-				delay: 1000,
-				duration: 5,
-				onReset: () => console.log("Resetted!"),
-				onUpdate: () => console.log("Updated!"),
-				onPauseResume: () => console.log("Paused or resumed!"),
-				onStart: ({ pauseResume }) => console.log(pauseResume),
-				onEnd: ({ pauseResume }) => console.log(pauseResume)
-			});
-			return (
-				<div>
-					<div>{countUp}</div>
-					<button onClick={start}>Start</button>
-					<button onClick={reset}>Reset</button>
-					<button onClick={pauseResume}>Pause/Resume</button>
-					<button onClick={() => update(2000)}>
-						Update to 2000
-					</button>
-				</div>
-			);
-		};
-
+		let display;
+		{showTitle ? display="block" : display="none"}
+		let prefixDisplay;
+		{showPrefix ? prefixDisplay="block" : prefixDisplay="none"}
+		
 		return (
-			<div className={classes}>
+			
+			<div  className={classes} 
+				  style={{backgroundColor:backgroundColor, 
+							borderRadius: borderRadius, 
+							boxShadow:`${boxShadow}px ${boxShadow}px ${boxShadow}px ${boxShadow}px ${boxShadowColor}`}}>
+
 				<RichText.Content
+					style={{color:titlecolor,  
+							display: display, 
+							fontSize:`${titleFontSize}px`, 
+							padding:`${titlePadding}px 0px`} }
 					className={"wp-block-guteblock-count-up__title"}
-					tagName="h4"
 					value={title}
+					tagName={"h2"}
 				/>
-				<div className="wp-block-guteblock-count-up__container">
-					<h5 className="wp-block-guteblock-count-up__prefix">
-						{prefix}
+				<div className="wp-block-guteblock-count-up__container" 
+					 style={{display:prefixDisplay,  
+					 		 padding:`${counterPadding}px 0px`}}>
+					<h5  >
+						<span style={{color:prefixColor, 
+									fontSize:`${prefixFontSize}px`}} 
+							  className="wp-block-guteblock-count-up__prefix">{prefix}</span> 
+						<span style={{color:textColor, 
+							  fontSize:`${numberFontSize}px`}} 
+						      className="wp-block-guteblock-count-up__number" data-count={number} counter-speed={6000}>{number}</span>
 					</h5>
-					<h5 className="wp-block-guteblock-count-up__number">
-						{number}
-					</h5>
-					<h5 className="wp-block-guteblock-count-up__number">
-						{CompleteHook}
-					</h5>
-					<CountUp delay={2} end={number} />
 				</div>
+
 			</div>
 		);
 	}

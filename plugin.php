@@ -5,7 +5,7 @@
  * Description: Guteblock is an exquisite collection of blocks redefining the use of Gutenberg (the brand-new WordPress Block Editor)
  * Author: Sweans
  * Author URI: https://www.sweans.com/
- * Version: 1.0.4
+ * Version: 1.0.5
  * Text Domain: guteblock
  * Tested up to: 5.3
  * License: GPL3

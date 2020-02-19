@@ -1,14 +1,13 @@
 import { Component } from "@wordpress/element";
 import { __ } from "@wordpress/i18n";
 import {
-	RichText,
-	InspectorControls,
+	RichText,	
 	BlockControls,
 	AlignmentToolbar
 } from "@wordpress/editor";
-import {
-	PanelBody
-} from "@wordpress/components";
+// import {
+// 	PanelBody
+// } from "@wordpress/components";
 import classnames from 'classnames';
 
 class AccordionEdit extends Component {	
@@ -66,11 +65,14 @@ class AccordionEdit extends Component {
 						isCollapsed={false}
 					/>
 				</BlockControls>
+				 
+				{/* 
 				<InspectorControls>					
-					<PanelBody title={__("Some Settings", "guteblock")}>
-
+					<PanelBody title={__("Accordion Settings", "guteblock")}>
+						
 					</PanelBody>
-				</InspectorControls>				
+				</InspectorControls>				 
+				*/}
 
 				<div className={classes}>
 					<div className="wp-block-guteblock-accordion__title-outer">
