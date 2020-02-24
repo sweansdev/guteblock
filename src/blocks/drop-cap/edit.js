@@ -19,14 +19,18 @@ class DropCapEdit extends Component {
 	};
 
 	render() {
-		const { className, attributes, setAttributes } = this.props;
+		const { className, attributes, setAttributes, clientId } = this.props;
 		const {
 			content,
 			textColor,
 			dropCapColor,
 			fontSize,
-			alignment
+			alignment,
+			blockid
 		} = attributes;
+		
+		var blockid_strip = clientId.substring(0, 8);
+		this.props.setAttributes({ blockid: blockid_strip });
 
 		const classes = classnames(className, {
 			[`align-${alignment}`]: alignment
@@ -78,7 +82,7 @@ class DropCapEdit extends Component {
 					</PanelBody>
 				</InspectorControls>
 
-				<div className={classes}>
+				<div id={`block-${blockid}`} className={classes}>
 					<RichText
 						className={"wp-block-guteblock-drop-cap__content"}
 						tagName="p"
@@ -92,10 +96,18 @@ class DropCapEdit extends Component {
 					<style
 						dangerouslySetInnerHTML={{
 							__html: [
-								`.wp-block-guteblock-drop-cap p:first-child:first-letter, .wp-block-guteblock-drop-cap p:nth-of-type(1):first-letter { color: ${dropCapColor}; font-size: ${fontSize}px; }`
+								`#block-${blockid}.wp-block-guteblock-drop-cap p:first-child:first-letter, .wp-block-guteblock-drop-cap p:nth-of-type(1):first-letter { color: ${dropCapColor}; font-size: ${fontSize}px; }`
 							].join("\n")
 						}}
 					></style>
+					{/* <style
+						dangerouslySetInnerHTML={{
+							__html: [
+								`.wp-block-guteblock-drop-cap p:first-child:first-letter, .wp-block-guteblock-drop-cap p:nth-of-type(1):first-letter { color: ${dropCapColor}; font-size: ${fontSize}px; }
+								#${blockid} p { font-weight: bold; }`
+							].join("\n")
+						}}
+					></style> */}
 				</div>
 			</>
 		);
