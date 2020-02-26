@@ -13,9 +13,9 @@ import "./blocks/spacer-divider";
 import "./blocks/accordion";
 import "./blocks/blockquote";
 import "./blocks/icon-list";
-import "./blocks/count-up";
-import "./blocks/button";
 import "./blocks/newsletter";
+//import "./blocks/count-up";
+//import "./blocks/button";
 
 import "./common/css/style.editor.scss";
 

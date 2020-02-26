@@ -1,11 +1,14 @@
 import "./style.editor.scss";
-import { registerBlockType } from "@wordpress/blocks";
+import { registerBlockType, createBlock } from "@wordpress/blocks";
 import { __ } from "@wordpress/i18n";
 import { RichText } from "@wordpress/editor";
 import edit from "./edit.js";
 import classnames from "classnames";
 
 const attributes = {
+	blockid: {
+		type: "string"
+	},
 	content: {
 		type: "string",
 		source: "html",
@@ -131,13 +134,40 @@ registerBlockType("guteblock/drop-cap", {
 	},
 	attributes,
 	edit,
+	transforms: {
+		from: [
+			{
+				type: "block",
+				blocks: ["core/paragraph"],
+				transform: ({ content, align }) => {
+					return createBlock("guteblock/drop-cap", {
+						content: content,
+						alignment: align
+					});
+				}
+			}
+		],
+		to: [
+			{
+				type: "block",
+				blocks: ["core/paragraph"],
+				transform: ({ content, alignment }) => {
+					return createBlock("core/paragraph", {
+						content: content,
+						align: alignment
+					});
+				}
+			}
+		]
+	},
 	save: ({ attributes }) => {
 		const {
 			content,
 			textColor,
 			dropCapColor,
 			fontSize,
-			alignment
+			alignment,
+			blockid
 		} = attributes;
 
 		const classes = classnames({
@@ -145,7 +175,7 @@ registerBlockType("guteblock/drop-cap", {
 		});
 
 		return (
-			<div className={classes}>
+			<div id={`block-${blockid}`} className={classes}>
 				<RichText.Content
 					className={"wp-block-guteblock-drop-cap__content"}
 					tagName="p"
@@ -157,7 +187,7 @@ registerBlockType("guteblock/drop-cap", {
 				<style
 					dangerouslySetInnerHTML={{
 						__html: [
-							`.wp-block-guteblock-drop-cap p:first-child:first-letter { color: ${dropCapColor}; font-size: ${fontSize}px; }`
+							`#block-${blockid}.wp-block-guteblock-drop-cap p:first-child:first-letter, .wp-block-guteblock-drop-cap p:nth-of-type(1):first-letter { color: ${dropCapColor}; font-size: ${fontSize}px; }`
 						].join("\n")
 					}}
 				></style>

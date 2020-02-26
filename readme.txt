@@ -4,7 +4,7 @@ Tags: Guteblock, blocks, block editor, gutenberg blocks, page builder, gutenberg
 Requires at least: 5.0
 Tested up to: 5.3
 Requires PHP: 5.3
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -41,19 +41,19 @@ Guteblock gives you:
 - Author Profile
 - Sharing Icons
 - Spacer and Divider Block
+- Icon List
+- Blockquote
 
 ## Guteblock Coming Soon
 
 - Accordion
 - Advanced Columns
-- Blockquote
 - Button
 - Cards
 - Count Up
 - Feature Grid
 - Google Maps
 - Custom Header
-- Icon List
 - Image Box
 - Inline Notice
 - Newsletter
@@ -99,6 +99,14 @@ Definitely! You can use Guteblock with other block plugins.
 
 
 == Changelog ==
+
+= 1.0.6 =
+
+* New: Icon List Block
+* New: Blockquote Block
+* Edit: Accordion Block
+* Other improvements
+* Added transformation on the drop cap block
 
 = 1.0.5 =
 

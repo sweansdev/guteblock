@@ -13,7 +13,6 @@ import "./blocks/spacer-divider/script";
 import "./blocks/accordion/script";
 import "./blocks/blockquote/script";
 import "./blocks/icon-list/script";
-import "./blocks/count-up/script";
-import "./blocks/button/script";
-
 import "./blocks/newsletter/script";
+//import "./blocks/count-up/script";
+//import "./blocks/button/script";
