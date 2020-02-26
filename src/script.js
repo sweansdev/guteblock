@@ -15,3 +15,5 @@ import "./blocks/blockquote/script";
 import "./blocks/icon-list/script";
 import "./blocks/count-up/script";
 import "./blocks/button/script";
+
+import "./blocks/newsletter/script";

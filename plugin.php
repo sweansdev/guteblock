@@ -68,6 +68,8 @@ function guteblock_register() {
 		array('jquery')
 	);
 
+	wp_localize_script( 'guteblock-script', 'guteblock', array( 'ajaxurl' => admin_url( 'admin-ajax.php' )));
+
 	wp_register_style(
 		'guteblock-style',
 		plugins_url('dist/style.css', __FILE__),
@@ -112,7 +114,62 @@ function guteblock_register() {
 	));
 	
 }
+/*Ajax Call in Nwsletter */
+add_action("wp_ajax_guteblock_newsletter_submit", "guteblock_newsletter_submit");
+add_action("wp_ajax_nopriv_guteblock_newsletter_submit", "guteblock_newsletter_submit");
 
+function guteblock_newsletter_submit() {
+	
+	echo $_POST["email"];
+
+	$data = [
+		'email'     => $_POST["email"],
+		'status'    => 'subscribed'
+	];
+	
+	$apiKey = '3401cf84f0f45ff90988a242a7ab5ade-us4';
+	$listId = 'c0f7c8f8df';
+
+	$memberId = md5(strtolower($data['email']));
+	$dataCenter = substr($apiKey,strpos($apiKey,'-')+1);
+	$url = 'https://' . $dataCenter . '.api.mailchimp.com/3.0/lists/' . $listId . '/members/' . $memberId;
+
+	$json = json_encode([
+		'email_address' => $data['email'],
+		'status'        => $data['status']
+	]);
+
+	$ch = curl_init($url);
+
+	curl_setopt($ch, CURLOPT_USERPWD, 'user:' . $apiKey);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $json);                                                                                                                 
+
+	$result = curl_exec($ch);
+	$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+	curl_close($ch);
+
+	return $httpCode;
+		
+
+
+
+
+
+	exit();
+
+
+}
+
+function my_must_login() {
+   echo "You must log in to vote";
+   die();
+}
+/*Ajax Call in Nwsletter */
 function guteblock_render_post_grid_block($attributes) {
 	$args = array(
 		'posts_per_page' => $attributes['numberofposts']

@@ -15,8 +15,7 @@ import "./blocks/blockquote";
 import "./blocks/icon-list";
 import "./blocks/count-up";
 import "./blocks/button";
-
-
+import "./blocks/newsletter";
 
 import "./common/css/style.editor.scss";
 

@@ -1,0 +1,48 @@
+.wp-block-guteblock-newsletter {
+	&.align-center {
+		text-align: center;
+	}
+	&.align-right {
+		text-align: right;
+	}
+	&.align-left {
+		text-align: left;
+	}
+	line-height: 0px;
+	.animation svg {
+		width: 50px;
+		height: 50px;
+		background-color: red;
+	}
+	.wp-block-guteblock-newsletter__container {
+		width: 90%;
+		position: relative;
+		display: inline-block;
+		overflow: hidden;
+	}
+	.components-base-control .components-base-control__field {
+		margin-bottom: 0px;
+	}
+	.components-base-control.wp-block-guteblock-newsletter__input {
+		margin-right: 1px;
+	}
+	button.components-button.wp-block-guteblock-newsletter-inner:hover {
+		transition: 0.5s ease all;
+	}
+	.wp-block-guteblock-newsletter__container span {
+		margin: 0px;
+	}
+	button.components-button.wp-block-guteblock-newsletter-inner {
+		position: absolute;
+		right: 0px;
+		top: 0px;
+	}
+	&.is-style-3 {
+		.editor-rich-text.block-editor-rich-text {
+			display: inline-block;
+		}
+		button.components-button.wp-block-guteblock-newsletter-inner {
+			bottom: 0px;
+		}
+	}
+}
