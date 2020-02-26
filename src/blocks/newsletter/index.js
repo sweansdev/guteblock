@@ -1,11 +1,11 @@
 import "./style.editor.scss";
 import { registerBlockType } from "@wordpress/blocks";
 import { __ } from "@wordpress/i18n";
-import { RichText } from "@wordpress/editor";
+//import { RichText } from "@wordpress/editor";
 import edit from "./edit.js";
 import "jquery";
-import classnames from "classnames";
-import { Button, Dashicon } from "@wordpress/components";
+//import classnames from "classnames";
+//import { Button, Dashicon } from "@wordpress/components";
 const attributes = {
 	title: {
 		type: "string",
@@ -215,187 +215,190 @@ registerBlockType("guteblock/newsletter", {
 	],
 	attributes,
 	edit,
-	save: ({ attributes }) => {
-		const {
-			title,
-			bgColor,
-			bgColorTwo,
-			alignment,
-			buttonTitle,
-			borderLeftRadius,
-			borderRightRadius,
-			verticalOuterPadding,
-			horizontalOuterPadding,
-			verticalInnerPadding,
-			horizontalPadding,
-			fontSize,
-			inputBackgroundColor,
-			inputTextColor,
-			inputTextTransform,
-			inputTextFontWeight,
-			buttonTextFontWeight,
-			buttonTextColor,
-			borderTopLeftRadius,
-			borderBottomLeftRadius,
-			borderBottomLeftRadiusTwo,
-			buttonHorizontalPadding,
-			buttonBackgroundColor,
-			buttonTextTransform,
-			buttonLetterSpacing,
-			icon,
-			hoverButtonTextColor,
-			hoverButtonBackgroundColor
-		} = attributes;
-
-		const classes = classnames({
-			[`align-${alignment}`]: alignment
-		});
-
-		const isStyle = RegExp(/is-style-/);
-		const styleName = isStyle.test(attributes.className)
-			? attributes.className.replace(isStyle, "")
-			: null;
-
-		let bg,
-			TopLeft,
-			btnTopLeft,
-			btnBottomLeft,
-			btnBottomLeftThreeOne,
-			placehoderThreeOne,
-			placeholder;
-
-		{
-			styleName == 3
-				? (btnBottomLeftThreeOne = borderBottomLeftRadiusTwo)
-				: (btnBottomLeftThreeOne = borderBottomLeftRadius);
-		}
-		{
-			styleName == 1 ? (bg = bgColor) : (bg = bgColorTwo);
-		}
-		{
-			styleName == 2 ? (TopLeft = 100) : (TopLeft = borderLeftRadius);
-		}
-		{
-			styleName != 1
-				? (btnTopLeft = 0)
-				: (btnTopLeft = borderTopLeftRadius);
-		}
-		{
-			styleName == 2
-				? (btnBottomLeft = 24)
-				: (btnBottomLeft = btnBottomLeftThreeOne);
-		}
-		{
-			styleName == 3
-				? (placehoderThreeOne = "Subscribe Now")
-				: (placehoderThreeOne = "Enter Your Email Id");
-		}
-		{
-			styleName == 2
-				? (placeholder = "Your mail Id goes here...")
-				: (placeholder = placehoderThreeOne);
-		}
-
-		return (
-			<div
-				className={classes}
-				style={{
-					backgroundColor: bg,
-					paddingLeft: horizontalOuterPadding,
-					paddingRight: horizontalOuterPadding,
-					paddingTop: verticalOuterPadding,
-					paddingBottom: verticalOuterPadding,
-					alignment: alignment
-				}}
-			>
-				<div
-					className="wp-block-guteblock-newsletter__container"
-					title={title}
-				>
-					<form
-						action=""
-						method="post"
-						className="newsletterSubmit"
-					>
-						<input
-							type="text"
-							className={
-								"wp-block-guteblock-newsletter__input"
-							}
-							placeholder={__(placeholder, "guteblock")}
-							style={{
-								paddingLeft: horizontalPadding,
-								paddingRight:
-									horizontalPadding +
-									4.5 * fontSize +
-									2 * buttonHorizontalPadding,
-								paddingTop: verticalInnerPadding,
-								paddingBottom: verticalInnerPadding,
-								textTransform: inputTextTransform,
-								fontWeight: inputTextFontWeight,
-								borderTopLeftRadius: TopLeft,
-								borderBottomLeftRadius: TopLeft,
-								borderTopRightRadius: borderRightRadius,
-								borderBottomRightRadius: borderRightRadius,
-								fontSize: fontSize,
-								backgroundColor: inputBackgroundColor,
-								color: inputTextColor,
-								border: "none"
-							}}
-						></input>
-						<Button
-							type="submit"
-							target="_blank"
-							rel="noopener noreferrer"
-							className="wp-block-guteblock-newsletter-inner"
-							style={{
-								paddingLeft: buttonHorizontalPadding,
-								paddingRight: buttonHorizontalPadding,
-								paddingTop: verticalInnerPadding,
-								paddingBottom: verticalInnerPadding,
-								borderTopLeftRadius: btnTopLeft,
-								borderBottomLeftRadius: btnBottomLeft,
-								borderTopRightRadius: borderRightRadius,
-								borderBottomRightRadius: borderRightRadius,
-								backgroundColor: buttonBackgroundColor,
-								textTransform: buttonTextTransform,
-								fontWeight: buttonTextFontWeight,
-								textDecoration: "none",
-								letterSpacing: `${buttonLetterSpacing}px`,
-								border: "none",
-								color: buttonTextColor,
-								fontSize: fontSize
-							}}
-						>
-							{styleName != 3 && (
-								<div className="wp-block-guteblock-newsletter__content">
-									<RichText.Content
-										style={{}}
-										tagName="span"
-										value={buttonTitle}
-									/>
-								</div>
-							)}
-							{styleName == 3 && (
-								<div className="wp-block-guteblock-newsletter__content">
-									<Dashicon
-										icon={icon}
-										size={fontSize + 1}
-										fill={buttonTextColor}
-									/>
-								</div>
-							)}
-						</Button>
-						<style
-							dangerouslySetInnerHTML={{
-								__html: [
-									`.wp-block-guteblock-newsletter-inner:hover { color: ${hoverButtonTextColor} !important; background-color: ${hoverButtonBackgroundColor} !important; }`
-								].join("\n")
-							}}
-						></style>
-					</form>
-				</div>
-			</div>
-		);
+	save: () => {
+		return false;
 	}
+	// save: ({ attributes }) => {
+	// 	const {
+	// 		title,
+	// 		bgColor,
+	// 		bgColorTwo,
+	// 		alignment,
+	// 		buttonTitle,
+	// 		borderLeftRadius,
+	// 		borderRightRadius,
+	// 		verticalOuterPadding,
+	// 		horizontalOuterPadding,
+	// 		verticalInnerPadding,
+	// 		horizontalPadding,
+	// 		fontSize,
+	// 		inputBackgroundColor,
+	// 		inputTextColor,
+	// 		inputTextTransform,
+	// 		inputTextFontWeight,
+	// 		buttonTextFontWeight,
+	// 		buttonTextColor,
+	// 		borderTopLeftRadius,
+	// 		borderBottomLeftRadius,
+	// 		borderBottomLeftRadiusTwo,
+	// 		buttonHorizontalPadding,
+	// 		buttonBackgroundColor,
+	// 		buttonTextTransform,
+	// 		buttonLetterSpacing,
+	// 		icon,
+	// 		hoverButtonTextColor,
+	// 		hoverButtonBackgroundColor
+	// 	} = attributes;
+
+	// 	const classes = classnames({
+	// 		[`align-${alignment}`]: alignment
+	// 	});
+
+	// 	const isStyle = RegExp(/is-style-/);
+	// 	const styleName = isStyle.test(attributes.className)
+	// 		? attributes.className.replace(isStyle, "")
+	// 		: null;
+
+	// 	let bg,
+	// 		TopLeft,
+	// 		btnTopLeft,
+	// 		btnBottomLeft,
+	// 		btnBottomLeftThreeOne,
+	// 		placehoderThreeOne,
+	// 		placeholder;
+
+	// 	{
+	// 		styleName == 3
+	// 			? (btnBottomLeftThreeOne = borderBottomLeftRadiusTwo)
+	// 			: (btnBottomLeftThreeOne = borderBottomLeftRadius);
+	// 	}
+	// 	{
+	// 		styleName == 1 ? (bg = bgColor) : (bg = bgColorTwo);
+	// 	}
+	// 	{
+	// 		styleName == 2 ? (TopLeft = 100) : (TopLeft = borderLeftRadius);
+	// 	}
+	// 	{
+	// 		styleName != 1
+	// 			? (btnTopLeft = 0)
+	// 			: (btnTopLeft = borderTopLeftRadius);
+	// 	}
+	// 	{
+	// 		styleName == 2
+	// 			? (btnBottomLeft = 24)
+	// 			: (btnBottomLeft = btnBottomLeftThreeOne);
+	// 	}
+	// 	{
+	// 		styleName == 3
+	// 			? (placehoderThreeOne = "Subscribe Now")
+	// 			: (placehoderThreeOne = "Enter Your Email Id");
+	// 	}
+	// 	{
+	// 		styleName == 2
+	// 			? (placeholder = "Your mail Id goes here...")
+	// 			: (placeholder = placehoderThreeOne);
+	// 	}
+
+	// 	return (
+	// 		<div
+	// 			className={classes}
+	// 			style={{
+	// 				backgroundColor: bg,
+	// 				paddingLeft: horizontalOuterPadding,
+	// 				paddingRight: horizontalOuterPadding,
+	// 				paddingTop: verticalOuterPadding,
+	// 				paddingBottom: verticalOuterPadding,
+	// 				alignment: alignment
+	// 			}}
+	// 		>
+	// 			<div
+	// 				className="wp-block-guteblock-newsletter__container"
+	// 				title={title}
+	// 			>
+	// 				<form
+	// 					action=""
+	// 					method="post"
+	// 					className="newsletterSubmit"
+	// 				>
+	// 					<input
+	// 						type="text"
+	// 						className={
+	// 							"wp-block-guteblock-newsletter__input"
+	// 						}
+	// 						placeholder={__(placeholder, "guteblock")}
+	// 						style={{
+	// 							paddingLeft: horizontalPadding,
+	// 							paddingRight:
+	// 								horizontalPadding +
+	// 								4.5 * fontSize +
+	// 								2 * buttonHorizontalPadding,
+	// 							paddingTop: verticalInnerPadding,
+	// 							paddingBottom: verticalInnerPadding,
+	// 							textTransform: inputTextTransform,
+	// 							fontWeight: inputTextFontWeight,
+	// 							borderTopLeftRadius: TopLeft,
+	// 							borderBottomLeftRadius: TopLeft,
+	// 							borderTopRightRadius: borderRightRadius,
+	// 							borderBottomRightRadius: borderRightRadius,
+	// 							fontSize: fontSize,
+	// 							backgroundColor: inputBackgroundColor,
+	// 							color: inputTextColor,
+	// 							border: "none"
+	// 						}}
+	// 					></input>
+	// 					<Button
+	// 						type="submit"
+	// 						target="_blank"
+	// 						rel="noopener noreferrer"
+	// 						className="wp-block-guteblock-newsletter-inner"
+	// 						style={{
+	// 							paddingLeft: buttonHorizontalPadding,
+	// 							paddingRight: buttonHorizontalPadding,
+	// 							paddingTop: verticalInnerPadding,
+	// 							paddingBottom: verticalInnerPadding,
+	// 							borderTopLeftRadius: btnTopLeft,
+	// 							borderBottomLeftRadius: btnBottomLeft,
+	// 							borderTopRightRadius: borderRightRadius,
+	// 							borderBottomRightRadius: borderRightRadius,
+	// 							backgroundColor: buttonBackgroundColor,
+	// 							textTransform: buttonTextTransform,
+	// 							fontWeight: buttonTextFontWeight,
+	// 							textDecoration: "none",
+	// 							letterSpacing: `${buttonLetterSpacing}px`,
+	// 							border: "none",
+	// 							color: buttonTextColor,
+	// 							fontSize: fontSize
+	// 						}}
+	// 					>
+	// 						{styleName != 3 && (
+	// 							<div className="wp-block-guteblock-newsletter__content">
+	// 								<RichText.Content
+	// 									style={{}}
+	// 									tagName="span"
+	// 									value={buttonTitle}
+	// 								/>
+	// 							</div>
+	// 						)}
+	// 						{styleName == 3 && (
+	// 							<div className="wp-block-guteblock-newsletter__content">
+	// 								<Dashicon
+	// 									icon={icon}
+	// 									size={fontSize + 1}
+	// 									fill={buttonTextColor}
+	// 								/>
+	// 							</div>
+	// 						)}
+	// 					</Button>
+	// 					<style
+	// 						dangerouslySetInnerHTML={{
+	// 							__html: [
+	// 								`.wp-block-guteblock-newsletter-inner:hover { color: ${hoverButtonTextColor} !important; background-color: ${hoverButtonBackgroundColor} !important; }`
+	// 							].join("\n")
+	// 						}}
+	// 					></style>
+	// 				</form>
+	// 			</div>
+	// 		</div>
+	// 	);
+	// }
 });

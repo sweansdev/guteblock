@@ -83,8 +83,6 @@ class AuthorProfileEdit extends Component {
 			? attributes.className.replace(isStyle, '')
 			: null
 		
-		console.log(styleName);
-
 		const classes = classnames(className, {
 			[`align-${alignment}`]: alignment
 		});
