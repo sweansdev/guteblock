@@ -10,7 +10,8 @@ $(document).ready(function() {
 			url: guteblock.ajaxurl,
 			data: {
 				action: "guteblock_newsletter_submit",
-				email: $(".wp-block-guteblock-newsletter__input").val()
+				email: $(".wp-block-guteblock-newsletter__input").val(),
+				status: $(".wp-block-guteblock-newsletter__hiddeninput").val()
 			},
 			success: function(response) {
 				alert(response);

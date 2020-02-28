@@ -9,8 +9,6 @@ import "jquery";
 const attributes = {
 	title: {
 		type: "string",
-		source: "html",
-		selector: "h4",
 		default: ""
 	},
 	bgColor: {
@@ -39,8 +37,6 @@ const attributes = {
 	},
 	buttonTitle: {
 		type: "string",
-		source: "html",
-		selector: "span",
 		default: "Subscribe"
 	},
 	verticalOuterPadding: {
@@ -136,6 +132,14 @@ const attributes = {
 	},
 	hoverButtonTextColor: {
 		type: "string"
+	},
+	styleIs: {
+		type:"number",
+		default:1
+	},
+	doubleOptIn: {
+		type:"number",
+		default:false
 	}
 };
 

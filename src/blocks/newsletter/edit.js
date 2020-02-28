@@ -10,6 +10,7 @@ import {
 import {
 	Button,
 	Toolbar,
+	ToggleControl,
 	Dashicon,
 	PanelBody,
 	TextControl,
@@ -68,6 +69,9 @@ class Newsletter extends Component {
 			}
 		};
 	};
+	onChangeEnableDoubleOptIn = doubleOptIn => {
+		this.props.setAttributes({ doubleOptIn });
+	};
 	onChangeButtonHoverBackgroundColor = hoverButtonBackgroundColor => {
 		this.props.setAttributes({ hoverButtonBackgroundColor });
 	};
@@ -78,6 +82,8 @@ class Newsletter extends Component {
 	render() {
 		const { className, attributes, setAttributes } = this.props;
 		const {
+			styleIs,
+			doubleOptIn,
 			title,
 			bgColor,
 			bgColorTwo,
@@ -116,6 +122,7 @@ class Newsletter extends Component {
 		const styleName = isStyle.test(attributes.className)
 			? attributes.className.replace(isStyle, "")
 			: null;
+		setAttributes({ styleIs: styleName });
 
 		let bg,
 			TopLeft,
@@ -126,7 +133,7 @@ class Newsletter extends Component {
 			placeholder,
 			r;
 		{
-			styleName == 3
+			styleIs == 3
 				? (btnBottomLeftThreeOne = borderBottomLeftRadiusTwo)
 				: (btnBottomLeftThreeOne = borderBottomLeftRadius);
 		}
@@ -170,6 +177,14 @@ class Newsletter extends Component {
 				</BlockControls>
 				<InspectorControls>
 					<PanelBody title={__("General Settings", "guteblock")}>
+					<ToggleControl
+						label={__("Enable Double Opt-in", "guteblock")}
+						onChange={this.onChangeEnableDoubleOptIn}
+						checked={doubleOptIn}
+					/>
+					<p className="description">
+								{ __( 'Send contacts an opt-in confirmation email when they subscribe to your list.', 'atomic-blocks' ) }
+							</p>
 						{styleName != 1 && (
 							<PanelColorSettings
 								title={__(
@@ -669,6 +684,13 @@ class Newsletter extends Component {
 								border: "none"
 							}}
 						/>
+						<TextControl
+							className={
+								"wp-block-guteblock-newsletter__hiddeninput"
+							}
+							type="hidden"
+							value={doubleOptIn}
+						/>
 						<Button
 							target="_blank"
 							rel="noopener noreferrer"
@@ -698,6 +720,7 @@ class Newsletter extends Component {
 										style={{}}
 										tagName="span"
 										value={buttonTitle}
+										onChange={this .onChangeButtonTitle}
 									/>
 								</div>
 							)}
