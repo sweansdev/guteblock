@@ -121,7 +121,7 @@ class Newsletter extends Component {
 		const isStyle = RegExp(/is-style-/);
 		const styleName = isStyle.test(attributes.className)
 			? attributes.className.replace(isStyle, "")
-			: null;
+			: 1;
 		setAttributes({ styleIs: styleName });
 
 		let bg,
@@ -689,6 +689,7 @@ class Newsletter extends Component {
 								"wp-block-guteblock-newsletter__hiddeninput"
 							}
 							type="hidden"
+							name="double-optin"
 							value={doubleOptIn}
 						/>
 						<Button

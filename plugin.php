@@ -142,7 +142,7 @@ function guteblock_newsletter_submit() {
 
 	$data = [
 		'email'     => $_POST["email"],
-		'subscriber_status'     => $_POST["status"],
+		'subscriber_status' => $_POST["double_optin"],
 		// 'status'    => 'subscribed'
 	];
 	
@@ -331,64 +331,69 @@ function guteblock_render_newsletter_block($attributes) {
 	if(isset($attributes['styleIs'])) {
 		$styleIs = $attributes['styleIs'];
 	} else {
-		$styleIs =1;
+		$styleIs = 1;
 	}
 	if(isset($attributes['doubleOptIn'])) {
 		$doubleOptIn = $attributes['doubleOptIn'];
 	} else {
 		$doubleOptIn =0;
 	}
-	if ( $attributes['styleIs'] == 3 ) {
+	if ( $styleIs == 3 ) {
 		$btnBottomLeftThreeOne = $borderBottomLeftRadiusTwo;
 	}
 	else{
 		$btnBottomLeftThreeOne = $borderBottomLeftRadius;
 	}
-	if ( $attributes['styleIs'] ==1 ) {
+	if ( $styleIs ==1 ) {
 		$bg = $bgColor;
 	}
 	else{
 		$bg = $bgColorTwo;
 	}
-	if ( $attributes['styleIs'] == 2 ) {
+	if ( $styleIs == 2 ) {
 		$TopLeft = 100;
 	}
 	else{
 		$TopLeft = $borderLeftRadius;
 	}
-	if ( $attributes['styleIs'] != 1 ) {
+	if ( $styleIs != 1 ) {
 		$btnTopLeft = 0;
 	}
 	else{
 		$btnTopLeft = $borderTopLeftRadius;
 	}
-	if ( $attributes['styleIs'] == 2 ) {
+	if ( $styleIs == 2 ) {
 		$btnBottomLeft = 30;
 	}
 	else{
 		$btnBottomLeft = $btnBottomLeftThreeOne;
 	}
-	if ( $attributes['styleIs'] == 3 ) {
+	if ( $styleIs == 3 ) {
 		$placehoderThreeOne = "Subscribe Now";
 	}
 	else{
 		$placehoderThreeOne = "Enter Your Email Id";
 	}
-	if ( $attributes['styleIs'] == 2 ) {
+	if ( $styleIs == 2 ) {
 		$placeholder = "Your mail Id goes here...";
 	}
 	else{
 		$placeholder = $placehoderThreeOne;
 	}
-	if ( $attributes['styleIs'] == 1 ) {
+	if ( $styleIs == 1 ) {
 		$r = $borderRightRadius;
 	}
 	else{
 		$r = 0;
 	}
+	if(isset($attributes['align'])) {
+		$align = $attributes['align'];
+	} else {
+		$align = "wide";
+	}
 	
 	$balancedPaddingRight = $horizontalOuterPadding + 4.5 * $fontSize + 2 * $buttonHorizontalPadding;
-	$newsletter .= '<div class="wp-block-guteblock-newsletter align'.$attributes['align'].' is-style-'.$attributes['styleIs'].' align-'.$alignment.'" 
+	$newsletter .= '<div class="wp-block-guteblock-newsletter align'.$align.' is-style-'.$attributes['styleIs'].' align-'.$alignment.'" 
 	style="background-color:'.$bg.';
 	padding-left:'.$horizontalOuterPadding.'px;
 	padding-right:'.$horizontalOuterPadding.'px;
@@ -418,7 +423,7 @@ function guteblock_render_newsletter_block($attributes) {
 			background-color:'.$inputBackgroundColor.';
 			border: none;
 			">';
-			$newsletter .= '<input type="hidden" value="'.$doubleOptIn.'" class="wp-block-guteblock-newsletter__hiddeninput">';
+			$newsletter .= '<input type="hidden" value="'.$doubleOptIn.'" class="wp-block-guteblock-newsletter__hiddeninput" name="double_optin" >';
 			$newsletter .= '<button type="submit"  target="_blank"  rel="noopener noreferrer" class="wp-block-guteblock-newsletter-inner" 
 			onMouseover="this.style.backgroundColor=#fhjjj";
 			style="padding-left:'.$buttonHorizontalPadding.'px;

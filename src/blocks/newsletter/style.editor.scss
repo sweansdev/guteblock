@@ -1,4 +1,11 @@
 .wp-block-guteblock-newsletter {
+
+	.wp-block-guteblock-newsletter__input input::placeholder {
+		color: unset;
+		opacity: .5;
+	}
+
+
 	&.is-style-3 {
 		button.components-button.wp-block-guteblock-newsletter-inner {
 			bottom: unset;

@@ -1,17 +1,20 @@
 import "./style.scss";
 
 import $ from "jquery";
-// import myAjax from 'jquery'
-var guteblock;
+
+
 $(document).ready(function() {
+	
+
 	$(".newsletterSubmit").submit(function() {
+
 		$.ajax({
 			type: "post",
 			url: guteblock.ajaxurl,
 			data: {
 				action: "guteblock_newsletter_submit",
 				email: $(".wp-block-guteblock-newsletter__input").val(),
-				status: $(".wp-block-guteblock-newsletter__hiddeninput").val()
+				double_optin: $(".wp-block-guteblock-newsletter input[name='double_optin']").val()
 			},
 			success: function(response) {
 				alert(response);
@@ -24,6 +27,8 @@ $(document).ready(function() {
 				// }
 			}
 		});
+		
+		
 
 		return false;
 	});
