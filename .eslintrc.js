@@ -8,7 +8,8 @@ module.exports = {
 	globals: {
 		Atomics: "readonly",
 		SharedArrayBuffer: "readonly",
-		wp: "readonly"
+		wp: "readonly",
+		guteblock: "readonly"
 	},
 	parser: "babel-eslint",
 	parserOptions: {

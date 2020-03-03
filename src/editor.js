@@ -14,14 +14,13 @@ import "./blocks/accordion";
 import "./blocks/blockquote";
 import "./blocks/icon-list";
 import "./blocks/newsletter";
-//import "./blocks/count-up";
-//import "./blocks/button";
-
+import "./blocks/feature-grid";
+import "./blocks/count-up";
+import "./blocks/button";
+import "./blocks/card";
 import "./common/css/style.editor.scss";
 
-// import "./blocks/count-up";
 // Adding Icon to Block Categories
-
 const icon = (
 	<svg viewBox="0 0 100 100">
 		<style />

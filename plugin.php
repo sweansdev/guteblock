@@ -18,6 +18,10 @@ if(!defined('ABSPATH')) {
 	exit;
 }
 
+$plugin_directory = plugin_dir_url(__FILE__);
+
+require_once( plugin_dir_path(__FILE__) . '/inc/admin/getting-started/getting-started.php' );
+
 function guteblock_categories($categories, $post) {
 	return array_merge(
 		$categories, 
@@ -73,15 +77,157 @@ $post_grid_attributes = array(
 	)
 );
 
-$newsletter_attr_json = '{"title":{"type":"string","source":"html","selector":"h4","default":""},"bgColor":{"type":"string","default":"#f1fbff"},"bgColorTwo":{"type":"string","default":"transparent"},"borderLeftRadius":{"type":"number","default":0},"borderRightRadius":{"type":"number","default":0},"align":{"type":"string","default":"wide"},"alignment":{"type":"string","default":"center"},"buttonTitle":{"type":"string","source":"html","selector":"span","default":"Subscribe"},"verticalOuterPadding":{"type":"number","default":25},"horizontalOuterPadding":{"type":"number","default":15},"verticalInnerPadding":{"type":"number","default":15},"horizontalPadding":{"type":"number","default":15},"inputBackgroundColor":{"type":"string","default":"#3c3c3c"},"inputTextColor":{"type":"string","default":"#cecece"},"inputTextFontWeight":{"type":"string","default":"normal"},"inputTextTransform":{"type":"string","default":"none"},"buttonBackgroundColor":{"type":"string","default":"#21ade5"},"buttonBackgroundColorTwo":{"type":"string","default":"#eae03d"},"buttonTextColor":{"type":"string","default":"#ffffff"},"fontSize":{"type":"number","default":14},"buttonTextFontWeight":{"type":"string","default":"normal"},"buttonTextTransform":{"type":"string","default":"none"},"buttonLetterSpacing":{"type":"number","default":0},"borderTopLeftRadius":{"type":"number","default":100},"borderBottomLeftRadius":{"type":"number","default":100},"borderBottomLeftRadiusTwo":{"type":"number","default":0},"buttonHorizontalPadding":{"type":"number","default":25},"icon":{"type":"string","default":"arrow-right-alt"},"iconColor":{"type":"string","default":"#fffff"},"iconSize":{"type":"number","default":15},"hoverButtonBackgroundColor":{"type":"string"},"hoverButtonTextColor":{"type":"string"},"doubleOptIn":{"type":"boolean","default":0}}';
+// $newsletter_attr_json = '{"title":{"type":"string","source":"html","selector":"h4","default":""},"bgColor":{"type":"string","default":"#f1fbff"},"bgColorTwo":{"type":"string","default":"transparent"},"borderLeftRadius":{"type":"number","default":0},"borderRightRadius":{"type":"number","default":0},"align":{"type":"string","default":"wide"},"alignment":{"type":"string","default":"center"},"buttonTitle":{"type":"string","source":"html","selector":"span","default":"Subscribe"},"verticalOuterPadding":{"type":"number","default":25},"horizontalOuterPadding":{"type":"number","default":15},"verticalInnerPadding":{"type":"number","default":15},"horizontalPadding":{"type":"number","default":15},"inputBackgroundColor":{"type":"string","default":"#3c3c3c"},"inputTextColor":{"type":"string","default":"#cecece"},"inputTextFontWeight":{"type":"string","default":"normal"},"inputTextTransform":{"type":"string","default":"none"},"buttonBackgroundColor":{"type":"string","default":"#21ade5"},"buttonBackgroundColorTwo":{"type":"string","default":"#eae03d"},"buttonTextColor":{"type":"string","default":"#ffffff"},"fontSize":{"type":"number","default":14},"buttonTextFontWeight":{"type":"string","default":"normal"},"buttonTextTransform":{"type":"string","default":"none"},"buttonLetterSpacing":{"type":"number","default":0},"borderTopLeftRadius":{"type":"number","default":100},"borderBottomLeftRadius":{"type":"number","default":100},"borderBottomLeftRadiusTwo":{"type":"number","default":0},"buttonHorizontalPadding":{"type":"number","default":25},"icon":{"type":"string","default":"arrow-right-alt"},"iconColor":{"type":"string","default":"#fffff"},"iconSize":{"type":"number","default":15},"hoverButtonBackgroundColor":{"type":"string"},"hoverButtonTextColor":{"type":"string"},"doubleOptIn":{"type":"boolean","default":0}}';
 
-$attr_array = json_decode($newsletter_attr_json, true);
-$newsletter_attributes = [];
+// $attr_array = json_decode($newsletter_attr_json, true);
+// $newsletter_attributes = [];
 
-foreach($attr_array as $key => $attr) {
-	$newsletter_attributes[$key]['type'] = $attr["type"];
-	$newsletter_attributes[$key]['default'] = $attr["default"];
-}
+// foreach($attr_array as $key => $attr) {
+// 	$newsletter_attributes[$key]['type'] = $attr["type"];
+// 	$newsletter_attributes[$key]['default'] = $attr["default"];
+// }
+// foreach($newsletter_attributes as $key => $attribute) {
+// 		echo '
+// 		"'.$key.'" => array(
+// 			"type" => "'.$attribute['type'].'",
+// 			"default" => "'.$attribute["default"].'"
+// 		),';
+// }
+
+$newsletter_attributes = array(
+	"title" => array(
+		"type" => "string",
+		"default" => ""
+	),
+	"bgColor" => array(
+		"type" => "string",
+		"default" => "#f1fbff"
+	),
+	"bgColorTwo" => array(
+		"type" => "string",
+		"default" => "transparent"
+	),
+	"borderLeftRadius" => array(
+		"type" => "number",
+		"default" => 0
+	),
+	"borderRightRadius" => array(
+		"type" => "number",
+		"default" => 0
+	),
+	"align" => array(
+		"type" => "string",
+		"default" => "wide"
+	),
+	"alignment" => array(
+		"type" => "string",
+		"default" => "center"
+	),
+	"buttonTitle" => array(
+		"type" => "string",
+		"default" => "Subscribe"
+	),
+	"verticalOuterPadding" => array(
+		"type" => "number",
+		"default" => 25
+	),
+	"horizontalOuterPadding" => array(
+		"type" => "number",
+		"default" => 15
+	),
+	"verticalInnerPadding" => array(
+		"type" => "number",
+		"default" => 15
+	),
+	"horizontalPadding" => array(
+		"type" => "number",
+		"default" => 15
+	),
+	"inputBackgroundColor" => array(
+		"type" => "string",
+		"default" => "#3c3c3c"
+	),
+	"inputTextColor" => array(
+		"type" => "string",
+		"default" => "#cecece"
+	),
+	"inputTextFontWeight" => array(
+		"type" => "string",
+		"default" => "normal"
+	),
+	"inputTextTransform" => array(
+		"type" => "string",
+		"default" => "none"
+	),
+	"buttonBackgroundColor" => array(
+		"type" => "string",
+		"default" => "#21ade5"
+	),
+	"buttonBackgroundColorTwo" => array(
+		"type" => "string",
+		"default" => "#eae03d"
+	),
+	"buttonTextColor" => array(
+		"type" => "string",
+		"default" => "#ffffff"
+	),
+	"fontSize" => array(
+		"type" => "number",
+		"default" => 14
+	),
+	"buttonTextFontWeight" => array(
+		"type" => "string",
+		"default" => "normal"
+	),
+	"buttonTextTransform" => array(
+		"type" => "string",
+		"default" => "none"
+	),
+	"buttonLetterSpacing" => array(
+		"type" => "number",
+		"default" => 0
+	),
+	"borderTopLeftRadius" => array(
+		"type" => "number",
+		"default" => 100
+	),
+	"borderBottomLeftRadius" => array(
+		"type" => "number",
+		"default" => 100
+	),
+	"borderBottomLeftRadiusTwo" => array(
+		"type" => "number",
+		"default" => 0
+	),
+	"buttonHorizontalPadding" => array(
+		"type" => "number",
+		"default" => 25
+	),
+	"icon" => array(
+		"type" => "string",
+		"default" => "arrow-right-alt"
+	),
+	"iconColor" => array(
+		"type" => "string",
+		"default" => "#fffff"
+	),
+	"iconSize" => array(
+		"type" => "number",
+		"default" => 15
+	),
+	"hoverButtonBackgroundColor" => array(
+		"type" => "string",
+		"default" => ""
+	),
+	"hoverButtonTextColor" => array(
+		"type" => "string",
+		"default" => ""
+	),
+	"doubleOptIn" => array(
+		"type" => "boolean",
+		"default" => 0
+	)
+);
 
 add_action('init', 'guteblock_register');
 function guteblock_register() {
@@ -138,8 +284,6 @@ add_action("wp_ajax_nopriv_guteblock_newsletter_submit", "guteblock_newsletter_s
 
 function guteblock_newsletter_submit() {
 	
-	echo $_POST["email"];
-
 	$data = [
 		'email'     => $_POST["email"],
 		'subscriber_status' => $_POST["double_optin"],
