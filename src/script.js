@@ -14,12 +14,11 @@ import "./blocks/feature-grid/script";
 import "./blocks/blockquote/script";
 import "./blocks/icon-list/script";
 import "./blocks/button/script";
-//import "./blocks/newsletter/script";
+import "./blocks/newsletter/script";
 //import "./blocks/accordion/script";
 //import "./blocks/count-up/script";
 //import "./blocks/card/script";
 
-
 // Pro
-//import "./blocks/quick-contact/script";
+import "./blocks/quick-contact/script";
 //import "./blocks/paypal-donation/script";

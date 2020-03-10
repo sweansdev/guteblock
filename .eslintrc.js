@@ -9,7 +9,8 @@ module.exports = {
 		Atomics: "readonly",
 		SharedArrayBuffer: "readonly",
 		wp: "readonly",
-		guteblock: "readonly"
+		guteblock: "readonly",
+		grecaptcha: "readonly"
 	},
 	parser: "babel-eslint",
 	parserOptions: {

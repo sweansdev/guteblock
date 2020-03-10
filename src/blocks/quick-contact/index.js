@@ -4,7 +4,7 @@ import { __ } from "@wordpress/i18n";
 import { RichText } from "@wordpress/editor";
 // import { TextareaControl,TextControl,Button } from "@wordpress/components";
 import edit from "./edit.js";
-import classnames from 'classnames';
+import classnames from "classnames";
 
 const attributes = {
 	width: {
@@ -159,11 +159,11 @@ const attributes = {
 	},
 	buttonWidth: {
 		type: "number",
-		default:30
+		default: 30
 	},
 	buttonBorderRadius: {
 		type: "number",
-		default:5
+		default: 5
 	},
 	buttonPadding: {
 		type: "number",
@@ -179,7 +179,6 @@ const attributes = {
 		type: "string",
 		default: ""
 	}
-
 };
 
 registerBlockType("guteblock/quick-contact", {
@@ -253,13 +252,12 @@ registerBlockType("guteblock/quick-contact", {
 	],
 	supports: {
 		reusable: false,
-		html: false ,
+		html: false,
 		align: ["wide", "full"]
 	},
 	attributes,
 	edit,
 	save: ({ attributes }) => {
-		
 		const {
 			width,
 			bgColor,
@@ -298,7 +296,7 @@ registerBlockType("guteblock/quick-contact", {
 			inputBackgroundColor,
 			showInputBorder,
 			inputBorderColor,
-			inputTextColor,	
+			inputTextColor,
 			buttonTextColor,
 			buttonBackgroundColor,
 			hoverButtonBackgroundColor,
@@ -310,89 +308,122 @@ registerBlockType("guteblock/quick-contact", {
 			authorEmailId
 		} = attributes;
 
-		const isStyle = RegExp(/is-style-/)
+		const isStyle = RegExp(/is-style-/);
 		const styleName = isStyle.test(attributes.className)
-			? attributes.className.replace(isStyle, '')
-			: 1
-		
+			? attributes.className.replace(isStyle, "")
+			: 1;
+
 		const classes = classnames({
 			[`align-${alignment}`]: alignment
-		})
-		let inputBorder,contactFormShadow,basicInputBorder,borderBottom,basicBorderRadius;
-		{ showInputBorder ? (inputBorder = `1px solid ${inputBorderColor}`) : (inputBorder = "none")}
-		{ showFormShadow ? (contactFormShadow= `0px 0px ${formShadow}px 0px ${formShadowColor}`): contactFormShadow = "none"}
-		{ styleName == 3 ? (basicInputBorder = "none") : (basicInputBorder = inputBorder);}
-		{ styleName == 3 ? (borderBottom = `2px solid ${inputBorderColor}`) : (borderBottom = inputBorder);}
-		{ styleName == 3 ? (basicBorderRadius = "0") : (basicBorderRadius = inputBorderBottomLeftRadius);}
-		{ styleName == 3 ? (basicBorderRadius = "0") : (basicBorderRadius = inputBorderBottomRightRadius);}
+		});
+		let inputBorder,
+			contactFormShadow,
+			basicInputBorder,
+			borderBottom,
+			basicBorderRadius;
+		{
+			showInputBorder
+				? (inputBorder = `1px solid ${inputBorderColor}`)
+				: (inputBorder = "none");
+		}
+		{
+			showFormShadow
+				? (contactFormShadow = `0px 0px ${formShadow}px 0px ${formShadowColor}`)
+				: (contactFormShadow = "none");
+		}
+		{
+			styleName == 3
+				? (basicInputBorder = "none")
+				: (basicInputBorder = inputBorder);
+		}
+		{
+			styleName == 3
+				? (borderBottom = `2px solid ${inputBorderColor}`)
+				: (borderBottom = inputBorder);
+		}
+		{
+			styleName == 3
+				? (basicBorderRadius = "0")
+				: (basicBorderRadius = inputBorderBottomLeftRadius);
+		}
+		{
+			styleName == 3
+				? (basicBorderRadius = "0")
+				: (basicBorderRadius = inputBorderBottomRightRadius);
+		}
 		return (
-			<div className={classes}
+			<div
+				className={classes}
 				style={{
 					alignment: alignment,
-					backgroundColor:bgColor,
+					backgroundColor: bgColor,
 					paddingTop: verticalPadding,
 					paddingBottom: verticalPadding,
 					paddingLeft: horizontalPadding,
 					paddingRight: horizontalPadding
-				}}>
-				<div className="wp-block-guteblock-quick-contact-form"
-				style={{
-					backgroundColor:formBackgroundColor,
-					padding:padding,
-					width: `${width}%`,
-					borderRadius:borderRadius,
-					boxShadow: contactFormShadow 
-				}}>
-					<div className={
-						"wp-block-guteblock-quick-contact-form_align_center"
-					}>
+				}}
+			>
+				<div
+					className="wp-block-guteblock-quick-contact-form"
+					style={{
+						backgroundColor: formBackgroundColor,
+						padding: padding,
+						width: `${width}%`,
+						borderRadius: borderRadius,
+						boxShadow: contactFormShadow
+					}}
+				>
+					<div
+						className={
+							"wp-block-guteblock-quick-contact-form_align_center"
+						}
+					>
 						<RichText.Content
 							className={
 								"wp-block-guteblock-quick-contact-form__title"
 							}
 							tagName="h4"
 							value={title}
-							placeholder={__(
-								"Title",
-								"guteblock"
-							)}
+							placeholder={__("Title", "guteblock")}
 							style={{
 								color: titleColor,
 								textTransform: titleTextTransform,
 								fontSize: `${titleFontSize}px`,
 								paddingTop: `${titleVerticalPadding}px`,
 								paddingBottom: `${titleVerticalPadding}px`
-							}}					
+							}}
 						/>
 					</div>
-					<div className={
-						"wp-block-guteblock-quick-contact-form_align_center"
-					}>
-					{styleName != 3 && (	
-						<RichText.Content
-							className={
-								"wp-block-guteblock-quick-contact-form__info"
-							}
-							tagName="p"
-							value={info}
-							placeholder={__(
-								"Info",
-								"guteblock"
-							)}
-							style={{
-								color: infoColor
-							}}						
-						/>
-					)}
+					<div
+						className={
+							"wp-block-guteblock-quick-contact-form_align_center"
+						}
+					>
+						{styleName != 3 && (
+							<RichText.Content
+								className={
+									"wp-block-guteblock-quick-contact-form__info"
+								}
+								tagName="p"
+								value={info}
+								placeholder={__("Info", "guteblock")}
+								style={{
+									color: infoColor
+								}}
+							/>
+						)}
 					</div>
 					<form
 						action=""
 						method="post"
 						className="quickContactFormSubmit"
+						id="quickContactMyForm"
 					>
-						<div className={
-							"wp-block-guteblock-quick-contact-form_align_left"
-						}>
+						<div
+							className={
+								"wp-block-guteblock-quick-contact-form_align_left"
+							}
+						>
 							<input
 								className={
 									"wp-block-guteblock-quick-contact-form__name_field"
@@ -403,22 +434,22 @@ registerBlockType("guteblock/quick-contact", {
 								)}
 								style={{
 									marginTop: `${inputVerticalMargin}px`,
-									marginBottom: `${inputVerticalMargin}px`,  
+									marginBottom: `${inputVerticalMargin}px`,
 									paddingTop: `${inputVerticalPadding}px`,
 									paddingBottom: `${inputVerticalPadding}px`,
 									paddingLeft: `${inputHorizontalPadding}px`,
-									paddingRight: `${inputHorizontalPadding}px`, 
+									paddingRight: `${inputHorizontalPadding}px`,
 									fontSize: `${inputFontSize}px`,
 									color: inputTextColor,
 									backgroundColor: inputBackgroundColor,
-									borderTop:basicInputBorder,
-									borderBottom:borderBottom,
-									borderLeft:basicInputBorder,
-									borderRight:basicInputBorder,
+									borderTop: basicInputBorder,
+									borderBottom: borderBottom,
+									borderLeft: basicInputBorder,
+									borderRight: basicInputBorder,
 									borderTopLeftRadius: `${inputBorderTopLeftRadius}px`,
-									borderTopRightRadius: `${inputBorderTopRightRadius}px`, 
-									borderBottomLeftRadius: `${basicBorderRadius}px`, 
-									borderBottomRightRadius: `${basicBorderRadius}px` 
+									borderTopRightRadius: `${inputBorderTopRightRadius}px`,
+									borderBottomLeftRadius: `${basicBorderRadius}px`,
+									borderBottomRightRadius: `${basicBorderRadius}px`
 								}}
 								type="text"
 								name="quick_contact_form_name_field"
@@ -426,9 +457,11 @@ registerBlockType("guteblock/quick-contact", {
 								required
 							/>
 						</div>
-						<div className={
-							"wp-block-guteblock-quick-contact-form_align_right"
-						}>
+						<div
+							className={
+								"wp-block-guteblock-quick-contact-form_align_right"
+							}
+						>
 							<input
 								className={
 									"wp-block-guteblock-quick-contact-form__email_field"
@@ -439,22 +472,22 @@ registerBlockType("guteblock/quick-contact", {
 								)}
 								style={{
 									marginTop: `${inputVerticalMargin}px`,
-									marginBottom: `${inputVerticalMargin}px`,  
+									marginBottom: `${inputVerticalMargin}px`,
 									paddingTop: `${inputVerticalPadding}px`,
 									paddingBottom: `${inputVerticalPadding}px`,
 									paddingLeft: `${inputHorizontalPadding}px`,
-									paddingRight: `${inputHorizontalPadding}px`, 
+									paddingRight: `${inputHorizontalPadding}px`,
 									fontSize: `${inputFontSize}px`,
 									color: inputTextColor,
 									backgroundColor: inputBackgroundColor,
-									borderTop:basicInputBorder,
-									borderBottom:borderBottom,
-									borderLeft:basicInputBorder,
-									borderRight:basicInputBorder,
+									borderTop: basicInputBorder,
+									borderBottom: borderBottom,
+									borderLeft: basicInputBorder,
+									borderRight: basicInputBorder,
 									borderTopLeftRadius: `${inputBorderTopLeftRadius}px`,
-									borderTopRightRadius: `${inputBorderTopRightRadius}px`, 
-									borderBottomLeftRadius: `${basicBorderRadius}px`, 
-									borderBottomRightRadius: `${basicBorderRadius}px` 
+									borderTopRightRadius: `${inputBorderTopRightRadius}px`,
+									borderBottomLeftRadius: `${basicBorderRadius}px`,
+									borderBottomRightRadius: `${basicBorderRadius}px`
 								}}
 								type="email"
 								name="quick_contact_form_email_field"
@@ -463,84 +496,90 @@ registerBlockType("guteblock/quick-contact", {
 							/>
 						</div>
 						{enablePhoneField && (
-						<div className={
-							"wp-block-guteblock-quick-contact-form_align_left"
-						}>
-							<input
+							<div
 								className={
-									"wp-block-guteblock-quick-contact-form__phone_field"
+									"wp-block-guteblock-quick-contact-form_align_left"
 								}
-								placeholder={__(
-									"Enter Your Phone Number",
-									"guteblock"
-								)}
-								style={{
-									marginTop: `${inputVerticalMargin}px`,
-									marginBottom: `${inputVerticalMargin}px`,  
-									paddingTop: `${inputVerticalPadding}px`,
-									paddingBottom: `${inputVerticalPadding}px`,
-									paddingLeft: `${inputHorizontalPadding}px`,
-									paddingRight: `${inputHorizontalPadding}px`, 
-									fontSize: `${inputFontSize}px`,
-									color: inputTextColor,
-									backgroundColor: inputBackgroundColor,
-									borderTop:basicInputBorder,
-									borderBottom:borderBottom,
-									borderLeft:basicInputBorder,
-									borderRight:basicInputBorder,
-									borderTopLeftRadius: `${inputBorderTopLeftRadius}px`,
-									borderTopRightRadius: `${inputBorderTopRightRadius}px`, 
-									borderBottomLeftRadius: `${basicBorderRadius}px`, 
-									borderBottomRightRadius: `${basicBorderRadius}px` 
-								}}
-								type="text"
-								name="quick_contact_form_phone_field"
-								value={phoneField}
-								required
-							/>
-						</div>
+							>
+								<input
+									className={
+										"wp-block-guteblock-quick-contact-form__phone_field"
+									}
+									placeholder={__(
+										"Enter Your Phone Number",
+										"guteblock"
+									)}
+									style={{
+										marginTop: `${inputVerticalMargin}px`,
+										marginBottom: `${inputVerticalMargin}px`,
+										paddingTop: `${inputVerticalPadding}px`,
+										paddingBottom: `${inputVerticalPadding}px`,
+										paddingLeft: `${inputHorizontalPadding}px`,
+										paddingRight: `${inputHorizontalPadding}px`,
+										fontSize: `${inputFontSize}px`,
+										color: inputTextColor,
+										backgroundColor: inputBackgroundColor,
+										borderTop: basicInputBorder,
+										borderBottom: borderBottom,
+										borderLeft: basicInputBorder,
+										borderRight: basicInputBorder,
+										borderTopLeftRadius: `${inputBorderTopLeftRadius}px`,
+										borderTopRightRadius: `${inputBorderTopRightRadius}px`,
+										borderBottomLeftRadius: `${basicBorderRadius}px`,
+										borderBottomRightRadius: `${basicBorderRadius}px`
+									}}
+									type="text"
+									name="quick_contact_form_phone_field"
+									value={phoneField}
+									required
+								/>
+							</div>
 						)}
 						{enableWebsiteField && (
-						<div className={
-							"wp-block-guteblock-quick-contact-form_align_right"
-						}>
-							<input
+							<div
 								className={
-									"wp-block-guteblock-quick-contact-form__website_field"
+									"wp-block-guteblock-quick-contact-form_align_right"
 								}
-								placeholder={__(
-									"Enter Your Website Here...",
-									"guteblock"
-								)}
-								style={{
-									marginTop: `${inputVerticalMargin}px`,
-									marginBottom: `${inputVerticalMargin}px`,  
-									paddingTop: `${inputVerticalPadding}px`,
-									paddingBottom: `${inputVerticalPadding}px`,
-									paddingLeft: `${inputHorizontalPadding}px`,
-									paddingRight: `${inputHorizontalPadding}px`, 
-									fontSize: `${inputFontSize}px`,
-									color: inputTextColor,
-									backgroundColor: inputBackgroundColor,
-									borderTop:basicInputBorder,
-									borderBottom:borderBottom,
-									borderLeft:basicInputBorder,
-									borderRight:basicInputBorder,
-									borderTopLeftRadius: `${inputBorderTopLeftRadius}px`,
-									borderTopRightRadius: `${inputBorderTopRightRadius}px`, 
-									borderBottomLeftRadius: `${basicBorderRadius}px`, 
-									borderBottomRightRadius: `${basicBorderRadius}px` 
-								}}
-								type="text"
-								name="quick_contact_form_website_field"
-								value={websiteField}
-								required
-							/>
-						</div>
+							>
+								<input
+									className={
+										"wp-block-guteblock-quick-contact-form__website_field"
+									}
+									placeholder={__(
+										"Enter Your Website Here...",
+										"guteblock"
+									)}
+									style={{
+										marginTop: `${inputVerticalMargin}px`,
+										marginBottom: `${inputVerticalMargin}px`,
+										paddingTop: `${inputVerticalPadding}px`,
+										paddingBottom: `${inputVerticalPadding}px`,
+										paddingLeft: `${inputHorizontalPadding}px`,
+										paddingRight: `${inputHorizontalPadding}px`,
+										fontSize: `${inputFontSize}px`,
+										color: inputTextColor,
+										backgroundColor: inputBackgroundColor,
+										borderTop: basicInputBorder,
+										borderBottom: borderBottom,
+										borderLeft: basicInputBorder,
+										borderRight: basicInputBorder,
+										borderTopLeftRadius: `${inputBorderTopLeftRadius}px`,
+										borderTopRightRadius: `${inputBorderTopRightRadius}px`,
+										borderBottomLeftRadius: `${basicBorderRadius}px`,
+										borderBottomRightRadius: `${basicBorderRadius}px`
+									}}
+									type="text"
+									name="quick_contact_form_website_field"
+									value={websiteField}
+									required
+								/>
+							</div>
 						)}
-						<div className={
-							"wp-block-guteblock-quick-contact-form_align_center"
-						}>
+						<div
+							className={
+								"wp-block-guteblock-quick-contact-form_align_center"
+							}
+						>
 							<textarea
 								className={
 									"wp-block-guteblock-quick-contact-form__message_field"
@@ -550,43 +589,45 @@ registerBlockType("guteblock/quick-contact", {
 									"guteblock"
 								)}
 								style={{
-								marginTop: `${inputVerticalMargin}px`,
-								marginBottom: `${inputVerticalMargin}px`,  
-								paddingTop: `${inputVerticalPadding}px`,
-								paddingBottom: `${inputVerticalPadding}px`,
-								paddingLeft: `${inputHorizontalPadding}px`,
-								paddingRight: `${inputHorizontalPadding}px`, 
-								fontSize: `${inputFontSize}px`,
-								color: inputTextColor,
-								backgroundColor: inputBackgroundColor,
-								borderTop:basicInputBorder,
-								borderBottom:borderBottom,
-								borderLeft:basicInputBorder,
-								borderRight:basicInputBorder,
-								borderTopLeftRadius: `${inputBorderTopLeftRadius}px`,
-								borderTopRightRadius: `${inputBorderTopRightRadius}px`, 
-								borderBottomLeftRadius: `${basicBorderRadius}px`, 
-								borderBottomRightRadius: `${basicBorderRadius}px` 
-							}}
+									marginTop: `${inputVerticalMargin}px`,
+									marginBottom: `${inputVerticalMargin}px`,
+									paddingTop: `${inputVerticalPadding}px`,
+									paddingBottom: `${inputVerticalPadding}px`,
+									paddingLeft: `${inputHorizontalPadding}px`,
+									paddingRight: `${inputHorizontalPadding}px`,
+									fontSize: `${inputFontSize}px`,
+									color: inputTextColor,
+									backgroundColor: inputBackgroundColor,
+									borderTop: basicInputBorder,
+									borderBottom: borderBottom,
+									borderLeft: basicInputBorder,
+									borderRight: basicInputBorder,
+									borderTopLeftRadius: `${inputBorderTopLeftRadius}px`,
+									borderTopRightRadius: `${inputBorderTopRightRadius}px`,
+									borderBottomLeftRadius: `${basicBorderRadius}px`,
+									borderBottomRightRadius: `${basicBorderRadius}px`
+								}}
 								name="quick_contact_form_message_field"
 								value={messageField}
 								required
 							/>
 						</div>
-							<input
-								type="hidden"
-								name="quick_contact_form_authorEmailId_field"
-								value={authorEmailId}
-							/>
-							<input 
-								type="hidden" 
-								value=""
-								name="recaptcha_response" 
-								id="recaptchaResponse"
-								/>
-						<div className={
-							"wp-block-guteblock-quick-contact-form_align_center"
-						}>
+						<input
+							type="hidden"
+							name="quick_contact_form_authorEmailId_field"
+							value={authorEmailId}
+						/>
+						<input
+							type="hidden"
+							value=""
+							name="recaptcha_response"
+							id="recaptchaResponse"
+						/>
+						<div
+							className={
+								"wp-block-guteblock-quick-contact-form_align_center"
+							}
+						>
 							<button
 								target="_blank"
 								rel="noopener noreferrer"
@@ -599,7 +640,7 @@ registerBlockType("guteblock/quick-contact", {
 									color: buttonTextColor,
 									borderRadius: `${buttonBorderRadius}px`,
 									padding: buttonPadding,
-									textTransform:buttonTextTransform,
+									textTransform: buttonTextTransform
 								}}
 							>
 								<RichText.Content

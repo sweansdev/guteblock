@@ -16,11 +16,11 @@ import "./blocks/button";
 import "./blocks/feature-grid";
 //import "./blocks/accordion";
 //import "./blocks/count-up";
-//import "./blocks/newsletter";
+import "./blocks/newsletter";
 //import "./blocks/card";
 
 // Pro
-//import "./blocks/quick-contact";
+import "./blocks/quick-contact";
 //import "./blocks/paypal-donation";
 
 import "./common/css/style.editor.scss";
