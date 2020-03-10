@@ -1,11 +1,11 @@
 <?php 
 /**
  * Plugin Name: Guteblock - Ultimate Gutenberg Blocks Plugin
- * Plugin URI: https://www.guteblock.com/
+ * Plugin URI: https://guteblock.com/
  * Description: Guteblock is an exquisite collection of blocks redefining the use of Gutenberg (the brand-new WordPress Block Editor)
  * Author: Sweans
  * Author URI: https://www.sweans.com/
- * Version: 1.0.6
+ * Version: 1.0.9
  * Text Domain: guteblock
  * Tested up to: 5.3
  * License: GPL3
@@ -19,8 +19,7 @@ if(!defined('ABSPATH')) {
 }
 
 $plugin_directory = plugin_dir_url(__FILE__);
-
-require_once( plugin_dir_path(__FILE__) . '/inc/admin/getting-started/getting-started.php' );
+require_once( plugin_dir_path(__FILE__) . '/inc/settings/settings.php' );
 
 function guteblock_categories($categories, $post) {
 	return array_merge(
@@ -50,184 +49,6 @@ function guteblock_register_block_type($block, $options = array()) {
 		)
 	);
 }
-
-$post_grid_attributes = array(
-	'numberofposts' => array(
-		'type' => 'number',
-		'default' => 2
-	),
-	'postCategories' => array(
-		'type' => 'string'
-	),
-	'columns' => array(
-		'type' => 'number',
-		'default' => 3
-	),
-	'align' => array(
-		'type' => 'string',
-		'default' => 'wide'
-	),
-	'alignment' => array(
-		'type' => 'string',
-		'default' => 'center'
-	),
-	'numberofwords' => array(
-		'type' => 'number',
-		'default' => 20
-	)
-);
-
-// $newsletter_attr_json = '{"title":{"type":"string","source":"html","selector":"h4","default":""},"bgColor":{"type":"string","default":"#f1fbff"},"bgColorTwo":{"type":"string","default":"transparent"},"borderLeftRadius":{"type":"number","default":0},"borderRightRadius":{"type":"number","default":0},"align":{"type":"string","default":"wide"},"alignment":{"type":"string","default":"center"},"buttonTitle":{"type":"string","source":"html","selector":"span","default":"Subscribe"},"verticalOuterPadding":{"type":"number","default":25},"horizontalOuterPadding":{"type":"number","default":15},"verticalInnerPadding":{"type":"number","default":15},"horizontalPadding":{"type":"number","default":15},"inputBackgroundColor":{"type":"string","default":"#3c3c3c"},"inputTextColor":{"type":"string","default":"#cecece"},"inputTextFontWeight":{"type":"string","default":"normal"},"inputTextTransform":{"type":"string","default":"none"},"buttonBackgroundColor":{"type":"string","default":"#21ade5"},"buttonBackgroundColorTwo":{"type":"string","default":"#eae03d"},"buttonTextColor":{"type":"string","default":"#ffffff"},"fontSize":{"type":"number","default":14},"buttonTextFontWeight":{"type":"string","default":"normal"},"buttonTextTransform":{"type":"string","default":"none"},"buttonLetterSpacing":{"type":"number","default":0},"borderTopLeftRadius":{"type":"number","default":100},"borderBottomLeftRadius":{"type":"number","default":100},"borderBottomLeftRadiusTwo":{"type":"number","default":0},"buttonHorizontalPadding":{"type":"number","default":25},"icon":{"type":"string","default":"arrow-right-alt"},"iconColor":{"type":"string","default":"#fffff"},"iconSize":{"type":"number","default":15},"hoverButtonBackgroundColor":{"type":"string"},"hoverButtonTextColor":{"type":"string"},"doubleOptIn":{"type":"boolean","default":0}}';
-
-// $attr_array = json_decode($newsletter_attr_json, true);
-// $newsletter_attributes = [];
-
-// foreach($attr_array as $key => $attr) {
-// 	$newsletter_attributes[$key]['type'] = $attr["type"];
-// 	$newsletter_attributes[$key]['default'] = $attr["default"];
-// }
-// foreach($newsletter_attributes as $key => $attribute) {
-// 		echo '
-// 		"'.$key.'" => array(
-// 			"type" => "'.$attribute['type'].'",
-// 			"default" => "'.$attribute["default"].'"
-// 		),';
-// }
-
-$newsletter_attributes = array(
-	"title" => array(
-		"type" => "string",
-		"default" => ""
-	),
-	"bgColor" => array(
-		"type" => "string",
-		"default" => "#f1fbff"
-	),
-	"bgColorTwo" => array(
-		"type" => "string",
-		"default" => "transparent"
-	),
-	"borderLeftRadius" => array(
-		"type" => "number",
-		"default" => 0
-	),
-	"borderRightRadius" => array(
-		"type" => "number",
-		"default" => 0
-	),
-	"align" => array(
-		"type" => "string",
-		"default" => "wide"
-	),
-	"alignment" => array(
-		"type" => "string",
-		"default" => "center"
-	),
-	"buttonTitle" => array(
-		"type" => "string",
-		"default" => "Subscribe"
-	),
-	"verticalOuterPadding" => array(
-		"type" => "number",
-		"default" => 25
-	),
-	"horizontalOuterPadding" => array(
-		"type" => "number",
-		"default" => 15
-	),
-	"verticalInnerPadding" => array(
-		"type" => "number",
-		"default" => 15
-	),
-	"horizontalPadding" => array(
-		"type" => "number",
-		"default" => 15
-	),
-	"inputBackgroundColor" => array(
-		"type" => "string",
-		"default" => "#3c3c3c"
-	),
-	"inputTextColor" => array(
-		"type" => "string",
-		"default" => "#cecece"
-	),
-	"inputTextFontWeight" => array(
-		"type" => "string",
-		"default" => "normal"
-	),
-	"inputTextTransform" => array(
-		"type" => "string",
-		"default" => "none"
-	),
-	"buttonBackgroundColor" => array(
-		"type" => "string",
-		"default" => "#21ade5"
-	),
-	"buttonBackgroundColorTwo" => array(
-		"type" => "string",
-		"default" => "#eae03d"
-	),
-	"buttonTextColor" => array(
-		"type" => "string",
-		"default" => "#ffffff"
-	),
-	"fontSize" => array(
-		"type" => "number",
-		"default" => 14
-	),
-	"buttonTextFontWeight" => array(
-		"type" => "string",
-		"default" => "normal"
-	),
-	"buttonTextTransform" => array(
-		"type" => "string",
-		"default" => "none"
-	),
-	"buttonLetterSpacing" => array(
-		"type" => "number",
-		"default" => 0
-	),
-	"borderTopLeftRadius" => array(
-		"type" => "number",
-		"default" => 100
-	),
-	"borderBottomLeftRadius" => array(
-		"type" => "number",
-		"default" => 100
-	),
-	"borderBottomLeftRadiusTwo" => array(
-		"type" => "number",
-		"default" => 0
-	),
-	"buttonHorizontalPadding" => array(
-		"type" => "number",
-		"default" => 25
-	),
-	"icon" => array(
-		"type" => "string",
-		"default" => "arrow-right-alt"
-	),
-	"iconColor" => array(
-		"type" => "string",
-		"default" => "#fffff"
-	),
-	"iconSize" => array(
-		"type" => "number",
-		"default" => 15
-	),
-	"hoverButtonBackgroundColor" => array(
-		"type" => "string",
-		"default" => ""
-	),
-	"hoverButtonTextColor" => array(
-		"type" => "string",
-		"default" => ""
-	),
-	"doubleOptIn" => array(
-		"type" => "boolean",
-		"default" => 0
-	)
-);
 
 add_action('init', 'guteblock_register');
 function guteblock_register() {
@@ -265,11 +86,172 @@ function guteblock_register() {
 	guteblock_register_block_type('testimonial');
 	guteblock_register_block_type('number-box');
 	guteblock_register_block_type('separator');
+
+	$post_grid_attributes = array(
+		'numberofposts' => array(
+			'type' => 'number',
+			'default' => 2
+		),
+		'postCategories' => array(
+			'type' => 'string'
+		),
+		'columns' => array(
+			'type' => 'number',
+			'default' => 3
+		),
+		'align' => array(
+			'type' => 'string',
+			'default' => 'wide'
+		),
+		'alignment' => array(
+			'type' => 'string',
+			'default' => 'center'
+		),
+		'numberofwords' => array(
+			'type' => 'number',
+			'default' => 20
+		)
+	);
 	
 	guteblock_register_block_type('post-grid', array(
 		'render_callback' => 'guteblock_render_post_grid_block',
 		'attributes' => $post_grid_attributes
 	));
+
+	$newsletter_attributes = array(
+		"title" => array(
+			"type" => "string",
+			"default" => ""
+		),
+		"bgColor" => array(
+			"type" => "string",
+			"default" => "#f1fbff"
+		),
+		"bgColorTwo" => array(
+			"type" => "string",
+			"default" => "transparent"
+		),
+		"borderLeftRadius" => array(
+			"type" => "number",
+			"default" => 0
+		),
+		"borderRightRadius" => array(
+			"type" => "number",
+			"default" => 0
+		),
+		"align" => array(
+			"type" => "string",
+			"default" => "wide"
+		),
+		"alignment" => array(
+			"type" => "string",
+			"default" => "center"
+		),
+		"buttonTitle" => array(
+			"type" => "string",
+			"default" => "Subscribe"
+		),
+		"verticalOuterPadding" => array(
+			"type" => "number",
+			"default" => 25
+		),
+		"horizontalOuterPadding" => array(
+			"type" => "number",
+			"default" => 15
+		),
+		"verticalInnerPadding" => array(
+			"type" => "number",
+			"default" => 15
+		),
+		"horizontalPadding" => array(
+			"type" => "number",
+			"default" => 15
+		),
+		"inputBackgroundColor" => array(
+			"type" => "string",
+			"default" => "#3c3c3c"
+		),
+		"inputTextColor" => array(
+			"type" => "string",
+			"default" => "#cecece"
+		),
+		"inputTextFontWeight" => array(
+			"type" => "string",
+			"default" => "normal"
+		),
+		"inputTextTransform" => array(
+			"type" => "string",
+			"default" => "none"
+		),
+		"buttonBackgroundColor" => array(
+			"type" => "string",
+			"default" => "#21ade5"
+		),
+		"buttonBackgroundColorTwo" => array(
+			"type" => "string",
+			"default" => "#eae03d"
+		),
+		"buttonTextColor" => array(
+			"type" => "string",
+			"default" => "#ffffff"
+		),
+		"fontSize" => array(
+			"type" => "number",
+			"default" => 14
+		),
+		"buttonTextFontWeight" => array(
+			"type" => "string",
+			"default" => "normal"
+		),
+		"buttonTextTransform" => array(
+			"type" => "string",
+			"default" => "none"
+		),
+		"buttonLetterSpacing" => array(
+			"type" => "number",
+			"default" => 0
+		),
+		"borderTopLeftRadius" => array(
+			"type" => "number",
+			"default" => 100
+		),
+		"borderBottomLeftRadius" => array(
+			"type" => "number",
+			"default" => 100
+		),
+		"borderBottomLeftRadiusTwo" => array(
+			"type" => "number",
+			"default" => 0
+		),
+		"buttonHorizontalPadding" => array(
+			"type" => "number",
+			"default" => 25
+		),
+		"icon" => array(
+			"type" => "string",
+			"default" => "arrow-right-alt"
+		),
+		"iconColor" => array(
+			"type" => "string",
+			"default" => "#fffff"
+		),
+		"iconSize" => array(
+			"type" => "number",
+			"default" => 15
+		),
+		"hoverButtonBackgroundColor" => array(
+			"type" => "string",
+			"default" => ""
+		),
+		"hoverButtonTextColor" => array(
+			"type" => "string",
+			"default" => ""
+		),
+		"doubleOptIn" => array(
+			"type" => "boolean",
+			"default" => 0
+		)
+	);
 
 	guteblock_register_block_type('newsletter', array(
 		'render_callback' => 'guteblock_render_newsletter_block',
@@ -283,31 +265,34 @@ add_action("wp_ajax_guteblock_newsletter_submit", "guteblock_newsletter_submit")
 add_action("wp_ajax_nopriv_guteblock_newsletter_submit", "guteblock_newsletter_submit");
 
 function guteblock_newsletter_submit() {
-	
+
 	$data = [
 		'email'     => $_POST["email"],
 		'subscriber_status' => $_POST["double_optin"],
 		// 'status'    => 'subscribed'
 	];
 	
-	$apiKey = '3401cf84f0f45ff90988a242a7ab5ade-us4';
-	$listId = 'c0f7c8f8df';
+	$apiKey = get_option( 'guteblock_mailchimp_api_key'); 
+	$listId = get_option( 'guteblock_mailchimp_list_id' );
 
 	$memberId = md5(strtolower($data['email']));
 	$dataCenter = substr($apiKey,strpos($apiKey,'-')+1);
 	$url = 'https://' . $dataCenter . '.api.mailchimp.com/3.0/lists/' . $listId . '/members/' . $memberId;
-
-	if($data['subscriber_status'] == 0 ) {
-		$status = "subscribed";
-	}
-	else {
-		$status = "pending";
+	if($data['email'] != ""){
+		if($data['subscriber_status'] == 0 ) {
+			$status = "subscribed";
+		}
+		else {
+			$status = "pending";
+		}
+	}else{
+		$status = "no mail";
 	}
 	$json = json_encode([
 		'email_address' => $data['email'],
 		'status'        => $status
 	]);
-
+	
 	$ch = curl_init($url);
 	curl_setopt($ch, CURLOPT_USERPWD, 'user:' . $apiKey);
 	curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
@@ -319,12 +304,22 @@ function guteblock_newsletter_submit() {
 	$result = curl_exec($ch);
 	$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 	curl_close($ch);
-
-	return $httpCode;
+	
+	if($status == "no mail") {
+		echo "Please Enter Your Email";
+	}else{
+		if($status == "pending") {
+			echo get_option( 'guteblock_mailchimp_success_response_do' );
+		}
+		else{
+			echo get_option( 'guteblock_mailchimp_success_response' );
+		}
+	}
 		
 	exit();
 
 }
+
 function guteblock_render_newsletter_block($attributes) {
 
 	if(isset($attributes['bgColor'])) {
@@ -550,8 +545,8 @@ function guteblock_render_newsletter_block($attributes) {
     position: relative;
     display: inline-block;
     overflow: hidden;">';
-		$newsletter .= '<form action="" method="post" class="newsletterSubmit">';
-			$newsletter .= 	'<input type="text" placeholder="'.$placeholder.'" class="wp-block-guteblock-newsletter__input" style="
+		$newsletter .= '<form action="" method="post" class="newsletterSubmit" id="newsletterMyForm">';
+			$newsletter .= 	'<input type="email" placeholder="'.$placeholder.'" class="wp-block-guteblock-newsletter__input" style="
 			padding-left: '.$horizontalPadding.'px;
 			padding-right:'.$balancedPaddingRight.'px;
 			padding-top:'.$verticalInnerPadding.'px;
@@ -568,11 +563,12 @@ function guteblock_render_newsletter_block($attributes) {
 			border: none;
 			">';
 			$newsletter .= '<input type="hidden" value="'.$doubleOptIn.'" class="wp-block-guteblock-newsletter__hiddeninput" name="double_optin" >';
+			$newsletter .= '<style>.wp-block-guteblock-newsletter-inner:hover { color: '.$hoverButtonTextColor.' !important; background-color:'.$hoverButtonBackgroundColor.'!important; transition:.5s ease all} </style>';
 			$newsletter .= '<button type="submit"  target="_blank"  rel="noopener noreferrer" class="wp-block-guteblock-newsletter-inner" 
 			onMouseover="this.style.backgroundColor=#fhjjj";
 			style="padding-left:'.$buttonHorizontalPadding.'px;
 			padding-right:'.$buttonHorizontalPadding.'px;
-			text-decoration:none;
+			text-decoration: none;
 			padding-top:'.$verticalInnerPadding.'px;
 			padding-bottom:'.$verticalInnerPadding.'px;
 			border-top-left-radius:'.$btnTopLeft.'px;
@@ -580,12 +576,13 @@ function guteblock_render_newsletter_block($attributes) {
 			border-top-right-radius:'.$r.'px;
 			border-bottom-right-radius:'.$r.'px;
 			background-color:'.$buttonBackgroundColor.';
-			text-tranform:'.$buttonTextTransform.';
+			text-transform:'.$buttonTextTransform.';
 			font-weight:'.$buttonTextFontWeight.';
 			letter-spacing:'.$buttonLetterSpacing.'px;
 			border: none;
 			color: '.$buttonTextColor.';
 			font-size: '.$fontSize.'px;
+			transition:.5s ease all;
 			position: absolute;
 			top: 0;
 			right: 0;
@@ -598,11 +595,11 @@ function guteblock_render_newsletter_block($attributes) {
 			}
 			$newsletter .= '</button>';
 		$newsletter .= '</form>';
+		$newsletter .= '<div class="wp-block-guteblock-newsletter__popup-window">';
+		$newsletter .= '</div>';
 	$newsletter .= '</div>';
 	$newsletter .= '</div>';
 	return $newsletter;
-
-
 }
 
 function guteblock_render_post_grid_block($attributes) {

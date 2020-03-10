@@ -10,11 +10,15 @@ import "./blocks/share-icons/script";
 import "./blocks/author-profile/script";
 import "./blocks/cta/script";
 import "./blocks/spacer-divider/script";
-import "./blocks/accordion/script";
+import "./blocks/feature-grid/script";
 import "./blocks/blockquote/script";
 import "./blocks/icon-list/script";
-import "./blocks/newsletter/script";
-import "./blocks/feature-grid/script";
-import "./blocks/count-up/script";
 import "./blocks/button/script";
-import "./blocks/card/script";
+//import "./blocks/newsletter/script";
+//import "./blocks/accordion/script";
+//import "./blocks/count-up/script";
+//import "./blocks/card/script";
+
+
+// Pro
+//import "./blocks/quick-contact/script";

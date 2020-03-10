@@ -138,7 +138,7 @@ const attributes = {
 		default:1
 	},
 	doubleOptIn: {
-		type:"number",
+		type:"boolean",
 		default:false
 	}
 };

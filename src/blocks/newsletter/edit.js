@@ -69,8 +69,13 @@ class Newsletter extends Component {
 			}
 		};
 	};
-	onChangeEnableDoubleOptIn = doubleOptIn => {
-		this.props.setAttributes({ doubleOptIn });
+	// onChangeEnableDoubleOptIn = doubleOptIn => {
+	// 	this.props.setAttributes({ doubleOptIn });
+	// };
+	onChangeEnableDoubleOptIn = () => {
+		this.props.setAttributes({
+			doubleOptIn: !this.props.attributes.doubleOptIn
+		});
 	};
 	onChangeButtonHoverBackgroundColor = hoverButtonBackgroundColor => {
 		this.props.setAttributes({ hoverButtonBackgroundColor });
@@ -178,6 +183,7 @@ class Newsletter extends Component {
 				<InspectorControls>
 					<PanelBody title={__("General Settings", "guteblock")}>
 					<ToggleControl
+						// value={doubleOptIn}
 						label={__("Enable Double Opt-in", "guteblock")}
 						onChange={this.onChangeEnableDoubleOptIn}
 						checked={doubleOptIn}
@@ -655,6 +661,7 @@ class Newsletter extends Component {
 				>
 					<div className="wp-block-guteblock-newsletter__container">
 						<TextControl
+						type="email"
 							className={
 								"wp-block-guteblock-newsletter__input"
 							}

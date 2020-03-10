@@ -7,7 +7,6 @@ $(document).ready(function() {
 	
 
 	$(".newsletterSubmit").submit(function() {
-
 		$.ajax({
 			type: "post",
 			url: guteblock.ajaxurl,
@@ -17,17 +16,14 @@ $(document).ready(function() {
 				double_optin: $(".wp-block-guteblock-newsletter input[name='double_optin']").val()
 			},
 			success: function(response) {
-				alert(response);
-
-				// if(response.type == "success") {
-				// console.log("successfully added email")
-				// }
-				// else {
-				// alert("Your vote could not be added")
-				// }
+				
+				$('.wp-block-guteblock-newsletter__popup-window').addClass('wp-block-guteblock-newsletter__popup-windowAfter');
+				$('.wp-block-guteblock-newsletter__popup-window').append(response);
+				setTimeout(function(){ $('.wp-block-guteblock-newsletter__popup-window').removeClass('wp-block-guteblock-newsletter__popup-windowAfter');
+				window.location.reload();}, 2000);
 			}
+			
 		});
-		
 		return false;
 	});
 });

@@ -45,4 +45,29 @@
 			bottom: 0px;
 		}
 	}
+	.wp-block-guteblock-newsletter__hiddeninput {
+		margin: 0;
+	}
+}
+.wp-block-guteblock-newsletter__popup-window{
+	width: 500px;
+	transform: translateY(-100%);
+	transition: .5s ease all;
+	overflow: hidden;
+	opacity: 0;
+	padding:100px 20px;
+	background-color:#fff;
+	display: block;
+	position: fixed;
+	top: 50%;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	border-radius: 5px;
+	box-shadow: 0px 0px 4px 1px #2e2e2e;
+}
+.wp-block-guteblock-newsletter__popup-windowAfter{
+	transform: translateY(-50%);
+	opacity: 1;
+	transition: .5s ease all;
 }

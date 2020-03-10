@@ -1,0 +1,88 @@
+.wp-block-guteblock-quick-contact {
+
+    &.align-center {
+        text-align: center;
+    }
+    &.align-right {
+        text-align: right;
+    }  
+    &.align-left {
+        text-align: left;
+    }
+    .wp-block-guteblock-quick-contact-form input::placeholder {
+        color: unset;
+        opacity: .5;
+    }
+    .wp-block-guteblock-quick-contact-form textarea::placeholder {
+        color: unset;
+        opacity: .5;
+    }
+    .editor-rich-text.block-editor-rich-text {
+        width: 100%;
+    }
+    .wp-block-guteblock-quick-contact-form {
+        margin: 0 auto;
+        display: inline-block;
+    }
+    .wp-block-guteblock-quick-contact-form__title  {
+        margin: 0 !important;
+    }
+    .wp-block-guteblock-quick-contact-form__info {
+        margin: 0 !important;
+    }
+    .wp-block-guteblock-quick-contact-form_align_right {
+        position: relative;
+        width: 48%;
+        margin: 0 1%;
+        display: inline-block;
+    }
+    .wp-block-guteblock-quick-contact-form_align_left{
+        position: relative;
+        width: 48%;
+        margin: 0 1%;
+        display: inline-block;
+    }
+    .wp-block-guteblock-quick-contact-form_align_center {
+        position: relative;
+        width: 98%;
+        margin: 0 1%;
+        display: inline-block;
+    }
+    button.wp-block-guteblock-quick-contact-form__submit_field {
+        text-transform: unset;
+        text-decoration: none;
+        transition: 1s ease all;
+    }
+    .wp-block-guteblock-quick-contact__popup-window{
+        width: 500px;
+        text-align: center;
+        transform: translateY(-100%);
+        transition: .75s ease all;
+        overflow: hidden;
+        opacity: 0;
+        visibility: hidden;
+        padding: 75px 20px;
+        background-color:#fff;
+        display: block;
+        position: fixed;
+        top: 50%;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        border-radius: 5px;
+        box-shadow: 0px 0px 4px 1px #2e2e2e;
+    }
+    .wp-block-guteblock-quick-contact__popup-windowAfter{
+        transform: translateY(-50%);
+        opacity: 1;
+        visibility: visible;
+        display: block;
+        transition: .75s ease all;
+    }
+    &.is-style-2 {
+        .wp-block-guteblock-quick-contact-form_align_right, 
+        .wp-block-guteblock-quick-contact-form_align_left {
+            width: 98%;
+        }
+    }
+}
