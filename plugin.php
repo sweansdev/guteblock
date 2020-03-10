@@ -65,10 +65,22 @@ function guteblock_register() {
 		array('wp-edit-blocks')
 	);
 
+	$main_script_dependancy = array('jquery');
+
+	$guteblock_recaptcha_site_key = get_option( 'guteblock_recaptcha_site_key' );
+	$guteblock_recaptcha_secret_key = get_option( 'guteblock_recaptcha_secret_key' );
+	
+	if ( ! (empty( $guteblock_recaptcha_site_key ) && empty( $guteblock_recaptcha_secret_key ))) {
+
+		wp_register_script('google-recaptcha','https://www.google.com/recaptcha/api.js?render=' . esc_attr( $guteblock_recaptcha_site_key ));
+		$main_script_dependancy = array('jquery', 'google-recaptcha');
+
+	}
+
 	wp_register_script(
 		'guteblock-script',
 		plugins_url('dist/script.js', __FILE__),
-		array('jquery', 'google-recaptcha')
+		$main_script_dependancy
 	);
 
 	$guteblock_recaptcha_site_key = get_option( 'guteblock_recaptcha_site_key' );
@@ -78,7 +90,7 @@ function guteblock_register() {
 		'guteblock-style',
 		plugins_url('dist/style.css', __FILE__),
 		array()
-	);
+	);	
 
 	guteblock_register_block_type('team-member');
 	guteblock_register_block_type('team-members');
@@ -318,17 +330,6 @@ function guteblock_quick_contact_submit() {
 	exit();
 	}
 }
-
-function form_recaptcha_assets() {
-	$guteblock_recaptcha_site_key=get_option( 'guteblock_recaptcha_site_key' );
-	$guteblock_recaptcha_secret_key=get_option( 'guteblock_recaptcha_secret_key' );
-	if ( ! empty( $guteblock_recaptcha_site_key ) && ! empty( $guteblock_recaptcha_secret_key ) ) {
-
-		wp_enqueue_script('google-recaptcha','https://www.google.com/recaptcha/api.js?render=' . esc_attr( $guteblock_recaptcha_site_key ), array( 'jquery' ), '3.0.0', true);
-
-	}
-}
-
 
 /* Ajax Call in Nwsletter */
 add_action("wp_ajax_guteblock_newsletter_submit", "guteblock_newsletter_submit");
