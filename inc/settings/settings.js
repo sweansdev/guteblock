@@ -17,4 +17,5 @@ jQuery( document ).ready( function($) {
 		$(this).siblings(".gb-settings-container").slideToggle();
 	});
 	
+	$(".guteblock-alert").delay(5000).slideUp();
 });

@@ -108,6 +108,14 @@
     display: inline-block;
     font-size: 13px;
 }
+.sw-btn-submit {
+    padding: 14px 27px;
+    font-size: 18px;
+    cursor: pointer;
+}
+.gb-getting-started .panel p.gb-desc-small {
+    font-size: 15px;
+}
 /*
 .gb-settings-container {
     float: left;
@@ -1100,10 +1108,12 @@ div.gb-block-split-right {
 	}
 }
 
-#guteblock-settings input[type=text] {
+#guteblock-settings input[type=text], #guteblock-settings textarea {
 	padding: 12px;
 	font-size: 18px;
 	border-radius: 5px;
+	width: 100%;
+	max-width: 450px;
 }
 
 #guteblock-settings .form-table th {

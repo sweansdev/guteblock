@@ -146,42 +146,88 @@ function guteblock_settings_page() {
 					</div>
 				<?php } ?>
 
-				<form action="" method="POST">
+				<form id="guteblock-settings" action="" method="POST">
 					<?php wp_nonce_field('gb_settings', 'gb_settings_nonce'); ?>
 					<input type="hidden" name="updated" value="true" />
-						
-					<div id="gb-mailchimp-settings" class="content-panel current">
 					
-						<h3>MailChimp</h3>
-						<div class="gb-settings-container">
-							<label>MailChimp API Key</label>
-							<input type="text" name="mailchimp-api" placeholder="" value="<?php echo get_option('guteblock_mailchimp_api_key'); ?>" />
 
-							<label>List ID</label>
-							<input type="text" name="mailchimp-list-id" placeholder="" value="<?php echo get_option('guteblock_mailchimp_list_id'); ?>" />
+					<div id="gb-mailchimp-settings" class="content-panel current">
 
-							<label>Success Response</label>
-							<textarea name="mailchimp-success-response"><?php echo get_option('guteblock_mailchimp_success_response'); ?></textarea>
-
-							<label>Success Response (Double Optin Enabled)</label>
-							<textarea name="mailchimp-success-response-do"><?php echo get_option('guteblock_mailchimp_success_response_do'); ?></textarea>
-							<span class="field-help">You can enable / disable double optin feature for each newsletter block separately.</span>
-
-							<input type="submit" class="sw-btn-submit" value="Save Settings" />		
-						</div>	
-
+						<div class="tab-content">
+							<table class="form-table">
+								<tbody>
+									<tr>
+										<th>
+											<label><?php esc_html_e( 'Mailchimp API Key', 'guteblock' ); ?></label>
+										</th>
+										<td>
+											<input type="text" name="mailchimp-api" placeholder="" value="<?php echo get_option('guteblock_mailchimp_api_key'); ?>" size="40" />
+											<p class="guteblock-settings-description"><a href="https://mailchimp.com/help/about-api-keys/#Find_or_generate_your_API_key" target="_blank" rel="noreferrer noopener"><?php esc_html_e( 'Need help finding API Keys?', 'guteblock' ); ?></a></p>
+										</td>
+									</tr>
+									<tr>
+										<th>
+											<label><?php esc_html_e( 'List ID', 'guteblock' ); ?></label>
+										</th>
+										<td>
+											<input type="text" name="mailchimp-list-id" placeholder="" value="<?php echo get_option('guteblock_mailchimp_list_id'); ?>" size="40" /><p class="guteblock-settings-description"><a href="https://mailchimp.com/help/find-audience-id/" target="_blank" rel="noreferrer noopener"><?php esc_html_e( 'How to find this?', 'guteblock' ); ?></a></p>
+										</td>
+									</tr>
+									<tr>
+										<th>
+											<label><?php esc_html_e( 'Success Response', 'guteblock' ); ?></label>
+										</th>
+										<td>
+											<textarea name="mailchimp-success-response"><?php echo get_option('guteblock_mailchimp_success_response'); ?></textarea>
+										</td>
+									</tr>
+									<tr>
+										<th>
+											<label><?php esc_html_e( 'Success Response (Double Optin Enabled)', 'guteblock' ); ?></label>
+										</th>
+										<td>
+											<textarea name="mailchimp-success-response-do" size="40"><?php echo get_option('guteblock_mailchimp_success_response_do'); ?></textarea>
+											<p class="guteblock-settings-description gb-desc-small"><?php esc_html_e( 'You can enable / disable double optin feature for each newsletter block separately.', 'guteblock' ); ?></p>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<p class="submit">
+							<input type="submit" class="sw-btn-submit" value="Save Settings" />	
+						</p>
+					
 					</div>
 
 					<div id="gb-recaptcha-settings" class="content-panel">
 					
-						<h3>reCAPTCHA</h3>
-						<div class="gb-settings-container">						
-							<label>Site Key</label>
-							<input type="text" name="recaptcha-site-key" placeholder="" value="<?php echo get_option('guteblock_recaptcha_site_key'); ?>" />
-							<label>Secret Key</label>
-							<input type="text" name="recaptcha-secret-key" placeholder="" value="<?php echo get_option('guteblock_recaptcha_secret_key'); ?>" />
-							<input type="submit" class="sw-btn-submit" value="Save Settings" />
+						<div class="tab-content">
+							<table class="form-table">
+								<tbody>
+									<tr>
+										<th>
+											<label><label><?php esc_html_e( 'Site Key', 'guteblock' ); ?></label></label>
+										</th>
+										<td>
+											<input type="text" name="recaptcha-site-key" placeholder="" value="<?php echo get_option('guteblock_recaptcha_site_key'); ?>" />
+										</td>
+									</tr>
+									<tr>
+										<th>
+											<label><?php esc_html_e( 'Secret Key', 'guteblock' ); ?></label>
+										</th>
+										<td>
+											<input type="text" name="recaptcha-secret-key" placeholder="" value="<?php echo get_option('guteblock_recaptcha_secret_key'); ?>" />
+										</td>
+									</tr>
+									
+
+								</tbody>
+							</table>
 						</div>
+						<p class="submit">
+							<input type="submit" class="sw-btn-submit" value="Save Settings" />	
+						</p>
 
 					</form>
 				</div>
@@ -208,48 +254,31 @@ function handle_form_data() {
 	$settings = $_POST;
 
 	// Saving API Key
-	if ( ! empty( $settings['mailchimp-api'] ) ) {
-		update_option( 'guteblock_mailchimp_api_key', sanitize_text_field( wp_unslash( $settings['mailchimp-api'] ) ), false );
-	} else {
-		delete_option( 'guteblock_mailchimp_api_key' );
-	}
-
+	gb_update_settings( 'guteblock_mailchimp_api_key', $settings['mailchimp-api']);
+	
 	// Saving List ID
-	if ( ! empty( $settings['mailchimp-list-id'] ) ) {
-		update_option( 'guteblock_mailchimp_list_id', sanitize_text_field( wp_unslash( $settings['mailchimp-list-id'] ) ), false );
-	} else {
-		delete_option( 'guteblock_mailchimp_list_id' );
-	}
-
+	gb_update_settings( 'guteblock_mailchimp_list_id', $settings['mailchimp-list-id']);
+	
 	// Saving Success Response
-	if ( ! empty( $settings['mailchimp-success-response'] ) ) {
-		update_option( 'guteblock_mailchimp_success_response', sanitize_text_field( wp_unslash( $settings['mailchimp-success-response'] ) ), false );
-	} else {
-		delete_option( 'guteblock_mailchimp_success_response' );
-	}
+	gb_update_settings( 'guteblock_mailchimp_success_response', $settings['mailchimp-success-response']);
 
 	// Saving Success Response (Double Optin Enabled)
-	if ( ! empty( $settings['mailchimp-success-response'] ) ) {
-		update_option( 'guteblock_mailchimp_success_response_do', sanitize_text_field( wp_unslash( $settings['mailchimp-success-response-do'] ) ), false );
-	} else {
-		delete_option( 'guteblock_mailchimp_success_response_do' );
-	}
+	gb_update_settings( 'guteblock_mailchimp_success_response_do', $settings['mailchimp-success-response-do']);
 
-	// Saving 
-	if ( ! empty( $settings['recaptcha-site-key'] ) ) {
-		update_option( 'guteblock_recaptcha_site_key', sanitize_text_field( wp_unslash( $settings['recaptcha-site-key'] ) ), false );
-	} else {
-		delete_option( 'guteblock_recaptcha_site_key' );
-	}
+	// Saving site key
+	gb_update_settings( 'guteblock_recaptcha_site_key', $settings['recaptcha-site-key']);
 
-	// Saving 
-	if ( ! empty( $settings['recaptcha-secret-key'] ) ) {
-		update_option( 'guteblock_recaptcha_secret_key', sanitize_text_field( wp_unslash( $settings['recaptcha-secret-key'] ) ), false );
-	} else {
-		delete_option( 'guteblock_recaptcha_secret_key' );
-	}
-
+	// Saving secret key
+	gb_update_settings( 'guteblock_recaptcha_secret_key', $settings['recaptcha-secret-key']);
 
 	return;
 
+}
+
+function gb_update_settings($param, $value) {
+	if ( ! empty( $value ) ) {
+		update_option( $param, sanitize_text_field( wp_unslash( $value ) ), false );
+	} else {
+		delete_option( $param );
+	}
 }
