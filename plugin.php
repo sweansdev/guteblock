@@ -69,7 +69,7 @@ function guteblock_register() {
 
 	$guteblock_recaptcha_site_key = get_option( 'guteblock_recaptcha_site_key' );
 	$guteblock_recaptcha_secret_key = get_option( 'guteblock_recaptcha_secret_key' );
-	
+
 	if ( ! (empty( $guteblock_recaptcha_site_key ) && empty( $guteblock_recaptcha_secret_key ))) {
 
 		wp_register_script('google-recaptcha','https://www.google.com/recaptcha/api.js?render=' . esc_attr( $guteblock_recaptcha_site_key ));
@@ -298,7 +298,8 @@ function guteblock_quick_contact_submit() {
 		'authorEmailId' 	=> $data['authorEmailId'],
 		'recaptchaResponse' => $data['recaptchaResponse']
 	]);
-	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+	if(isset($_POST['recaptchaResponse']) && !empty($_POST['recaptchaResponserecaptchaResponse'])){
 
 		//Build POST request:
 		$recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
@@ -311,10 +312,13 @@ function guteblock_quick_contact_submit() {
 		
 		// Take action based on the score returned:
 		if ($recaptcha->score >= 0.5) {
+
 			if( $data['authorEmailId'] == "" ) {
+
 				echo "Please Fill the Author Email Id";
-			}
-			else {
+
+			} else {
+
 				$to = $data['authorEmailId'];
                 $subject = 'The Quick Contact form';
                 $message = $data['messageField'];
@@ -322,13 +326,22 @@ function guteblock_quick_contact_submit() {
                 $headers = array('Content-Type: text/html; charset=UTF-8');
                 wp_mail( $to, $subject, $message, $body, $headers );
 				echo "Message Sent Successfully";
+
 			}
-		} 
-		else {
-			// Not verified - show form error
+
+		} else {
+
+			echo 'captcha parameters missing';
+
 		}
-	exit();
+		
+	} else {
+		
+		echo 'captcha parameters missing';
+
 	}
+
+	return;
 }
 
 /* Ajax Call in Nwsletter */
