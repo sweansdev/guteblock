@@ -71,6 +71,7 @@ function guteblock_register() {
 		array('jquery', 'google-recaptcha')
 	);
 
+	$guteblock_recaptcha_site_key = get_option( 'guteblock_recaptcha_site_key' );
 	wp_localize_script( 'guteblock-script', 'guteblock', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ), 'siteurl' => get_bloginfo( 'url' ), 'recaptcha_site_key' => $guteblock_recaptcha_site_key));
 
 	wp_register_style(
