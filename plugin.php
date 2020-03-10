@@ -71,7 +71,7 @@ function guteblock_register() {
 		array('jquery')
 	);
 
-	wp_localize_script( 'guteblock-script', 'guteblock', array( 'ajaxurl' => admin_url( 'admin-ajax.php' )));
+	wp_localize_script( 'guteblock-script', 'guteblock', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ), 'siteurl' => get_bloginfo( 'url' )));
 
 	wp_register_style(
 		'guteblock-style',

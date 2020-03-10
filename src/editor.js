@@ -21,6 +21,7 @@ import "./blocks/feature-grid";
 
 // Pro
 //import "./blocks/quick-contact";
+//import "./blocks/paypal-donation";
 
 import "./common/css/style.editor.scss";
 

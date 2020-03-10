@@ -22,3 +22,4 @@ import "./blocks/button/script";
 
 // Pro
 //import "./blocks/quick-contact/script";
+//import "./blocks/paypal-donation/script";
