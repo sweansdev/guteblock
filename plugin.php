@@ -68,10 +68,10 @@ function guteblock_register() {
 	wp_register_script(
 		'guteblock-script',
 		plugins_url('dist/script.js', __FILE__),
-		array('jquery')
+		array('jquery', 'google-recaptcha')
 	);
 
-	wp_localize_script( 'guteblock-script', 'guteblock', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ), 'siteurl' => get_bloginfo( 'url' )));
+	wp_localize_script( 'guteblock-script', 'guteblock', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ), 'siteurl' => get_bloginfo( 'url' ), 'recaptcha_site_key' => $guteblock_recaptcha_site_key));
 
 	wp_register_style(
 		'guteblock-style',
@@ -259,6 +259,75 @@ function guteblock_register() {
 	));
 	
 }
+
+
+/* Add action for Quick Contact Form Submit*/
+add_action("wp_ajax_guteblock_quick_contact_submit", "guteblock_quick_contact_submit");
+add_action("wp_ajax_nopriv_guteblock_quick_contact_submit", "guteblock_quick_contact_submit");
+function guteblock_quick_contact_submit() {
+
+	$data = [
+		'nameField'     	=> 	$_POST["nameField"],
+		'emailField'    	=> 	$_POST["emailField"],
+		'phoneField'    	=> 	$_POST["phoneField"],
+		'websiteField'  	=> 	$_POST["websiteField"],
+		'messageField' 		=>	$_POST["messageField"],
+		'authorEmailId' 	=> 	$_POST["authorEmailId"],
+		'recaptchaResponse' => 	$_POST["recaptchaResponse"]
+		
+	];
+	$json = json_encode([
+		'nameField'     	=> $data['nameField'],
+		'emailField'    	=> $data['emailField'],
+		'phoneField'    	=> $data['phoneField'],
+		'websiteField'  	=> $data['websiteField'],
+		'messageField'  	=> $data['messageField'],
+		'authorEmailId' 	=> $data['authorEmailId'],
+		'recaptchaResponse' => $data['recaptchaResponse']
+	]);
+	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+		//Build POST request:
+		$recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
+		$guteblock_recaptcha_secret_key = get_option( 'guteblock_recaptcha_secret_key' );
+		$recaptcha_response = $_POST['recaptchaResponse'];
+	
+		// Make and decode POST request:
+		$recaptcha = file_get_contents($recaptcha_url . '?secret=' . $guteblock_recaptcha_secret_key . '&response=' . $recaptcha_response);
+		$recaptcha = json_decode($recaptcha);
+		
+		// Take action based on the score returned:
+		if ($recaptcha->score >= 0.5) {
+			if( $data['authorEmailId'] == "" ) {
+				echo "Please Fill the Author Email Id";
+			}
+			else {
+				$to = $data['authorEmailId'];
+                $subject = 'The Quick Contact form';
+                $message = $data['messageField'];
+                $body = 'The email body content';
+                $headers = array('Content-Type: text/html; charset=UTF-8');
+                wp_mail( $to, $subject, $message, $body, $headers );
+				echo "Message Sent Successfully";
+			}
+		} 
+		else {
+			// Not verified - show form error
+		}
+	exit();
+	}
+}
+
+function form_recaptcha_assets() {
+	$guteblock_recaptcha_site_key=get_option( 'guteblock_recaptcha_site_key' );
+	$guteblock_recaptcha_secret_key=get_option( 'guteblock_recaptcha_secret_key' );
+	if ( ! empty( $guteblock_recaptcha_site_key ) && ! empty( $guteblock_recaptcha_secret_key ) ) {
+
+		wp_enqueue_script('google-recaptcha','https://www.google.com/recaptcha/api.js?render=' . esc_attr( $guteblock_recaptcha_site_key ), array( 'jquery' ), '3.0.0', true);
+
+	}
+}
+
 
 /* Ajax Call in Nwsletter */
 add_action("wp_ajax_guteblock_newsletter_submit", "guteblock_newsletter_submit");
