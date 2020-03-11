@@ -198,6 +198,7 @@ class QuickContact extends Component {
 				? (basicBottomRightBorderRadius = "0")
 				: (basicBottomRightBorderRadius = inputBorderBottomRightRadius);
 		}
+		console.log(authorEmailId);
 		return (
 			<>
 				<BlockControls>

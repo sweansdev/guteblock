@@ -464,55 +464,55 @@ function guteblock_register() {
 // add_action("wp_ajax_nopriv_guteblock_quick_contact_submit", "guteblock_quick_contact_submit");
 function guteblock_quick_contact_submit($attributes) {
 	
-	$data = [
-		'nameField'     	=> 	$_POST["nameField"],
-		'emailField'    	=> 	$_POST["emailField"],
-		'phoneField'    	=> 	$_POST["phoneField"],
-		'websiteField'  	=> 	$_POST["websiteField"],
-		'messageField' 		=>	$_POST["messageField"],
-		'authorEmailId' 	=> 	$attributes['authorEmailId'],
-		'recaptchaResponse' => 	$_POST["recaptchaResponse"]
-	];
-
-	if(isset($_POST['recaptchaResponse']) && !empty($_POST['recaptchaResponse'])){
+	$data = $_POST;
+	// var_dump($data["quick_contact_form_name_field"]);
+	// var_dump($data["quick_contact_form_email_field"]);
+	// var_dump($data["quick_contact_form_phone_field"]);
+	// var_dump($data["quick_contact_form_website_field"]);
+	// var_dump($data["quick_contact_form_message_field"]);
+	// var_dump($data["recaptcha_response"]);
+	if(isset($data["recaptcha_response"]) && !empty($data["recaptcha_response"])){
 
 		//Build POST request:
 		$recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
 		$guteblock_recaptcha_secret_key = get_option( 'guteblock_recaptcha_secret_key' );
-		$recaptcha_response = $_POST['recaptchaResponse'];
+		$recaptcha_response = $data["recaptcha_response"];
 	
 		// Make and decode POST request:
 		$recaptcha = file_get_contents($recaptcha_url . '?secret=' . $guteblock_recaptcha_secret_key . '&response=' . $recaptcha_response);
 		$recaptcha = json_decode($recaptcha);
-		
 		// Take action based on the score returned:
 		if ($recaptcha->score >= 0.5) {
 
-			if( $data['authorEmailId'] == "" ) {
+			if( $attributes['authorEmailId'] == "" ) {
 
 				echo "Please Fill the Author Email Id";
+				$pop_up_message_qc="Please Fill the Author Email Id";
 
 			} else {
 				
-				$to = $data['authorEmailId'];
+				$to = $attributes['authorEmailId'];
                 $subject = 'The Quick Contact form';
-                $message = $data['messageField'];
+                $message = $data["quick_contact_form_message_field"];
                 $body = 'The email body content';
                 $headers = array('Content-Type: text/html; charset=UTF-8');
                 wp_mail( $to, $subject, $message, $body, $headers );
 				echo "Message Sent Successfully";
+				$pop_up_message_qc="Message Sent Successfully";
 
 			}
 
 		} else {
 
 			echo 'captcha parameters missing';
+			$pop_up_message_qc="captcha parameters missing1";
 
 		}
 		
 	} else {
 		
 		echo 'captcha parameters missing';
+		$pop_up_message_qc="captcha parameters missing2";
 
 	}
 
@@ -622,6 +622,7 @@ function guteblock_render_quick_contact_block($attributes) {
 						border-bottom-left-radius: '.$basicBottomLeftBorderRadius.'px; 
 						border-bottom-right-radius: '.$basicBottomRightBorderRadius.'px;"
 						type="text"
+						required
 						name="quick_contact_form_name_field">';
 				$quick_contact .= '</div>';
 				$quick_contact .= '<div class="wp-block-guteblock-quick-contact-form_align_right">';
@@ -647,6 +648,7 @@ function guteblock_render_quick_contact_block($attributes) {
 						border-bottom-left-radius: '.$basicBottomLeftBorderRadius.'px; 
 						border-bottom-right-radius: '.$basicBottomRightBorderRadius.'px;"
 						type="email"
+						required
 						name="quick_contact_form_email_field">';
 				$quick_contact .= '</div>';
 				if( $attributes['enablePhoneField'] == true ) {
@@ -726,6 +728,7 @@ function guteblock_render_quick_contact_block($attributes) {
 						border-bottom-left-radius: '.$basicBottomLeftBorderRadius.'px; 
 						border-bottom-right-radius: '.$basicBottomRightBorderRadius.'px;"
 						name="quick_contact_form_message_field"
+						required
 						>';
 						$quick_contact .= '</textarea>';	
 				$quick_contact .= '</div>';
@@ -766,8 +769,7 @@ function guteblock_render_quick_contact_block($attributes) {
 			$quick_contact .= '</form>';
 		$quick_contact .= '</div>';
 		$quick_contact .= '<div 
-			class="wp-block-guteblock-quick-contact__popup-window"></div>';
-	$quick_contact .= '</div>';
+			class="wp-block-guteblock-quick-contact__popup-window">'.$pop_up_message_qc.'</div>';
 	return $quick_contact;
 }
 /* Ajax Call in Nwsletter */
