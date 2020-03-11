@@ -270,6 +270,191 @@ function guteblock_register() {
 		'render_callback' => 'guteblock_render_newsletter_block',
 		'attributes' => $newsletter_attributes
 	));
+
+	$quick_contact_attributes = array(
+		"styleIs" => array(
+			"type" => "number",
+			"default" => 1
+		),
+		"width" => array(
+			"type" => "number",
+			"default" => 100
+		),
+		"bgColor" => array(
+			"type" => "string",
+			"default" => "#000000"
+		),
+		"horizontalPadding" => array(
+			"type" => "number",
+			"default" => 15
+		),
+		"verticalPadding" => array(
+			"type" => "number",
+			"default" => 15
+		),
+		"formBackgroundColor" => array(
+			"type" => "string",
+			"default" => "#000000"
+		),
+		"borderRadius" => array(
+			"type" => "number",
+			"default" => 0
+		),
+		"padding" => array(
+			"type" => "number",
+			"default" => 20
+		),
+		"showFormShadow" => array(
+			"type" => "boolean",
+			"default" => false
+		),
+		"formShadow" => array(
+			"type" => "number",
+			"default" => 2
+		),
+		"formShadowColor" => array(
+			"type" => "string",
+			"default" => "#806760"
+		),
+		"title" => array(
+			"type" => "string",
+			"default" => "Quick Contact"
+		),
+		"titleColor" => array(
+			"type" => "string",
+			"default" => "#ffffff"
+		),
+		"titleFontSize" => array(
+			"type" => "number",
+			"default" => 35
+		),
+		"titleTextTransform" => array(
+			"type" => "string",
+			"default" => "Uppercase"
+		),
+		"titleVerticalPadding" => array(
+			"type" => "number",
+			"default" => 0
+		),
+		"align" => array(
+			"type" => "string",
+			"default" => "wide"
+		),
+		"alignment" => array(
+			"type" => "string",
+			"default" => "center"
+		),
+		"info" => array(
+			"type" => "string",
+			"default" => "Contact us today, and get reply with in 24 hours!"
+		),
+		"infoColor" => array(
+			"type" => "string",
+			"default" => "#ffffff"
+		),
+		"contactFormShadow" => array(
+			"type" => "number",
+			"default" => 0
+		),
+		"buttonTitle" => array(
+			"type" => "string",
+			"default" => "send"
+		),
+		"inputVerticalMargin" => array(
+			"type" => "number",
+			"default" => 5
+		),
+		"inputVerticalPadding" => array(
+			"type" => "number",
+			"default" => 15
+		),
+		"inputBorderTopLeftRadius" => array(
+			"type" => "number",
+			"default" => 5
+		),
+		"inputBorderTopRightRadius" => array(
+			"type" => "number",
+			"default" => 5
+		),
+		"inputBorderBottomLeftRadius" => array(
+			"type" => "number",
+			"default" => 5
+		),
+		"inputBorderBottomRightRadius" => array(
+			"type" => "number",
+			"default" => 5
+		),
+		"inputHorizontalPadding" => array(
+			"type" => "number",
+			"default" => 15
+		),
+		"inputTextColor" => array(
+			"type" => "string",
+			"default" => "#ffcebf"
+		),
+		"inputBackgroundColor" => array(
+			"type" => "string",
+			"default" => "#000000"
+		),
+		"inputFontSize" => array(
+			"type" => "number",
+			"default" => 15
+		),
+		"showInputBorder" => array(
+			"type" => "boolean",
+			"default" => true
+		),
+		"inputBorderColor" => array(
+			"type" => "string",
+			"default" => "#806760"
+		),
+		"buttonTextColor" => array(
+			"type" => "string",
+			"default" => "#ffffff"
+		),
+		"enablePhoneField" => array(
+			"type" => "boolean",
+			"default" => false
+		),
+		"enableWebsiteField" => array(
+			"type" => "boolean",
+			"default" => false
+		),
+		"buttonBackgroundColor" => array(
+			"type" => "string",
+			"default" => "#f24848"
+		),
+		"buttonWidth" => array(
+			"type" => "number",
+			"default" => 30
+		),
+		"buttonBorderRadius" => array(
+			"type" => "number",
+			"default" => 5
+		),
+		"buttonTextTransform" => array(
+			"type" => "string",
+			"default" => "uppercase"
+		),
+		"buttonPadding" => array(
+			"type" => "number",
+			"default" => 10
+		),
+		"hoverButtonBackgroundColor" => array(
+			"type" => "string"
+		),
+		"hoverButtonTextColor" => array(
+			"type" => "string"
+		),
+		"authorEmailId" => array(
+			"type" => "string",
+			"default" => ""
+		)
+	);
+	guteblock_register_block_type('quick-contact', array(
+		'render_callback' => 'guteblock_render_quick_contact_block',
+		'attributes' => $quick_contact_attributes
+	));
 	
 }
 
@@ -298,8 +483,7 @@ function guteblock_quick_contact_submit() {
 		'authorEmailId' 	=> $data['authorEmailId'],
 		'recaptchaResponse' => $data['recaptchaResponse']
 	]);
-
-	if(isset($_POST['recaptchaResponse']) && !empty($_POST['recaptchaResponserecaptchaResponse'])){
+	if(isset($_POST['recaptchaResponse']) && !empty($_POST['recaptchaResponse'])){
 
 		//Build POST request:
 		$recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
@@ -343,7 +527,250 @@ function guteblock_quick_contact_submit() {
 
 	return;
 }
-
+function guteblock_render_quick_contact_block($attributes) {
+	if ( $attributes['showInputBorder'] == true ) {
+		$inputBorder = '1px solid '.$attributes['inputBorderColor'];
+	}
+	else{
+		$inputBorder = "none";
+	}
+	if ( $attributes['showFormShadow'] == true ) {
+		$contactFormShadow = '0px 0px'.$attributes['formShadow'].'px 0px '.$attributes['formShadowColor'];
+	}
+	else{
+		$contactFormShadow = "none";
+	}
+	if( $attributes['styleIs'] == 3 ) {
+		$basicInputBorder = "none";
+	}
+	else {
+		$basicInputBorder = $inputBorder;
+	}
+	if( $attributes['styleIs'] == 3 ) {
+		$borderBottom = '2px solid '.$attributes['inputBorderColor'];
+	}
+	else {
+		$borderBottom = $inputBorder;
+	}
+	if( $attributes['styleIs'] == 3 ) {
+		$basicBottomLeftBorderRadius = 0;
+	}
+	else {
+		$basicBottomLeftBorderRadius = $attributes['inputBorderBottomLeftRadius'];
+	}
+	if( $attributes['styleIs'] == 3 ) {
+		$basicBottomRightBorderRadius = 0;
+	}
+	else {
+		$basicBottomRightBorderRadius = $attributes['inputBorderBottomRightRadius'];
+	}
+	$quick_contact .= '<div class="wp-block-guteblock-quick-contact align'.$attributes['align'].'  align-' .$attributes['alignment'].'" 
+	style="
+	text-align:'.$attributes['alignment'].';
+	background-color:'.$attributes['bgColor'].';
+	padding-left:'.$attributes['horizontalPadding'].'px;
+	padding-right:'.$attributes['horizontalPadding'].'px;
+	padding-top:'.$attributes['verticalPadding'].'px;
+	padding-bottom:'.$attributes['verticalPadding'].'px">';
+		$quick_contact .= '<div class="wp-block-guteblock-quick-contact-form"
+		style="
+		background-color:'.$attributes['formBackgroundColor'].';
+		padding:'.$attributes['padding'].'px;
+		width:'.$attributes['width'].'%;
+		border-radius:'.$attributes['borderRadius'].'px;
+		box-shadow:'.$attributes['contactFormShadow'].';
+		">';
+			$quick_contact .= '<div class="wp-block-guteblock-quick-contact-form_align_center">';
+				$quick_contact .= '<h4
+					class="wp-block-guteblock-quick-contact-form__title"
+					style="
+					color: '.$attributes['titleColor'].';
+					font-size: '.$attributes['titleFontSize'].'px;
+					text-transform: '.$attributes['titleTextTransform'].';
+					padding-top: '.$attributes['titleVerticalPadding'].'px;
+					padding-bottom: '.$attributes['titleVerticalPadding'].'px;
+				">'.$attributes['title'].'</h4>';
+			$quick_contact .= '</div>';
+			$quick_contact .= '<div class="wp-block-guteblock-quick-contact-form_align_center">';
+				$quick_contact .= '<p
+					class="wp-block-guteblock-quick-contact-form__info"
+					style="
+					color:'.$attributes['infoColor'].';
+				">'.$attributes['info'].'</p>';
+			$quick_contact .= '</div>';
+			$quick_contact .= '<form 
+				action="" 
+				method="post" 
+				class="quickContactFormSubmit"
+				id="quickContactMyForm">';
+				$quick_contact .= '<div class="wp-block-guteblock-quick-contact-form_align_left">';
+					$quick_contact .= '<input 
+						class="wp-block-guteblock-quick-contact-form__name_field"
+						placeholder="Enter Your Name"
+						style="
+						margin-top: '.$attributes['inputVerticalMargin'].'px;
+						margin-bottom: '.$attributes['inputVerticalMargin'].'px; 
+						padding-top: '.$attributes['inputVerticalPadding'].'px;
+						padding-bottom: '.$attributes['inputVerticalPadding'].'px;
+						padding-left: '.$attributes['inputHorizontalPadding'].'px;
+						padding-right: '.$attributes['inputHorizontalPadding'].'px; 
+						font-size: '.$attributes['inputFontSize'].'px;
+						color: '.$attributes['inputTextColor'].';
+						background-color: '.$attributes['inputBackgroundColor'].';
+						border-top: '.$basicInputBorder.';
+						border-bottom: '.$borderBottom.';
+						border-left: '.$basicInputBorder.';
+						border-right: '.$basicInputBorder.';
+						border-top-left-radius: '.$attributes['inputBorderTopLeftRadius'].'px;
+						border-top-right-radius: '.$attributes['inputBorderTopRightRadius'].'px; 
+						border-bottom-left-radius: '.$basicBottomLeftBorderRadius.'px; 
+						border-bottom-right-radius: '.$basicBottomRightBorderRadius.'px;"
+						type="text"
+						name="quick_contact_form_name_field">';
+				$quick_contact .= '</div>';
+				$quick_contact .= '<div class="wp-block-guteblock-quick-contact-form_align_right">';
+					$quick_contact .= '<input 
+						class="wp-block-guteblock-quick-contact-form__email_field"
+						placeholder="Enter Your Email"
+						style="
+						margin-top: '.$attributes['inputVerticalMargin'].'px;
+						margin-bottom: '.$attributes['inputVerticalMargin'].'px; 
+						padding-top: '.$attributes['inputVerticalPadding'].'px;
+						padding-bottom: '.$attributes['inputVerticalPadding'].'px;
+						padding-left: '.$attributes['inputHorizontalPadding'].'px;
+						padding-right: '.$attributes['inputHorizontalPadding'].'px; 
+						font-size: '.$attributes['inputFontSize'].'px;
+						color: '.$attributes['inputTextColor'].';
+						background-color: '.$attributes['inputBackgroundColor'].';
+						border-top: '.$basicInputBorder.';
+						border-bottom: '.$borderBottom.';
+						border-left: '.$basicInputBorder.';
+						border-right: '.$basicInputBorder.';
+						border-top-left-radius: '.$attributes['inputBorderTopLeftRadius'].'px;
+						border-top-right-radius: '.$attributes['inputBorderTopRightRadius'].'px; 
+						border-bottom-left-radius: '.$basicBottomLeftBorderRadius.'px; 
+						border-bottom-right-radius: '.$basicBottomRightBorderRadius.'px;"
+						type="email"
+						name="quick_contact_form_email_field">';
+				$quick_contact .= '</div>';
+				if( $attributes['enablePhoneField'] == true ) {
+					$quick_contact .= '<div class="wp-block-guteblock-quick-contact-form_align_left">';
+					$quick_contact .= '<input 
+						class="wp-block-guteblock-quick-contact-form__phone_field"
+						placeholder="Enter Your Phone Number"
+						style="
+						margin-top: '.$attributes['inputVerticalMargin'].'px;
+						margin-bottom: '.$attributes['inputVerticalMargin'].'px; 
+						padding-top: '.$attributes['inputVerticalPadding'].'px;
+						padding-bottom: '.$attributes['inputVerticalPadding'].'px;
+						padding-left: '.$attributes['inputHorizontalPadding'].'px;
+						padding-right: '.$attributes['inputHorizontalPadding'].'px; 
+						font-size: '.$attributes['inputFontSize'].'px;
+						color: '.$attributes['inputTextColor'].';
+						background-color: '.$attributes['inputBackgroundColor'].';
+						border-top: '.$basicInputBorder.';
+						border-bottom: '.$borderBottom.';
+						border-left: '.$basicInputBorder.';
+						border-right: '.$basicInputBorder.';
+						border-top-left-radius: '.$attributes['inputBorderTopLeftRadius'].'px;
+						border-top-right-radius: '.$attributes['inputBorderTopRightRadius'].'px; 
+						border-bottom-left-radius: '.$basicBottomLeftBorderRadius.'px; 
+						border-bottom-right-radius: '.$basicBottomRightBorderRadius.'px;"
+						type="text"
+						name="quick_contact_form_phone_field">';
+				$quick_contact .= '</div>';
+				}
+				if( $attributes['enableWebsiteField'] == true ) {
+					$quick_contact .= '<div class="wp-block-guteblock-quick-contact-form_align_right">';
+					$quick_contact .= '<input 
+						class="wp-block-guteblock-quick-contact-form__website_field"
+						placeholder="Enter Your Website Here..."
+						style="
+						margin-top: '.$attributes['inputVerticalMargin'].'px;
+						margin-bottom: '.$attributes['inputVerticalMargin'].'px; 
+						padding-top: '.$attributes['inputVerticalPadding'].'px;
+						padding-bottom: '.$attributes['inputVerticalPadding'].'px;
+						padding-left: '.$attributes['inputHorizontalPadding'].'px;
+						padding-right: '.$attributes['inputHorizontalPadding'].'px; 
+						font-size: '.$attributes['inputFontSize'].'px;
+						color: '.$attributes['inputTextColor'].';
+						background-color: '.$attributes['inputBackgroundColor'].';
+						border-top: '.$basicInputBorder.';
+						border-bottom: '.$borderBottom.';
+						border-left: '.$basicInputBorder.';
+						border-right: '.$basicInputBorder.';
+						border-top-left-radius: '.$attributes['inputBorderTopLeftRadius'].'px;
+						border-top-right-radius: '.$attributes['inputBorderTopRightRadius'].'px; 
+						border-bottom-left-radius: '.$basicBottomLeftBorderRadius.'px; 
+						border-bottom-right-radius: '.$basicBottomRightBorderRadius.'px;"
+						type="text"
+						name="quick_contact_form_website_field">';
+				$quick_contact .= '</div>';
+				}
+				$quick_contact .= '<div class="wp-block-guteblock-quick-contact-form_align_center">';
+					$quick_contact .= '<textarea 
+						class="wp-block-guteblock-quick-contact-form__message_field"
+						placeholder="Type Message Here..."
+						style="
+						margin-top: '.$attributes['inputVerticalMargin'].'px;
+						margin-bottom: '.$attributes['inputVerticalMargin'].'px; 
+						padding-top: '.$attributes['inputVerticalPadding'].'px;
+						padding-bottom: '.$attributes['inputVerticalPadding'].'px;
+						padding-left: '.$attributes['inputHorizontalPadding'].'px;
+						padding-right: '.$attributes['inputHorizontalPadding'].'px; 
+						font-size: '.$attributes['inputFontSize'].'px;
+						color: '.$attributes['inputTextColor'].';
+						background-color: '.$attributes['inputBackgroundColor'].';
+						border-top: '.$basicInputBorder.';
+						border-bottom: '.$borderBottom.';
+						border-left: '.$basicInputBorder.';
+						border-right: '.$basicInputBorder.';
+						border-top-left-radius: '.$attributes['inputBorderTopLeftRadius'].'px;
+						border-top-right-radius: '.$attributes['inputBorderTopRightRadius'].'px; 
+						border-bottom-left-radius: '.$basicBottomLeftBorderRadius.'px; 
+						border-bottom-right-radius: '.$basicBottomRightBorderRadius.'px;"
+						name="quick_contact_form_message_field"
+						>';
+						$quick_contact .= '</textarea>';	
+				$quick_contact .= '</div>';
+					$quick_contact .= '<input
+						type="hidden"
+						name="quick_contact_form_authorEmailId_field"
+					/>';
+					$quick_contact .= '<input
+						type="hidden"
+						name="recaptcha_response"
+						id="recaptchaResponse"
+					/>';
+				$quick_contact .= '<div class="wp-block-guteblock-quick-contact-form_align_center">';
+				$quick_contact .= '<style>
+					.wp-block-guteblock-quick-contact-form__submit_field:hover {
+						color:'.$attributes['hoverButtonTextColor'].' !important;
+						background-color: '.$attributes['hoverButtonBackgroundColor'].' !important;
+						transition: 1s ease all !important;
+					}
+					</style>';
+					$quick_contact .= '<button
+						target="_blank"
+						rel="noopener noreferrer"
+						class="wp-block-guteblock-quick-contact-form__submit_field"
+						style="width:'.$attributes['buttonWidth'].'%;
+							background-color: '.$attributes['buttonBackgroundColor'].';
+							color: '.$attributes['buttonTextColor'].';
+							border-radius: '.$attributes['buttonBorderRadius'].'px;
+							padding: '.$attributes['buttonPadding'].'px;
+							text-transform: '.$attributes['buttonTextTransform'].';
+							">
+							<span>'.$attributes['buttonTitle'].'</span>
+					</button>';
+				$quick_contact .= '</div>';
+			$quick_contact .= '</form>';
+		$quick_contact .= '</div>';
+		$quick_contact .= '<div 
+			class="wp-block-guteblock-quick-contact__popup-window"></div>';
+	$quick_contact .= '</div>';
+	return $quick_contact;
+}
 /* Ajax Call in Nwsletter */
 add_action("wp_ajax_guteblock_newsletter_submit", "guteblock_newsletter_submit");
 add_action("wp_ajax_nopriv_guteblock_newsletter_submit", "guteblock_newsletter_submit");

@@ -48,7 +48,9 @@ $(document).ready(function() {
 				).addClass(
 					"wp-block-guteblock-quick-contact__popup-windowAfter"
 				);
-				// $('.wp-block-guteblock-quick-contact__popup-window').empty(response);
+				$(".wp-block-guteblock-quick-contact__popup-window").empty(
+					response
+				);
 				$(".wp-block-guteblock-quick-contact__popup-window").append(
 					response
 				);

@@ -1,10 +1,10 @@
 import "./style.editor.scss";
 import { registerBlockType } from "@wordpress/blocks";
 import { __ } from "@wordpress/i18n";
-import { RichText } from "@wordpress/editor";
+// import { RichText } from "@wordpress/editor";
 // import { TextareaControl,TextControl,Button } from "@wordpress/components";
 import edit from "./edit.js";
-import classnames from "classnames";
+// import classnames from "classnames";
 
 const attributes = {
 	width: {
@@ -257,415 +257,418 @@ registerBlockType("guteblock/quick-contact", {
 	},
 	attributes,
 	edit,
-	save: ({ attributes }) => {
-		const {
-			width,
-			bgColor,
-			horizontalPadding,
-			verticalPadding,
-			formBackgroundColor,
-			formShadow,
-			formShadowColor,
-			showFormShadow,
-			borderRadius,
-			padding,
-			title,
-			titleColor,
-			titleTextTransform,
-			titleFontSize,
-			titleVerticalPadding,
-			alignment,
-			info,
-			infoColor,
-			buttonTitle,
-			nameField,
-			emailField,
-			phoneField,
-			websiteField,
-			enablePhoneField,
-			enableWebsiteField,
-			messageField,
-			inputHorizontalPadding,
-			inputVerticalMargin,
-			inputVerticalPadding,
-			inputBorderBottomLeftRadius,
-			inputBorderBottomRightRadius,
-			inputBorderTopLeftRadius,
-			inputBorderTopRightRadius,
-			inputFontSize,
-			inputBackgroundColor,
-			showInputBorder,
-			inputBorderColor,
-			inputTextColor,
-			buttonTextColor,
-			buttonBackgroundColor,
-			hoverButtonBackgroundColor,
-			hoverButtonTextColor,
-			buttonBorderRadius,
-			buttonWidth,
-			buttonPadding,
-			buttonTextTransform,
-			authorEmailId
-		} = attributes;
-
-		const isStyle = RegExp(/is-style-/);
-		const styleName = isStyle.test(attributes.className)
-			? attributes.className.replace(isStyle, "")
-			: 1;
-
-		const classes = classnames({
-			[`align-${alignment}`]: alignment
-		});
-		let inputBorder,
-			contactFormShadow,
-			basicInputBorder,
-			borderBottom,
-			basicBorderRadius;
-		{
-			showInputBorder
-				? (inputBorder = `1px solid ${inputBorderColor}`)
-				: (inputBorder = "none");
-		}
-		{
-			showFormShadow
-				? (contactFormShadow = `0px 0px ${formShadow}px 0px ${formShadowColor}`)
-				: (contactFormShadow = "none");
-		}
-		{
-			styleName == 3
-				? (basicInputBorder = "none")
-				: (basicInputBorder = inputBorder);
-		}
-		{
-			styleName == 3
-				? (borderBottom = `2px solid ${inputBorderColor}`)
-				: (borderBottom = inputBorder);
-		}
-		{
-			styleName == 3
-				? (basicBorderRadius = "0")
-				: (basicBorderRadius = inputBorderBottomLeftRadius);
-		}
-		{
-			styleName == 3
-				? (basicBorderRadius = "0")
-				: (basicBorderRadius = inputBorderBottomRightRadius);
-		}
-		return (
-			<div
-				className={classes}
-				style={{
-					alignment: alignment,
-					backgroundColor: bgColor,
-					paddingTop: verticalPadding,
-					paddingBottom: verticalPadding,
-					paddingLeft: horizontalPadding,
-					paddingRight: horizontalPadding
-				}}
-			>
-				<div
-					className="wp-block-guteblock-quick-contact-form"
-					style={{
-						backgroundColor: formBackgroundColor,
-						padding: padding,
-						width: `${width}%`,
-						borderRadius: borderRadius,
-						boxShadow: contactFormShadow
-					}}
-				>
-					<div
-						className={
-							"wp-block-guteblock-quick-contact-form_align_center"
-						}
-					>
-						<RichText.Content
-							className={
-								"wp-block-guteblock-quick-contact-form__title"
-							}
-							tagName="h4"
-							value={title}
-							placeholder={__("Title", "guteblock")}
-							style={{
-								color: titleColor,
-								textTransform: titleTextTransform,
-								fontSize: `${titleFontSize}px`,
-								paddingTop: `${titleVerticalPadding}px`,
-								paddingBottom: `${titleVerticalPadding}px`
-							}}
-						/>
-					</div>
-					<div
-						className={
-							"wp-block-guteblock-quick-contact-form_align_center"
-						}
-					>
-						{styleName != 3 && (
-							<RichText.Content
-								className={
-									"wp-block-guteblock-quick-contact-form__info"
-								}
-								tagName="p"
-								value={info}
-								placeholder={__("Info", "guteblock")}
-								style={{
-									color: infoColor
-								}}
-							/>
-						)}
-					</div>
-					<form
-						action=""
-						method="post"
-						className="quickContactFormSubmit"
-						id="quickContactMyForm"
-					>
-						<div
-							className={
-								"wp-block-guteblock-quick-contact-form_align_left"
-							}
-						>
-							<input
-								className={
-									"wp-block-guteblock-quick-contact-form__name_field"
-								}
-								placeholder={__(
-									"Enter Your Name",
-									"guteblock"
-								)}
-								style={{
-									marginTop: `${inputVerticalMargin}px`,
-									marginBottom: `${inputVerticalMargin}px`,
-									paddingTop: `${inputVerticalPadding}px`,
-									paddingBottom: `${inputVerticalPadding}px`,
-									paddingLeft: `${inputHorizontalPadding}px`,
-									paddingRight: `${inputHorizontalPadding}px`,
-									fontSize: `${inputFontSize}px`,
-									color: inputTextColor,
-									backgroundColor: inputBackgroundColor,
-									borderTop: basicInputBorder,
-									borderBottom: borderBottom,
-									borderLeft: basicInputBorder,
-									borderRight: basicInputBorder,
-									borderTopLeftRadius: `${inputBorderTopLeftRadius}px`,
-									borderTopRightRadius: `${inputBorderTopRightRadius}px`,
-									borderBottomLeftRadius: `${basicBorderRadius}px`,
-									borderBottomRightRadius: `${basicBorderRadius}px`
-								}}
-								type="text"
-								name="quick_contact_form_name_field"
-								value={nameField}
-								required
-							/>
-						</div>
-						<div
-							className={
-								"wp-block-guteblock-quick-contact-form_align_right"
-							}
-						>
-							<input
-								className={
-									"wp-block-guteblock-quick-contact-form__email_field"
-								}
-								placeholder={__(
-									"Enter Your Email",
-									"guteblock"
-								)}
-								style={{
-									marginTop: `${inputVerticalMargin}px`,
-									marginBottom: `${inputVerticalMargin}px`,
-									paddingTop: `${inputVerticalPadding}px`,
-									paddingBottom: `${inputVerticalPadding}px`,
-									paddingLeft: `${inputHorizontalPadding}px`,
-									paddingRight: `${inputHorizontalPadding}px`,
-									fontSize: `${inputFontSize}px`,
-									color: inputTextColor,
-									backgroundColor: inputBackgroundColor,
-									borderTop: basicInputBorder,
-									borderBottom: borderBottom,
-									borderLeft: basicInputBorder,
-									borderRight: basicInputBorder,
-									borderTopLeftRadius: `${inputBorderTopLeftRadius}px`,
-									borderTopRightRadius: `${inputBorderTopRightRadius}px`,
-									borderBottomLeftRadius: `${basicBorderRadius}px`,
-									borderBottomRightRadius: `${basicBorderRadius}px`
-								}}
-								type="email"
-								name="quick_contact_form_email_field"
-								value={emailField}
-								required
-							/>
-						</div>
-						{enablePhoneField && (
-							<div
-								className={
-									"wp-block-guteblock-quick-contact-form_align_left"
-								}
-							>
-								<input
-									className={
-										"wp-block-guteblock-quick-contact-form__phone_field"
-									}
-									placeholder={__(
-										"Enter Your Phone Number",
-										"guteblock"
-									)}
-									style={{
-										marginTop: `${inputVerticalMargin}px`,
-										marginBottom: `${inputVerticalMargin}px`,
-										paddingTop: `${inputVerticalPadding}px`,
-										paddingBottom: `${inputVerticalPadding}px`,
-										paddingLeft: `${inputHorizontalPadding}px`,
-										paddingRight: `${inputHorizontalPadding}px`,
-										fontSize: `${inputFontSize}px`,
-										color: inputTextColor,
-										backgroundColor: inputBackgroundColor,
-										borderTop: basicInputBorder,
-										borderBottom: borderBottom,
-										borderLeft: basicInputBorder,
-										borderRight: basicInputBorder,
-										borderTopLeftRadius: `${inputBorderTopLeftRadius}px`,
-										borderTopRightRadius: `${inputBorderTopRightRadius}px`,
-										borderBottomLeftRadius: `${basicBorderRadius}px`,
-										borderBottomRightRadius: `${basicBorderRadius}px`
-									}}
-									type="text"
-									name="quick_contact_form_phone_field"
-									value={phoneField}
-									required
-								/>
-							</div>
-						)}
-						{enableWebsiteField && (
-							<div
-								className={
-									"wp-block-guteblock-quick-contact-form_align_right"
-								}
-							>
-								<input
-									className={
-										"wp-block-guteblock-quick-contact-form__website_field"
-									}
-									placeholder={__(
-										"Enter Your Website Here...",
-										"guteblock"
-									)}
-									style={{
-										marginTop: `${inputVerticalMargin}px`,
-										marginBottom: `${inputVerticalMargin}px`,
-										paddingTop: `${inputVerticalPadding}px`,
-										paddingBottom: `${inputVerticalPadding}px`,
-										paddingLeft: `${inputHorizontalPadding}px`,
-										paddingRight: `${inputHorizontalPadding}px`,
-										fontSize: `${inputFontSize}px`,
-										color: inputTextColor,
-										backgroundColor: inputBackgroundColor,
-										borderTop: basicInputBorder,
-										borderBottom: borderBottom,
-										borderLeft: basicInputBorder,
-										borderRight: basicInputBorder,
-										borderTopLeftRadius: `${inputBorderTopLeftRadius}px`,
-										borderTopRightRadius: `${inputBorderTopRightRadius}px`,
-										borderBottomLeftRadius: `${basicBorderRadius}px`,
-										borderBottomRightRadius: `${basicBorderRadius}px`
-									}}
-									type="text"
-									name="quick_contact_form_website_field"
-									value={websiteField}
-									required
-								/>
-							</div>
-						)}
-						<div
-							className={
-								"wp-block-guteblock-quick-contact-form_align_center"
-							}
-						>
-							<textarea
-								className={
-									"wp-block-guteblock-quick-contact-form__message_field"
-								}
-								placeholder={__(
-									"Type Message Here...",
-									"guteblock"
-								)}
-								style={{
-									marginTop: `${inputVerticalMargin}px`,
-									marginBottom: `${inputVerticalMargin}px`,
-									paddingTop: `${inputVerticalPadding}px`,
-									paddingBottom: `${inputVerticalPadding}px`,
-									paddingLeft: `${inputHorizontalPadding}px`,
-									paddingRight: `${inputHorizontalPadding}px`,
-									fontSize: `${inputFontSize}px`,
-									color: inputTextColor,
-									backgroundColor: inputBackgroundColor,
-									borderTop: basicInputBorder,
-									borderBottom: borderBottom,
-									borderLeft: basicInputBorder,
-									borderRight: basicInputBorder,
-									borderTopLeftRadius: `${inputBorderTopLeftRadius}px`,
-									borderTopRightRadius: `${inputBorderTopRightRadius}px`,
-									borderBottomLeftRadius: `${basicBorderRadius}px`,
-									borderBottomRightRadius: `${basicBorderRadius}px`
-								}}
-								name="quick_contact_form_message_field"
-								value={messageField}
-								required
-							/>
-						</div>
-						<input
-							type="hidden"
-							name="quick_contact_form_authorEmailId_field"
-							value={authorEmailId}
-						/>
-						<input
-							type="hidden"
-							value=""
-							name="recaptcha_response"
-							id="recaptchaResponse"
-						/>
-						<div
-							className={
-								"wp-block-guteblock-quick-contact-form_align_center"
-							}
-						>
-							<button
-								target="_blank"
-								rel="noopener noreferrer"
-								className={
-									"wp-block-guteblock-quick-contact-form__submit_field"
-								}
-								style={{
-									width: `${buttonWidth}%`,
-									backgroundColor: buttonBackgroundColor,
-									color: buttonTextColor,
-									borderRadius: `${buttonBorderRadius}px`,
-									padding: buttonPadding,
-									textTransform: buttonTextTransform
-								}}
-							>
-								<RichText.Content
-									style={{}}
-									tagName="span"
-									value={buttonTitle}
-								/>
-							</button>
-						</div>
-					</form>
-					<style
-						dangerouslySetInnerHTML={{
-							__html: [
-								`.wp-block-guteblock-quick-contact-form__submit_field:hover {
-									color: ${hoverButtonTextColor} !important;
-									background-color: ${hoverButtonBackgroundColor} !important;
-									transition: 1s ease all !important;
-								}
-								`
-							].join("\n")
-						}}
-					></style>
-				</div>
-				<div className="wp-block-guteblock-quick-contact__popup-window"></div>
-			</div>
-		);
+	save: () => {
+		return false;
 	}
+	// save: ({ attributes }) => {
+	// 	const {
+	// 		width,
+	// 		bgColor,
+	// 		horizontalPadding,
+	// 		verticalPadding,
+	// 		formBackgroundColor,
+	// 		formShadow,
+	// 		formShadowColor,
+	// 		showFormShadow,
+	// 		borderRadius,
+	// 		padding,
+	// 		title,
+	// 		titleColor,
+	// 		titleTextTransform,
+	// 		titleFontSize,
+	// 		titleVerticalPadding,
+	// 		alignment,
+	// 		info,
+	// 		infoColor,
+	// 		buttonTitle,
+	// 		nameField,
+	// 		emailField,
+	// 		phoneField,
+	// 		websiteField,
+	// 		enablePhoneField,
+	// 		enableWebsiteField,
+	// 		messageField,
+	// 		inputHorizontalPadding,
+	// 		inputVerticalMargin,
+	// 		inputVerticalPadding,
+	// 		inputBorderBottomLeftRadius,
+	// 		inputBorderBottomRightRadius,
+	// 		inputBorderTopLeftRadius,
+	// 		inputBorderTopRightRadius,
+	// 		inputFontSize,
+	// 		inputBackgroundColor,
+	// 		showInputBorder,
+	// 		inputBorderColor,
+	// 		inputTextColor,
+	// 		buttonTextColor,
+	// 		buttonBackgroundColor,
+	// 		hoverButtonBackgroundColor,
+	// 		hoverButtonTextColor,
+	// 		buttonBorderRadius,
+	// 		buttonWidth,
+	// 		buttonPadding,
+	// 		buttonTextTransform,
+	// 		authorEmailId
+	// 	} = attributes;
+
+	// 	const isStyle = RegExp(/is-style-/);
+	// 	const styleName = isStyle.test(attributes.className)
+	// 		? attributes.className.replace(isStyle, "")
+	// 		: 1;
+
+	// 	const classes = classnames({
+	// 		[`align-${alignment}`]: alignment
+	// 	});
+	// 	let inputBorder,
+	// 		contactFormShadow,
+	// 		basicInputBorder,
+	// 		borderBottom,
+	// 		basicBorderRadius;
+	// 	{
+	// 		showInputBorder
+	// 			? (inputBorder = `1px solid ${inputBorderColor}`)
+	// 			: (inputBorder = "none");
+	// 	}
+	// 	{
+	// 		showFormShadow
+	// 			? (contactFormShadow = `0px 0px ${formShadow}px 0px ${formShadowColor}`)
+	// 			: (contactFormShadow = "none");
+	// 	}
+	// 	{
+	// 		styleName == 3
+	// 			? (basicInputBorder = "none")
+	// 			: (basicInputBorder = inputBorder);
+	// 	}
+	// 	{
+	// 		styleName == 3
+	// 			? (borderBottom = `2px solid ${inputBorderColor}`)
+	// 			: (borderBottom = inputBorder);
+	// 	}
+	// 	{
+	// 		styleName == 3
+	// 			? (basicBorderRadius = "0")
+	// 			: (basicBorderRadius = inputBorderBottomLeftRadius);
+	// 	}
+	// 	{
+	// 		styleName == 3
+	// 			? (basicBorderRadius = "0")
+	// 			: (basicBorderRadius = inputBorderBottomRightRadius);
+	// 	}
+	// 	return (
+	// 		<div
+	// 			className={classes}
+	// 			style={{
+	// 				alignment: alignment,
+	// 				backgroundColor: bgColor,
+	// 				paddingTop: verticalPadding,
+	// 				paddingBottom: verticalPadding,
+	// 				paddingLeft: horizontalPadding,
+	// 				paddingRight: horizontalPadding
+	// 			}}
+	// 		>
+	// 			<div
+	// 				className="wp-block-guteblock-quick-contact-form"
+	// 				style={{
+	// 					backgroundColor: formBackgroundColor,
+	// 					padding: padding,
+	// 					width: `${width}%`,
+	// 					borderRadius: borderRadius,
+	// 					boxShadow: contactFormShadow
+	// 				}}
+	// 			>
+	// 				<div
+	// 					className={
+	// 						"wp-block-guteblock-quick-contact-form_align_center"
+	// 					}
+	// 				>
+	// 					<RichText.Content
+	// 						className={
+	// 							"wp-block-guteblock-quick-contact-form__title"
+	// 						}
+	// 						tagName="h4"
+	// 						value={title}
+	// 						placeholder={__("Title", "guteblock")}
+	// 						style={{
+	// 							color: titleColor,
+	// 							textTransform: titleTextTransform,
+	// 							fontSize: `${titleFontSize}px`,
+	// 							paddingTop: `${titleVerticalPadding}px`,
+	// 							paddingBottom: `${titleVerticalPadding}px`
+	// 						}}
+	// 					/>
+	// 				</div>
+	// 				<div
+	// 					className={
+	// 						"wp-block-guteblock-quick-contact-form_align_center"
+	// 					}
+	// 				>
+	// 					{styleName != 3 && (
+	// 						<RichText.Content
+	// 							className={
+	// 								"wp-block-guteblock-quick-contact-form__info"
+	// 							}
+	// 							tagName="p"
+	// 							value={info}
+	// 							placeholder={__("Info", "guteblock")}
+	// 							style={{
+	// 								color: infoColor
+	// 							}}
+	// 						/>
+	// 					)}
+	// 				</div>
+	// 				<form
+	// 					action=""
+	// 					method="post"
+	// 					className="quickContactFormSubmit"
+	// 					id="quickContactMyForm"
+	// 				>
+	// 					<div
+	// 						className={
+	// 							"wp-block-guteblock-quick-contact-form_align_left"
+	// 						}
+	// 					>
+	// 						<input
+	// 							className={
+	// 								"wp-block-guteblock-quick-contact-form__name_field"
+	// 							}
+	// 							placeholder={__(
+	// 								"Enter Your Name",
+	// 								"guteblock"
+	// 							)}
+	// 							style={{
+	// 								marginTop: `${inputVerticalMargin}px`,
+	// 								marginBottom: `${inputVerticalMargin}px`,
+	// 								paddingTop: `${inputVerticalPadding}px`,
+	// 								paddingBottom: `${inputVerticalPadding}px`,
+	// 								paddingLeft: `${inputHorizontalPadding}px`,
+	// 								paddingRight: `${inputHorizontalPadding}px`,
+	// 								fontSize: `${inputFontSize}px`,
+	// 								color: inputTextColor,
+	// 								backgroundColor: inputBackgroundColor,
+	// 								borderTop: basicInputBorder,
+	// 								borderBottom: borderBottom,
+	// 								borderLeft: basicInputBorder,
+	// 								borderRight: basicInputBorder,
+	// 								borderTopLeftRadius: `${inputBorderTopLeftRadius}px`,
+	// 								borderTopRightRadius: `${inputBorderTopRightRadius}px`,
+	// 								borderBottomLeftRadius: `${basicBorderRadius}px`,
+	// 								borderBottomRightRadius: `${basicBorderRadius}px`
+	// 							}}
+	// 							type="text"
+	// 							name="quick_contact_form_name_field"
+	// 							value={nameField}
+	// 							required
+	// 						/>
+	// 					</div>
+	// 					<div
+	// 						className={
+	// 							"wp-block-guteblock-quick-contact-form_align_right"
+	// 						}
+	// 					>
+	// 						<input
+	// 							className={
+	// 								"wp-block-guteblock-quick-contact-form__email_field"
+	// 							}
+	// 							placeholder={__(
+	// 								"Enter Your Email",
+	// 								"guteblock"
+	// 							)}
+	// 							style={{
+	// 								marginTop: `${inputVerticalMargin}px`,
+	// 								marginBottom: `${inputVerticalMargin}px`,
+	// 								paddingTop: `${inputVerticalPadding}px`,
+	// 								paddingBottom: `${inputVerticalPadding}px`,
+	// 								paddingLeft: `${inputHorizontalPadding}px`,
+	// 								paddingRight: `${inputHorizontalPadding}px`,
+	// 								fontSize: `${inputFontSize}px`,
+	// 								color: inputTextColor,
+	// 								backgroundColor: inputBackgroundColor,
+	// 								borderTop: basicInputBorder,
+	// 								borderBottom: borderBottom,
+	// 								borderLeft: basicInputBorder,
+	// 								borderRight: basicInputBorder,
+	// 								borderTopLeftRadius: `${inputBorderTopLeftRadius}px`,
+	// 								borderTopRightRadius: `${inputBorderTopRightRadius}px`,
+	// 								borderBottomLeftRadius: `${basicBorderRadius}px`,
+	// 								borderBottomRightRadius: `${basicBorderRadius}px`
+	// 							}}
+	// 							type="email"
+	// 							name="quick_contact_form_email_field"
+	// 							value={emailField}
+	// 							required
+	// 						/>
+	// 					</div>
+	// 					{enablePhoneField && (
+	// 						<div
+	// 							className={
+	// 								"wp-block-guteblock-quick-contact-form_align_left"
+	// 							}
+	// 						>
+	// 							<input
+	// 								className={
+	// 									"wp-block-guteblock-quick-contact-form__phone_field"
+	// 								}
+	// 								placeholder={__(
+	// 									"Enter Your Phone Number",
+	// 									"guteblock"
+	// 								)}
+	// 								style={{
+	// 									marginTop: `${inputVerticalMargin}px`,
+	// 									marginBottom: `${inputVerticalMargin}px`,
+	// 									paddingTop: `${inputVerticalPadding}px`,
+	// 									paddingBottom: `${inputVerticalPadding}px`,
+	// 									paddingLeft: `${inputHorizontalPadding}px`,
+	// 									paddingRight: `${inputHorizontalPadding}px`,
+	// 									fontSize: `${inputFontSize}px`,
+	// 									color: inputTextColor,
+	// 									backgroundColor: inputBackgroundColor,
+	// 									borderTop: basicInputBorder,
+	// 									borderBottom: borderBottom,
+	// 									borderLeft: basicInputBorder,
+	// 									borderRight: basicInputBorder,
+	// 									borderTopLeftRadius: `${inputBorderTopLeftRadius}px`,
+	// 									borderTopRightRadius: `${inputBorderTopRightRadius}px`,
+	// 									borderBottomLeftRadius: `${basicBorderRadius}px`,
+	// 									borderBottomRightRadius: `${basicBorderRadius}px`
+	// 								}}
+	// 								type="text"
+	// 								name="quick_contact_form_phone_field"
+	// 								value={phoneField}
+	// 								required
+	// 							/>
+	// 						</div>
+	// 					)}
+	// 					{enableWebsiteField && (
+	// 						<div
+	// 							className={
+	// 								"wp-block-guteblock-quick-contact-form_align_right"
+	// 							}
+	// 						>
+	// 							<input
+	// 								className={
+	// 									"wp-block-guteblock-quick-contact-form__website_field"
+	// 								}
+	// 								placeholder={__(
+	// 									"Enter Your Website Here...",
+	// 									"guteblock"
+	// 								)}
+	// 								style={{
+	// 									marginTop: `${inputVerticalMargin}px`,
+	// 									marginBottom: `${inputVerticalMargin}px`,
+	// 									paddingTop: `${inputVerticalPadding}px`,
+	// 									paddingBottom: `${inputVerticalPadding}px`,
+	// 									paddingLeft: `${inputHorizontalPadding}px`,
+	// 									paddingRight: `${inputHorizontalPadding}px`,
+	// 									fontSize: `${inputFontSize}px`,
+	// 									color: inputTextColor,
+	// 									backgroundColor: inputBackgroundColor,
+	// 									borderTop: basicInputBorder,
+	// 									borderBottom: borderBottom,
+	// 									borderLeft: basicInputBorder,
+	// 									borderRight: basicInputBorder,
+	// 									borderTopLeftRadius: `${inputBorderTopLeftRadius}px`,
+	// 									borderTopRightRadius: `${inputBorderTopRightRadius}px`,
+	// 									borderBottomLeftRadius: `${basicBorderRadius}px`,
+	// 									borderBottomRightRadius: `${basicBorderRadius}px`
+	// 								}}
+	// 								type="text"
+	// 								name="quick_contact_form_website_field"
+	// 								value={websiteField}
+	// 								required
+	// 							/>
+	// 						</div>
+	// 					)}
+	// 					<div
+	// 						className={
+	// 							"wp-block-guteblock-quick-contact-form_align_center"
+	// 						}
+	// 					>
+	// 						<textarea
+	// 							className={
+	// 								"wp-block-guteblock-quick-contact-form__message_field"
+	// 							}
+	// 							placeholder={__(
+	// 								"Type Message Here...",
+	// 								"guteblock"
+	// 							)}
+	// 							style={{
+	// 								marginTop: `${inputVerticalMargin}px`,
+	// 								marginBottom: `${inputVerticalMargin}px`,
+	// 								paddingTop: `${inputVerticalPadding}px`,
+	// 								paddingBottom: `${inputVerticalPadding}px`,
+	// 								paddingLeft: `${inputHorizontalPadding}px`,
+	// 								paddingRight: `${inputHorizontalPadding}px`,
+	// 								fontSize: `${inputFontSize}px`,
+	// 								color: inputTextColor,
+	// 								backgroundColor: inputBackgroundColor,
+	// 								borderTop: basicInputBorder,
+	// 								borderBottom: borderBottom,
+	// 								borderLeft: basicInputBorder,
+	// 								borderRight: basicInputBorder,
+	// 								borderTopLeftRadius: `${inputBorderTopLeftRadius}px`,
+	// 								borderTopRightRadius: `${inputBorderTopRightRadius}px`,
+	// 								borderBottomLeftRadius: `${basicBorderRadius}px`,
+	// 								borderBottomRightRadius: `${basicBorderRadius}px`
+	// 							}}
+	// 							name="quick_contact_form_message_field"
+	// 							value={messageField}
+	// 							required
+	// 						/>
+	// 					</div>
+	// 					<input
+	// 						type="hidden"
+	// 						name="quick_contact_form_authorEmailId_field"
+	// 						value={authorEmailId}
+	// 					/>
+	// 					<input
+	// 						type="hidden"
+	// 						value=""
+	// 						name="recaptcha_response"
+	// 						id="recaptchaResponse"
+	// 					/>
+	// 					<div
+	// 						className={
+	// 							"wp-block-guteblock-quick-contact-form_align_center"
+	// 						}
+	// 					>
+	// 						<button
+	// 							target="_blank"
+	// 							rel="noopener noreferrer"
+	// 							className={
+	// 								"wp-block-guteblock-quick-contact-form__submit_field"
+	// 							}
+	// 							style={{
+	// 								width: `${buttonWidth}%`,
+	// 								backgroundColor: buttonBackgroundColor,
+	// 								color: buttonTextColor,
+	// 								borderRadius: `${buttonBorderRadius}px`,
+	// 								padding: buttonPadding,
+	// 								textTransform: buttonTextTransform
+	// 							}}
+	// 						>
+	// 							<RichText.Content
+	// 								style={{}}
+	// 								tagName="span"
+	// 								value={buttonTitle}
+	// 							/>
+	// 						</button>
+	// 					</div>
+	// 				</form>
+	// 				<style
+	// 					dangerouslySetInnerHTML={{
+	// 						__html: [
+	// 							`.wp-block-guteblock-quick-contact-form__submit_field:hover {
+	// 								color: ${hoverButtonTextColor} !important;
+	// 								background-color: ${hoverButtonBackgroundColor} !important;
+	// 								transition: 1s ease all !important;
+	// 							}
+	// 							`
+	// 						].join("\n")
+	// 					}}
+	// 				></style>
+	// 			</div>
+	// 			<div className="wp-block-guteblock-quick-contact__popup-window"></div>
+	// 		</div>
+	// 	);
+	// }
 });
