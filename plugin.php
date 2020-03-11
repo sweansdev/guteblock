@@ -754,6 +754,7 @@ function guteblock_render_quick_contact_block($attributes) {
 				}
 				
 				$quick_contact .= '<button
+					type="submit"
 					target="_blank"
 					rel="noopener noreferrer"
 					class="wp-block-guteblock-quick-contact-form__submit_field"
@@ -836,282 +837,113 @@ function guteblock_newsletter_submit() {
 
 function guteblock_render_newsletter_block($attributes) {
 
-	if(isset($attributes['bgColor'])) {
-		$bgColor = $attributes['bgColor'];
-	} else {
-		$bgColor ="#f1fbff";
-	}
-	if(isset($attributes['bgColorTwo'])) {
-		$bgColorTwo = $attributes['bgColorTwo'];
-	} else {
-		$bgColorTwo ="transparent";
-	}
-	if(isset($attributes['alignment'])) {
-		$alignment = $attributes['alignment'];
-	} else {
-		$alignment ="center";
-	}
-	if(isset($attributes['horizontalOuterPadding'])) {
-		$horizontalOuterPadding = $attributes['horizontalOuterPadding'];
-	} else {
-		$horizontalOuterPadding = 15;
-	}
-	if(isset($attributes['verticalOuterPadding'])) {
-		$verticalOuterPadding = $attributes['verticalOuterPadding'];
-	} else {
-		$verticalOuterPadding =25;
-	}
-	if(isset($attributes['horizontalPadding'])) {
-		$horizontalPadding = $attributes['horizontalPadding'];
-	} else {
-		$horizontalPadding =15;
-	}
-	if(isset($attributes['fontSize'])) {
-		$fontSize = $attributes['fontSize'];
-	} else {
-		$fontSize =14;
-	}
-	if(isset($attributes['buttonHorizontalPadding'])) {
-		$buttonHorizontalPadding = $attributes['buttonHorizontalPadding'];
-	} else {
-		$buttonHorizontalPadding =15;
-	}
-	if(isset($attributes['verticalInnerPadding'])) {
-		$verticalInnerPadding = $attributes['verticalInnerPadding'];
-	} else {
-		$verticalInnerPadding =15;
-	}
-	if(isset($attributes['inputTextTransform'])) {
-		$inputTextTransform = $attributes['inputTextTransform'];
-	} else {
-		$inputTextTransform ="none";
-	}
-	if(isset($attributes['inputTextFontWeight'])) {
-		$inputTextFontWeight = $attributes['inputTextFontWeight'];
-	} else {
-		$inputTextFontWeight ="normal";
-	}
-	if(isset($attributes['borderLeftRadius'])) {
-		$borderLeftRadius = $attributes['borderLeftRadius'];
-	} else {
-		$borderLeftRadius = 0;
-	}
-	if(isset($attributes['borderRightRadius'])) {
-		$borderRightRadius = $attributes['borderRightRadius'];
-	} else {
-		$borderRightRadius = 0;
-	}
-	if(isset($attributes['inputBackgroundColor'])) {
-		$inputBackgroundColor = $attributes['inputBackgroundColor'];
-	} else {
-		$inputBackgroundColor = "#3c3c3c";
-	}
-	if(isset($attributes['inputTextColor'])) {
-		$inputTextColor = $attributes['inputTextColor'];
-	} else {
-		$inputTextColor = "#cecece";
-	}
-	if(isset($attributes['buttonBackgroundColor'])) {
-		$buttonBackgroundColor = $attributes['buttonBackgroundColor'];
-	} else {
-		$buttonBackgroundColor = "#21ade5";
-	}
-	if(isset($attributes['buttonBackgroundColorTwo'])) {
-		$buttonBackgroundColorTwo = $attributes['buttonBackgroundColorTwo'];
-	} else {
-		$buttonBackgroundColorTwo = "#eae03d";
-	}
-	if(isset($attributes['buttonTextColor'])) {
-		$buttonTextColor = $attributes['buttonTextColor'];
-	} else {
-		$buttonTextColor = "#ffffff";
-	}
-	if(isset($attributes['buttonTextFontWeight'])) {
-		$buttonTextFontWeight = $attributes['buttonTextFontWeight'];
-	} else {
-		$buttonTextFontWeight = "normal";
-	}
-	if(isset($attributes['buttonTextTransform'])) {
-		$buttonTextTransform = $attributes['buttonTextTransform'];
-	} else {
-		$buttonTextTransform = "none";
-	}
-	if(isset($attributes['buttonLetterSpacing'])) {
-		$buttonLetterSpacing = $attributes['buttonLetterSpacing'];
-	} else {
-		$buttonLetterSpacing = 0;
-	}
-	if(isset($attributes['borderTopLeftRadius'])) {
-		$borderTopLeftRadius = $attributes['borderTopLeftRadius'];
-	} else {
-		$borderTopLeftRadius = 100;
-	}
-	if(isset($attributes['borderBottomLeftRadius'])) {
-		$borderBottomLeftRadius = $attributes['borderBottomLeftRadius'];
-	} else {
-		$borderBottomLeftRadius = 100;
-	}
-	if(isset($attributes['borderBottomLeftRadiusTwo'])) {
-		$borderBottomLeftRadiusTwo = $attributes['borderBottomLeftRadiusTwo'];
-	} else {
-		$borderBottomLeftRadiusTwo = 0;
-	}
-	if(isset($attributes['buttonHorizontalPadding'])) {
-		$buttonHorizontalPadding = $attributes['buttonHorizontalPadding'];
-	} else {
-		$buttonHorizontalPadding = 25;
-	}
-	if(isset($attributes['buttonTitle'])) {
-		$buttonTitle = $attributes['buttonTitle'];
-	} else {
-		$buttonTitle = "Subscribe";
-	}
-	if(isset($attributes['icon'])) {
-		$icon = $attributes['icon'];
-	} else {
-		$icon = "arrow-right-alt";
-	}
-	if(isset($attributes['hoverButtonTextColor'])) {
-		$hoverButtonTextColor = $attributes['hoverButtonTextColor'];
-	} else {
-		$hoverButtonTextColor =" ";
-	}
-	if(isset($attributes['hoverButtonBackgroundColor'])) {
-		$hoverButtonBackgroundColor = $attributes['hoverButtonBackgroundColor'];
-	} else {
-		$hoverButtonBackgroundColor =" ";
-	}
-	if(isset($attributes['styleIs'])) {
-		$styleIs = $attributes['styleIs'];
-	} else {
-		$styleIs = 1;
-	}
-	if(isset($attributes['doubleOptIn'])) {
-		$doubleOptIn = $attributes['doubleOptIn'];
-	} else {
-		$doubleOptIn =0;
-	}
-	if ( $styleIs == 3 ) {
-		$btnBottomLeftThreeOne = $borderBottomLeftRadiusTwo;
+	if ( $attributes['styleIs'] == 3 ) {
+		$btnBottomLeftThreeOne = $attributes['borderBottomLeftRadiusTwo'];
 	}
 	else{
-		$btnBottomLeftThreeOne = $borderBottomLeftRadius;
+		$btnBottomLeftThreeOne = $attributes['borderBottomLeftRadius'];
 	}
-	if ( $styleIs ==1 ) {
-		$bg = $bgColor;
+	if ( $attributes['styleIs'] ==1 ) {
+		$bg = $attributes['bgColor'];
 	}
 	else{
-		$bg = $bgColorTwo;
+		$bg = $attributes['bgColorTwo'];
 	}
-	if ( $styleIs == 2 ) {
+	if ( $attributes['styleIs'] == 2 ) {
 		$TopLeft = 100;
 	}
 	else{
-		$TopLeft = $borderLeftRadius;
+		$TopLeft = $attributes['borderLeftRadius'];
 	}
-	if ( $styleIs != 1 ) {
+	if ( $attributes['styleIs'] != 1 ) {
 		$btnTopLeft = 0;
 	}
 	else{
-		$btnTopLeft = $borderTopLeftRadius;
+		$btnTopLeft = $attributes['borderTopLeftRadius'];
 	}
-	if ( $styleIs == 2 ) {
+	if ( $attributes['styleIs'] == 2 ) {
 		$btnBottomLeft = 30;
 	}
 	else{
 		$btnBottomLeft = $btnBottomLeftThreeOne;
 	}
-	if ( $styleIs == 3 ) {
+	if ( $attributes['styleIs'] == 3 ) {
 		$placehoderThreeOne = "Subscribe Now";
 	}
 	else{
 		$placehoderThreeOne = "Enter Your Email Id";
 	}
-	if ( $styleIs == 2 ) {
+	if ( $attributes['styleIs'] == 2 ) {
 		$placeholder = "Your mail Id goes here...";
 	}
 	else{
 		$placeholder = $placehoderThreeOne;
 	}
-	if ( $styleIs == 1 ) {
-		$r = $borderRightRadius;
+	if ( $attributes['styleIs'] == 1 ) {
+		$basicBorderRightRadius = $attributes['borderRightRadius'];
 	}
 	else{
-		$r = 0;
-	}
-	if(isset($attributes['align'])) {
-		$align = $attributes['align'];
-	} else {
-		$align = "wide";
+		$basicBorderRightRadius = 0;
 	}
 	
-	$balancedPaddingRight = $horizontalOuterPadding + 4.5 * $fontSize + 2 * $buttonHorizontalPadding;
-	$newsletter .= '<div class="wp-block-guteblock-newsletter align'.$align.' is-style-'.$attributes['styleIs'].' align-'.$alignment.'" 
+	$balancedPaddingRight = $attributes['horizontalOuterPadding'] + 4.5 * $attributes['fontSize'] + 2 * $attributes['buttonHorizontalPadding'];
+	$newsletter .= '<div class="wp-block-guteblock-newsletter align'.$attributes['align'].' is-style-'.$attributes['styleIs'].' align-'.$attributes['alignment'].'" 
 	style="background-color:'.$bg.';
-	padding-left:'.$horizontalOuterPadding.'px;
-	padding-right:'.$horizontalOuterPadding.'px;
-	padding-top:'.$verticalOuterPadding.'px;
-	padding-bottom:'.$verticalOuterPadding.'px;
+	padding-left:'.$attributes['horizontalOuterPadding'].'px;
+	padding-right:'.$attributes['horizontalOuterPadding'].'px;
+	padding-top:'.$attributes['verticalOuterPadding'].'px;
+	padding-bottom:'.$attributes['verticalOuterPadding'].'px;
 	text-align:'.$attributes['alignment'].'">';
 	
-	$newsletter .= '<div class="wp-block-guteblock-newsletter__container" 
-	style="width: 90%;
-    position: relative;
-    display: inline-block;
-    overflow: hidden;">';
+	$newsletter .= '<div class="wp-block-guteblock-newsletter__container">';
 		$newsletter .= '<form action="" method="post" class="newsletterSubmit" id="newsletterMyForm">';
 			$newsletter .= 	'<input type="email" placeholder="'.$placeholder.'" class="wp-block-guteblock-newsletter__input" style="
-			padding-left: '.$horizontalPadding.'px;
+			padding-left: '.$attributes['horizontalPadding'].'px;
 			padding-right:'.$balancedPaddingRight.'px;
-			padding-top:'.$verticalInnerPadding.'px;
-			padding-bottom:'.$verticalInnerPadding.'px;
-			text-transform:'.$inputTextTransform.';
-			font-weight:'.$inputTextFontWeight.';
+			padding-top:'.$attributes['verticalInnerPadding'].'px;
+			padding-bottom:'.$attributes['verticalInnerPadding'].'px;
+			text-transform:'.$attributes['inputTextTransform'].';
+			font-weight:'.$attributes['inputTextFontWeight'].';
 			border-top-left-radius:'.$TopLeft.'px;
 			border-bottom-left-radius:'.$TopLeft.'px;
-			border-top-right-radius:'.$r.'px;
-			border-bottom-right-radius:'.$r.'px;
-			color:'.$inputTextColor.';
-			font-size:'.$fontSize.'px;
-			background-color:'.$inputBackgroundColor.';
+			border-top-right-radius:'.$basicBorderRightRadius.'px;
+			border-bottom-right-radius:'.$basicBorderRightRadius.'px;
+			color:'.$attributes['inputTextColor'].';
+			font-size:'.$attributes['fontSize'].'px;
+			background-color:'.$attributes['inputBackgroundColor'].';
 			border: none;
 			">';
-			$newsletter .= '<input type="hidden" value="'.$doubleOptIn.'" class="wp-block-guteblock-newsletter__hiddeninput" name="double_optin" >';
-			$newsletter .= '<style>.wp-block-guteblock-newsletter-inner:hover { color: '.$hoverButtonTextColor.' !important; background-color:'.$hoverButtonBackgroundColor.'!important; transition:.5s ease all} </style>';
-			$newsletter .= '<button type="submit"  target="_blank"  rel="noopener noreferrer" class="wp-block-guteblock-newsletter-inner" 
-			onMouseover="this.style.backgroundColor=#fhjjj";
-			style="padding-left:'.$buttonHorizontalPadding.'px;
-			padding-right:'.$buttonHorizontalPadding.'px;
+			$newsletter .= '<input type="hidden" value="'.$attributes['doubleOptIn'].'" class="wp-block-guteblock-newsletter__hiddeninput" name="double_optin" >';
+			$newsletter .= '<style>.wp-block-guteblock-newsletter-inner:hover { color: '.$attributes['hoverButtonTextColor'].' !important; background-color:'.$attributes['hoverButtonBackgroundColor'].'!important; transition:.5s ease all} </style>';
+			$newsletter .= '<button type="submit"  target="_blank"  rel="noopener noreferrer" class="wp-block-guteblock-newsletter-inner";
+			style="padding-left:'.$attributes['buttonHorizontalPadding'].'px;
+			padding-right:'.$attributes['buttonHorizontalPadding'].'px;
 			text-decoration: none;
-			padding-top:'.$verticalInnerPadding.'px;
-			padding-bottom:'.$verticalInnerPadding.'px;
+			padding-top:'.$attributes['verticalInnerPadding'].'px;
+			padding-bottom:'.$attributes['verticalInnerPadding'].'px;
 			border-top-left-radius:'.$btnTopLeft.'px;
 			border-bottom-left-radius:'.$btnBottomLeft.'px;
-			border-top-right-radius:'.$r.'px;
-			border-bottom-right-radius:'.$r.'px;
-			background-color:'.$buttonBackgroundColor.';
-			text-transform:'.$buttonTextTransform.';
-			font-weight:'.$buttonTextFontWeight.';
-			letter-spacing:'.$buttonLetterSpacing.'px;
+			border-top-right-radius:'.$basicBorderRightRadius.'px;
+			border-bottom-right-radius:'.$basicBorderRightRadius.'px;
+			background-color:'.$attributes['buttonBackgroundColor'].';
+			text-transform:'.$attributes['buttonTextTransform'].';
+			font-weight:'.$attributes['buttonTextFontWeight'].';
+			letter-spacing:'.$attributes['buttonLetterSpacing'].'px;
 			border: none;
-			color: '.$buttonTextColor.';
-			font-size: '.$fontSize.'px;
-			transition:.5s ease all;
-			position: absolute;
-			top: 0;
-			right: 0;
-			bottom: 0;">';
+			color: '.$attributes['buttonTextColor'].';
+			font-size: '.$attributes['fontSize'].'px;
+			transition:.5s ease all;">';
 			if ( $attributes['styleIs'] != 3 ) {
-					$newsletter .= '<span>'.$buttonTitle.'</span>';
+					$newsletter .= '<span>'.$attributes['buttonTitle'].'</span>';
 			}
 			else if( $attributes['styleIs'] == 3 ) {
-				$newsletter .= '<span class="dashicons dashicons-'.$icon.'" style="font-size: '.$fontSize.'px; width:'.$fontSize.'px;height:'.$fontSize.'px;"></span>';
+				$newsletter .= '<span class="dashicons dashicons-'.$attributes['icon'].'" style="font-size: '.$attributes['fontSize'].'px; width:'.$attributes['fontSize'].'px;height:'.$attributes['fontSize'].'px;"></span>';
 			}
 			$newsletter .= '</button>';
-		$newsletter .= '</form>';
-		$newsletter .= '<div class="wp-block-guteblock-newsletter__popup-window">';
+			$newsletter .= '</form>';
+			$newsletter .= '<div class="wp-block-guteblock-newsletter__popup-window">';
+			$newsletter .= '</div>';
 		$newsletter .= '</div>';
-	$newsletter .= '</div>';
 	$newsletter .= '</div>';
 	return $newsletter;
 }

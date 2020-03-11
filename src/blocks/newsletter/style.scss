@@ -26,13 +26,17 @@
 	.components-base-control.wp-block-guteblock-newsletter__input {
 		margin-right: 1px;
 	}
-	button.components-button.wp-block-guteblock-newsletter-inner:hover {
+	input::placeholder {
+		color: unset;
+		opacity: 0.5;
+	}
+	.wp-block-guteblock-newsletter-inner:hover {
 		transition: 0.5s ease all;
 	}
 	.wp-block-guteblock-newsletter__container span {
 		margin: 0px;
 	}
-	button.components-button.wp-block-guteblock-newsletter-inner {
+	.wp-block-guteblock-newsletter-inner {
 		position: absolute;
 		right: 0px;
 		top: 0px;
@@ -41,7 +45,7 @@
 		.editor-rich-text.block-editor-rich-text {
 			display: inline-block;
 		}
-		button.components-button.wp-block-guteblock-newsletter-inner {
+		.wp-block-guteblock-newsletter-inner {
 			bottom: 0px;
 		}
 	}
