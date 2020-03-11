@@ -528,43 +528,44 @@ function guteblock_quick_contact_submit() {
 	return;
 }
 function guteblock_render_quick_contact_block($attributes) {
+
 	if ( $attributes['showInputBorder'] == true ) {
 		$inputBorder = '1px solid '.$attributes['inputBorderColor'];
-	}
-	else{
+	} else {
 		$inputBorder = "none";
 	}
+
 	if ( $attributes['showFormShadow'] == true ) {
-		$contactFormShadow = '0px 0px'.$attributes['formShadow'].'px 0px '.$attributes['formShadowColor'];
-	}
-	else{
+		$contactFormShadow = '0px 0px '.$attributes['formShadow'].'px 0px '.$attributes['formShadowColor'];
+	} else {
 		$contactFormShadow = "none";
 	}
+
 	if( $attributes['styleIs'] == 3 ) {
 		$basicInputBorder = "none";
-	}
-	else {
+	} else {
 		$basicInputBorder = $inputBorder;
 	}
+
 	if( $attributes['styleIs'] == 3 ) {
 		$borderBottom = '2px solid '.$attributes['inputBorderColor'];
-	}
-	else {
+	} else {
 		$borderBottom = $inputBorder;
 	}
+
 	if( $attributes['styleIs'] == 3 ) {
 		$basicBottomLeftBorderRadius = 0;
-	}
-	else {
+	} else {
 		$basicBottomLeftBorderRadius = $attributes['inputBorderBottomLeftRadius'];
 	}
+
 	if( $attributes['styleIs'] == 3 ) {
 		$basicBottomRightBorderRadius = 0;
-	}
-	else {
+	} else {
 		$basicBottomRightBorderRadius = $attributes['inputBorderBottomRightRadius'];
 	}
-	$quick_contact .= '<div class="wp-block-guteblock-quick-contact align'.$attributes['align'].'  align-' .$attributes['alignment'].'" 
+
+	$quick_contact = '<div class="wp-block-guteblock-quick-contact align'.$attributes['align'].' align-' .$attributes['alignment'].'" 
 	style="
 	text-align:'.$attributes['alignment'].';
 	background-color:'.$attributes['bgColor'].';
@@ -578,7 +579,7 @@ function guteblock_render_quick_contact_block($attributes) {
 		padding:'.$attributes['padding'].'px;
 		width:'.$attributes['width'].'%;
 		border-radius:'.$attributes['borderRadius'].'px;
-		box-shadow:'.$attributes['contactFormShadow'].';
+		box-shadow:'.$contactFormShadow.';
 		">';
 			$quick_contact .= '<div class="wp-block-guteblock-quick-contact-form_align_center">';
 				$quick_contact .= '<h4
@@ -743,25 +744,27 @@ function guteblock_render_quick_contact_block($attributes) {
 						id="recaptchaResponse"
 					/>';
 				$quick_contact .= '<div class="wp-block-guteblock-quick-contact-form_align_center">';
-				$quick_contact .= '<style>
+				if(isset($attributes['hoverButtonTextColor'])) {
+					$quick_contact .= '<style>
 					.wp-block-guteblock-quick-contact-form__submit_field:hover {
 						color:'.$attributes['hoverButtonTextColor'].' !important;
 						background-color: '.$attributes['hoverButtonBackgroundColor'].' !important;
 						transition: 1s ease all !important;
-					}
-					</style>';
-					$quick_contact .= '<button
-						target="_blank"
-						rel="noopener noreferrer"
-						class="wp-block-guteblock-quick-contact-form__submit_field"
-						style="width:'.$attributes['buttonWidth'].'%;
-							background-color: '.$attributes['buttonBackgroundColor'].';
-							color: '.$attributes['buttonTextColor'].';
-							border-radius: '.$attributes['buttonBorderRadius'].'px;
-							padding: '.$attributes['buttonPadding'].'px;
-							text-transform: '.$attributes['buttonTextTransform'].';
-							">
-							<span>'.$attributes['buttonTitle'].'</span>
+					}</style>';
+				}
+				
+				$quick_contact .= '<button
+					target="_blank"
+					rel="noopener noreferrer"
+					class="wp-block-guteblock-quick-contact-form__submit_field"
+					style="width:'.$attributes['buttonWidth'].'%;
+						background-color: '.$attributes['buttonBackgroundColor'].';
+						color: '.$attributes['buttonTextColor'].';
+						border-radius: '.$attributes['buttonBorderRadius'].'px;
+						padding: '.$attributes['buttonPadding'].'px;
+						text-transform: '.$attributes['buttonTextTransform'].';
+						">
+						<span>'.$attributes['buttonTitle'].'</span>
 					</button>';
 				$quick_contact .= '</div>';
 			$quick_contact .= '</form>';

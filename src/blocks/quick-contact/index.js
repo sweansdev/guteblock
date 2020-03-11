@@ -49,8 +49,6 @@ const attributes = {
 	},
 	title: {
 		type: "string",
-		source: "html",
-		selector: "h4",
 		default: "Quick Contact"
 	},
 	titleColor: {
@@ -79,8 +77,6 @@ const attributes = {
 	},
 	info: {
 		type: "string",
-		source: "html",
-		selector: "p",
 		default: "Contact us today, and get reply with in 24 hours!"
 	},
 	infoColor: {
