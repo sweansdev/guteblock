@@ -5,15 +5,22 @@
 	p:nth-of-type(1):first-letter {
 		float: left;
 		font-size: 75px;
-		line-height: 60px;
 		padding-top: 4px;
 		padding-right: 8px;
 		padding-left: 3px;
-		margin: 9px 6px 5px 0;
+		margin: 0px 6px 10px 0;
+		line-height: 0.68;
+		text-transform: uppercase;
 	}
 
-	p.wp-block-guteblock-drop-cap__content {
-		line-height: 1.776;
+	p.wp-block-guteblock-drop-cap__content::after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+
+	p.wp-block-guteblock-drop-cap__content::after {
+		padding: 0;
 	}
 
 	&.align-center {
