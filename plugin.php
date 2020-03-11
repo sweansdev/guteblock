@@ -460,29 +460,20 @@ function guteblock_register() {
 
 
 /* Add action for Quick Contact Form Submit*/
-add_action("wp_ajax_guteblock_quick_contact_submit", "guteblock_quick_contact_submit");
-add_action("wp_ajax_nopriv_guteblock_quick_contact_submit", "guteblock_quick_contact_submit");
-function guteblock_quick_contact_submit() {
-
+// add_action("wp_ajax_guteblock_quick_contact_submit", "guteblock_quick_contact_submit");
+// add_action("wp_ajax_nopriv_guteblock_quick_contact_submit", "guteblock_quick_contact_submit");
+function guteblock_quick_contact_submit($attributes) {
+	
 	$data = [
 		'nameField'     	=> 	$_POST["nameField"],
 		'emailField'    	=> 	$_POST["emailField"],
 		'phoneField'    	=> 	$_POST["phoneField"],
 		'websiteField'  	=> 	$_POST["websiteField"],
 		'messageField' 		=>	$_POST["messageField"],
-		'authorEmailId' 	=> 	$_POST["authorEmailId"],
+		'authorEmailId' 	=> 	$attributes['authorEmailId'],
 		'recaptchaResponse' => 	$_POST["recaptchaResponse"]
-		
 	];
-	$json = json_encode([
-		'nameField'     	=> $data['nameField'],
-		'emailField'    	=> $data['emailField'],
-		'phoneField'    	=> $data['phoneField'],
-		'websiteField'  	=> $data['websiteField'],
-		'messageField'  	=> $data['messageField'],
-		'authorEmailId' 	=> $data['authorEmailId'],
-		'recaptchaResponse' => $data['recaptchaResponse']
-	]);
+
 	if(isset($_POST['recaptchaResponse']) && !empty($_POST['recaptchaResponse'])){
 
 		//Build POST request:
@@ -502,7 +493,7 @@ function guteblock_quick_contact_submit() {
 				echo "Please Fill the Author Email Id";
 
 			} else {
-
+				
 				$to = $data['authorEmailId'];
                 $subject = 'The Quick Contact form';
                 $message = $data['messageField'];
@@ -528,6 +519,10 @@ function guteblock_quick_contact_submit() {
 	return;
 }
 function guteblock_render_quick_contact_block($attributes) {
+
+	if($_POST) {
+		guteblock_quick_contact_submit($attributes);		
+	}
 
 	if ( $attributes['showInputBorder'] == true ) {
 		$inputBorder = '1px solid '.$attributes['inputBorderColor'];
