@@ -1,12 +1,12 @@
 <?php
 /**
- * Getting Started page
+ * About Guteblock page
  *
  * @package Guteblock
  */
 
 /**
- * Load Getting Started styles in the admin
+ * Load About Guteblock styles in the admin
  *
  * @since 1.0.0
  * @param string $hook The current admin page.
@@ -17,10 +17,10 @@ function guteblock_start_load_admin_scripts( $hook ) {
 		return;
 	}
 
-	// Getting Started javascript.
+	// About Guteblock javascript.
 	wp_enqueue_script( 'guteblock-settings-script', plugins_url( 'settings/settings.js', dirname( __FILE__ ) ), array( 'jquery' ), '1.0.0', true );
 
-	// Getting Started styles.
+	// About Guteblock styles.
 	wp_register_style( 'guteblock-settings-style', plugins_url( 'settings/settings.css', dirname( __FILE__ ) ), false, '1.0.0' );
 	wp_enqueue_style( 'guteblock-settings-style' );
 
@@ -40,8 +40,8 @@ function guteblock_getting_started_menu() {
 
 	add_submenu_page(
 		'guteblock',
-		esc_html__( 'Getting Started', 'guteblock' ),
-		esc_html__( 'Getting Started', 'guteblock' ),
+		esc_html__( 'About Guteblock', 'guteblock' ),
+		esc_html__( 'About Guteblock', 'guteblock' ),
 		'manage_options',
 		'guteblock',
 		'guteblock_getting_started_page'
@@ -64,12 +64,12 @@ function guteblock_getting_started_page() {
 	<div class="wrap gb-getting-started">
 		<div class="intro-wrap">
 			<div class="intro">
-				<a href="https://guteblock.com/"><img class="guteblock-logo" src="<?php echo esc_url( plugins_url( 'newimages/logo.png', __FILE__ ) ); ?>" alt="<?php esc_html_e( 'Visit Guteblock', 'guteblock' ); ?>" /></a>
-				<h3><?php printf( esc_html__( 'Getting started with', 'guteblock' ) ); ?> <strong><?php printf( esc_html__( 'Guteblock', 'guteblock' ) ); ?></strong></h3>
+				<a href="https://guteblock.com/"><img class="guteblock-logo" src="<?php echo esc_url( plugins_url( 'images/logo.png', __FILE__ ) ); ?>" alt="<?php esc_html_e( 'Visit Guteblock', 'guteblock' ); ?>" /></a>
+				<h3><?php printf( esc_html__( 'Do more with', 'guteblock' ) ); ?> <strong><?php printf( esc_html__( 'Guteblock', 'guteblock' ) ); ?></strong></h3>
 			</div>
 
 			<ul class="gb-menu">
-				<li class="current" data-target="#getting-started"><a href="#"><i class="fa fa-check"></i><?php esc_html_e( 'Getting Started', 'guteblock' ); ?></a></li>
+				<li class="current" data-target="#getting-started"><a href="#"><i class="fa fa-check"></i><?php esc_html_e( 'About Guteblock', 'guteblock' ); ?></a></li>
 				<li data-target="#plugin-help"><a href="#"><i class="fa fa-plug"></i> <?php esc_html_e( 'Plugin Help File', 'guteblock' ); ?></a></li>
 			</ul>
 
@@ -88,7 +88,37 @@ function guteblock_getting_started_page() {
 						</div>
 						<div class="gb-block-split-right">
 							<div class="gb-block-theme">
-								<img src="<?php echo esc_url( plugins_url( 'newimages/img-right.jpg', __FILE__ ) ); ?>" alt="<?php esc_html_e( 'Guteblock Theme', 'guteblock' ); ?>" />
+								<img src="<?php echo esc_url( plugins_url( 'images/img-right.jpg', __FILE__ ) ); ?>" alt="<?php esc_html_e( 'Guteblock Theme', 'guteblock' ); ?>" />
+							</div>
+						</div>
+					</div>
+					<div class="gb-block-split gb-content-outer clearfix">
+						<h3>Discover our Blocks Collection</h3>
+						<p>Boost up your Gutenberg editor to next level with our powerful Blocks and build websites in no time! A unique and advanced collection of professionally designed 20 blocks that are absolutely free!</p>
+						<div class="gb-block-listing">
+							<div class="gb-block">
+								<div class="gb-block-img gb-post-grid"></div>
+								<p>Post Grid</p>
+							</div>
+							<div class="gb-block">
+								<div class="gb-block-img gb-post-grid"></div>
+								<p>Post Grid</p>
+							</div>
+							<div class="gb-block">
+								<div class="gb-block-img gb-post-grid"></div>
+								<p>Post Grid</p>
+							</div>
+							<div class="gb-block">
+								<div class="gb-block-img gb-post-grid"></div>
+								<p>Post Grid</p>
+							</div>
+							<div class="gb-block">
+								<div class="gb-block-img gb-post-grid"></div>
+								<p>Post Grid</p>
+							</div>
+							<div class="gb-block">
+								<div class="gb-block-img gb-post-grid"></div>
+								<p>Post Grid</p>
 							</div>
 						</div>
 					</div>
@@ -104,7 +134,7 @@ function guteblock_getting_started_page() {
 						</div>
 						<div class="gb-block-split-right">
 							<div class="gb-block-theme">
-								<img src="<?php echo esc_url( plugins_url( 'newimages/img-right.jpg', __FILE__ ) ); ?>" alt="<?php esc_html_e( 'Guteblock Theme', 'guteblock' ); ?>" />
+								<img src="<?php echo esc_url( plugins_url( 'images/img-right.jpg', __FILE__ ) ); ?>" alt="<?php esc_html_e( 'Guteblock Theme', 'guteblock' ); ?>" />
 							</div>
 						</div>
 					</div>
@@ -126,7 +156,7 @@ function guteblock_settings_page() {
 	<div class="wrap gb-getting-started">
 		<div class="intro-wrap">
 			<div class="intro">
-				<a href="https://guteblock.com/"><img class="guteblock-logo" src="<?php echo esc_url( plugins_url( 'newimages/logo.png', __FILE__ ) ); ?>" alt="<?php esc_html_e( 'Visit Guteblock', 'guteblock' ); ?>" /></a>
+				<a href="https://guteblock.com/"><img class="guteblock-logo" src="<?php echo esc_url( plugins_url( 'images/logo.png', __FILE__ ) ); ?>" alt="<?php esc_html_e( 'Visit Guteblock', 'guteblock' ); ?>" /></a>
 				<h3><?php printf( esc_html__( 'Configure ', 'guteblock' ) ); ?> <strong><?php printf( esc_html__( 'Guteblock', 'guteblock' ) ); ?></strong></h3>
 			</div>
 
