@@ -7,9 +7,11 @@ function guteblock_quick_contact_submit($attributes) {
     $error_msg = "";
 
     if( $attributes['authorEmailId'] == "" ) {
-
-        $error_msg = "Please Fill the Author Email Id";
-
+        if (current_user_can( 'manage_options' )) {
+            $error_msg = "Forwading email for this block is not defined.";
+        } else {
+            $error_msg = "Something went wrong.";
+        }
     }
 
 
@@ -35,14 +37,19 @@ function guteblock_quick_contact_submit($attributes) {
             $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $guteblock_recaptcha_secret_key . '&response=' . $recaptcha_response);
             $recaptcha = json_decode($recaptcha);
             // Take action based on the score returned:
-            if ($recaptcha->score < 0.5) {
+            if (isset($recaptcha->score)) {
+                
+                if ($recaptcha->score < 0.5) {
+                    $error_msg = "reCAPTCHA failed. Please try again.";
+                }
+
+            } else {
 
                 $error_msg = "reCAPTCHA failed. Please try again.";
 
-
             }
             
-
+            
         }
 
     }
