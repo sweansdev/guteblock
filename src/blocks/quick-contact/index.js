@@ -85,8 +85,6 @@ const attributes = {
 	},
 	buttonTitle: {
 		type: "string",
-		source: "html",
-		selector: "span",
 		default: "Send"
 	},
 	inputVerticalMargin: {
@@ -174,6 +172,10 @@ const attributes = {
 	authorEmailId: {
 		type: "string",
 		default: ""
+	},
+	enablereCAPTCHA: {
+		type: "boolean",
+		default: false
 	}
 };
 

@@ -35,7 +35,8 @@ function guteblock_getting_started_menu() {
 		'manage_options',
 		'guteblock',
 		'guteblock_getting_started_page',
-		'dashicons-building'
+		//'dashicons-layout'
+		'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDIzLjEuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCA2NCA2NCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNjQgNjQ7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPHN0eWxlIHR5cGU9InRleHQvY3NzIj4KCS5zdDB7ZmlsbDojQTBBNUFBO30KPC9zdHlsZT4KPHBhdGggY2xhc3M9InN0MCIgZD0iTTUyLjcsMjIuNEw0MS42LDExLjRjLTUuOC01LjgtMTUuMi01LjgtMjEsMGwtOS4yLDkuMmMtNS44LDUuOC01LjgsMTUuMiwwLDIxbDExLjEsMTEuMWM1LjgsNS44LDE1LjIsNS44LDIxLDAKCWw5LjItOS4yQzU4LjUsMzcuNyw1OC41LDI4LjIsNTIuNywyMi40eiBNNDguNywzOS41bC04LjksOC45Yy0xLjgsMS45LTQuMSwyLjktNi43LDIuOWMtMC4xLDAtMC4xLDAtMC4yLDBjLTIuNSwwLTQuOS0xLTYuNy0yLjgKCUwxNS40LDM3LjdjLTMuNi0zLjYtMy43LTkuNC0wLjItMTMuMWMwLDAsMC4xLTAuMSwwLjEtMC4xbDktOWMzLjUtMy43LDkuNS0zLjksMTMuMy0wLjRjMCwwLDAsMCwwLjEsMC4xbDAuNywwLjYKCWMxLjcsMS42LDEuNyw0LjIsMC4xLDUuOGMtMS42LDEuNy00LjIsMS43LTUuOCwwLjFsLTAuNy0wLjZjLTAuNS0wLjQtMS4yLTAuNC0xLjYsMGMtMC4xLDAuMS0wLjEsMC4xLTAuMSwwLjFsLTksOQoJYy0wLjQsMC41LTAuNCwxLjIsMC4xLDEuNmwxMC45LDEwLjljMC4zLDAuMywwLjYsMC40LDAuOSwwLjRzMC42LTAuMSwwLjgtMC40YzAuMS0wLjEsMC4xLTAuMSwwLjEtMC4xbDktOWMwLjMtMC4zLDAuMy0wLjYsMC4zLTAuOAoJcy0wLjEtMC41LTAuMy0wLjhjLTAuMy0wLjMtMC42LTAuMy0wLjgtMC4zYy0wLjIsMC0wLjUsMC4xLTAuOCwwLjNsLTMuNywzLjdjLTEuNiwxLjYtNC4yLDEuNi01LjgsMGMtMS42LTEuNi0xLjYtNC4yLDAtNS44CglsMy43LTMuN2MxLjgtMS44LDQuMS0yLjgsNi42LTIuOHM0LjksMSw2LjYsMi43YzEuOCwxLjgsMi44LDQuMSwyLjgsNi42UzUwLjQsMzcuOCw0OC43LDM5LjV6Ii8+Cjwvc3ZnPgo='
 	);
 
 	add_submenu_page(
@@ -69,8 +70,8 @@ function guteblock_getting_started_page() {
 			</div>
 
 			<ul class="gb-menu">
-				<li class="current" data-target="#getting-started"><a href="#"><i class="fa fa-check"></i><?php esc_html_e( 'About Guteblock', 'guteblock' ); ?></a></li>
-				<li data-target="#plugin-help"><a href="#"><i class="fa fa-plug"></i> <?php esc_html_e( 'Plugin Help File', 'guteblock' ); ?></a></li>
+				<li class="current" data-target="#getting-started"><a href="#"><?php esc_html_e( 'About Guteblock', 'guteblock' ); ?></a></li>
+				<li data-target="#support"><a href="#"><?php esc_html_e( 'Support', 'guteblock' ); ?></a></li>
 			</ul>
 
 		</div>
@@ -83,7 +84,8 @@ function guteblock_getting_started_page() {
 						<div class="gb-block-split-left">							
 							<div class="gb-titles">
 								<h2><?php esc_html_e( 'Enhance your Gutenberg experience with Guteblock!', 'guteblock' ); ?></h2>
-								<p><?php esc_html_e( 'The Guteblock collection is now ready to use in your posts and pages. Check out the help file link above for detailed instructions!', 'guteblock' ); ?></p>
+								<p><?php esc_html_e( 'Amazing Guteblock collection is all set to enhance your gutenberg experience. Click the link below to explore more about our blocks.', 'guteblock' ); ?></p>
+								<a href="https://guteblock.com/" class="sw-btn-submit" target="_blank"><?php esc_html_e( 'Visit Guteblock.com', 'guteblock' ); ?></a>
 							</div>
 						</div>
 						<div class="gb-block-split-right">
@@ -93,48 +95,166 @@ function guteblock_getting_started_page() {
 						</div>
 					</div>
 					<div class="gb-block-split gb-content-outer clearfix">
-						<h3>Discover our Blocks Collection</h3>
-						<p>Boost up your Gutenberg editor to next level with our powerful Blocks and build websites in no time! A unique and advanced collection of professionally designed 20 blocks that are absolutely free!</p>
+						<h3><?php esc_html_e( 'Discover Our Blocks Collection', 'guteblock' ); ?></h3>
+						<p><?php esc_html_e( 'Boost up your Gutenberg editor to next level with our powerful Blocks and build websites in no time! A unique and advanced collection of professionally designed 20 blocks that are absolutely free!', 'guteblock' ); ?></p>
 						<div class="gb-block-listing">
 							<div class="gb-block">
 								<div class="gb-block-img gb-post-grid"></div>
-								<p>Post Grid</p>
+								<p><?php esc_html_e( 'Post Grid', 'guteblock' ); ?></p>
+								<span><?php esc_html_e( 'Boost up your Gutenberg editor to next level with our powerful Blocks and build websites in no time!', 'guteblock' ); ?></spam>
 							</div>
 							<div class="gb-block">
-								<div class="gb-block-img gb-post-grid"></div>
-								<p>Post Grid</p>
+								<div class="gb-block-img gb-number-box"></div>
+								<p><?php esc_html_e( 'Number Box', 'guteblock' ); ?></p>
 							</div>
 							<div class="gb-block">
-								<div class="gb-block-img gb-post-grid"></div>
-								<p>Post Grid</p>
+								<div class="gb-block-img gb-feature-grid"></div>
+								<p><?php esc_html_e( 'Number Box', 'guteblock' ); ?>Feature Grid</p>
 							</div>
 							<div class="gb-block">
-								<div class="gb-block-img gb-post-grid"></div>
-								<p>Post Grid</p>
+								<div class="gb-block-img gb-icon-list"></div>
+								<p><?php esc_html_e( 'Number Box', 'guteblock' ); ?>Icon List</p>
 							</div>
 							<div class="gb-block">
-								<div class="gb-block-img gb-post-grid"></div>
-								<p>Post Grid</p>
+								<div class="gb-block-img gb-container"></div>
+								<p><?php esc_html_e( 'Number Box', 'guteblock' ); ?>Container</p>
 							</div>
 							<div class="gb-block">
-								<div class="gb-block-img gb-post-grid"></div>
-								<p>Post Grid</p>
+								<div class="gb-block-img gb-separator"></div>
+								<p><?php esc_html_e( 'Number Box', 'guteblock' ); ?>Seperator</p>
 							</div>
+
+
+
+							<div class="gb-block">
+								<div class="gb-block-img gb-count-up"></div>
+								<p><?php esc_html_e( 'Number Box', 'guteblock' ); ?>Count Up</p>
+							</div>
+							<div class="gb-block">
+								<div class="gb-block-img gb-call-to-action"></div>
+								<p><?php esc_html_e( 'Number Box', 'guteblock' ); ?>Call to Action</p>
+							</div>
+							<div class="gb-block">
+								<div class="gb-block-img gb-header"></div>
+								<p><?php esc_html_e( 'Number Box', 'guteblock' ); ?>Header</p>
+							</div>
+							<div class="gb-block">
+								<div class="gb-block-img gb-testimonial"></div>
+								<p><?php esc_html_e( 'Number Box', 'guteblock' ); ?>Testimonial</p>
+							</div>
+							<div class="gb-block">
+								<div class="gb-block-img gb-video-popup"></div>
+								<p><?php esc_html_e( 'Number Box', 'guteblock' ); ?>Video Popup</p>
+							</div>
+							<div class="gb-block">
+								<div class="gb-block-img gb-pricing-table"></div>
+								<p><?php esc_html_e( 'Number Box', 'guteblock' ); ?>Pricing Table</p>
+							</div>
+
+
+
+							<div class="gb-block">
+								<div class="gb-block-img gb-accordion"></div>
+								<p><?php esc_html_e( 'Number Box', 'guteblock' ); ?>Accordion</p>
+							</div>
+							<div class="gb-block">
+								<div class="gb-block-img gb-team-members"></div>
+								<p><?php esc_html_e( 'Number Box', 'guteblock' ); ?>Team Members</p>
+							</div>
+							<div class="gb-block">
+								<div class="gb-block-img gb-notification"></div>
+								<p><?php esc_html_e( 'Number Box', 'guteblock' ); ?>Notification</p>
+							</div>
+							<div class="gb-block">
+								<div class="gb-block-img gb-card"></div>
+								<p><?php esc_html_e( 'Number Box', 'guteblock' ); ?>Card</p>
+							</div>
+							<div class="gb-block">
+								<div class="gb-block-img gb-feature"></div>
+								<p><?php esc_html_e( 'Number Box', 'guteblock' ); ?>Feature</p>
+							</div>
+							<div class="gb-block">
+								<div class="gb-block-img gb-button"></div>
+								<p><?php esc_html_e( 'Number Box', 'guteblock' ); ?>Button</p>
+							</div>
+
+
+
+							<div class="gb-block">
+								<div class="gb-block-img gb-blockquote"></div>
+								<p><?php esc_html_e( 'Number Box', 'guteblock' ); ?>Blockquote</p>
+							</div>
+							<div class="gb-block">
+								<div class="gb-block-img gb-image-box"></div>
+								<p><?php esc_html_e( 'Number Box', 'guteblock' ); ?>Image Box</p>
+							</div>
+							<div class="gb-block">
+								<div class="gb-block-img gb-advanced-columns"></div>
+								<p><?php esc_html_e( 'Number Box', 'guteblock' ); ?>Advanced Columns</p>
+							</div>
+							<div class="gb-block">
+								<div class="gb-block-img gb-newsletter"></div>
+								<p><?php esc_html_e( 'Number Box', 'guteblock' ); ?>Newsletter</p>
+							</div>
+							<div class="gb-block">
+								<div class="gb-block-img gb-inline-notice"></div>
+								<p><?php esc_html_e( 'Number Box', 'guteblock' ); ?>Inline Notice</p>
+							</div>
+							<div class="gb-block">
+								<div class="gb-block-img gb-call-to-action"></div>
+								<p><?php esc_html_e( 'Number Box', 'guteblock' ); ?>Call To Action</p>
+							</div>
+
+
+
+							<div class="gb-block">
+								<div class="gb-block-img gb-sharing-icons"></div>
+								<p><?php esc_html_e( 'Sharing Icons', 'guteblock' ); ?></p>
+							</div>
+							<div class="gb-block">
+								<div class="gb-block-img gb-author-profile"></div>
+								<p><?php esc_html_e( 'Author Profile', 'guteblock' ); ?></p>
+							</div>
+							<div class="gb-block">
+								<div class="gb-block-img gb-drop-cap"></div>
+								<p><?php esc_html_e( 'Drop Cap', 'guteblock' ); ?></p>
+							</div>
+							<div class="gb-block">
+								<div class="gb-block-img gb-spacer-divider"></div>
+								<p><?php esc_html_e( 'Spacer Divider', 'guteblock' ); ?></p>
+							</div>
+							<div class="gb-block">
+								<div class="gb-block-img gb-video-box"></div>
+								<p><?php esc_html_e( 'Video Box', 'guteblock' ); ?></p>
+							</div>
+							<div class="gb-block">
+								<div class="gb-block-img gb-google-maps"></div>
+								<p><?php esc_html_e( 'Google Maps', 'guteblock' ); ?></p>
+							</div>
+
+							
+							<div class="gb-block">
+								<div class="gb-block-img gb-next-page"></div>
+								<p><?php esc_html_e( 'Next Page', 'guteblock' ); ?></p>
+							</div>
+
+							
 						</div>
 					</div>
 				</div>
 
-				<div id="plugin-help" class="content-panel">
+				<div id="support" class="content-panel">
 					<div class="gb-block-split clearfix">
 						<div class="gb-block-split-left">							
 							<div class="gb-titles">
-								<h2><?php esc_html_e( '2222 Enhance your Gutenberg experience with Guteblock!', 'guteblock' ); ?></h2>
-								<p><?php esc_html_e( '2222 The Guteblock collection is now ready to use in your posts and pages. Check out the help file link above for detailed instructions!', 'guteblock' ); ?></p>
+								<h2><?php esc_html_e( 'Facing issues with Guteblock?', 'guteblock' ); ?></h2>
+								<p><?php esc_html_e( 'We are here to help you out with any queries related to Guteblock. Currently, we are actively accepting tickets through WordPress Support forum. Contact us there!', 'guteblock' ); ?></p>
+								<a href="https://wordpress.org/support/plugin/guteblock/" class="sw-btn-submit" target="_blank"><?php esc_html_e( 'View Support Forum', 'guteblock' ); ?></a>
 							</div>
 						</div>
 						<div class="gb-block-split-right">
 							<div class="gb-block-theme">
-								<img src="<?php echo esc_url( plugins_url( 'images/img-right.jpg', __FILE__ ) ); ?>" alt="<?php esc_html_e( 'Guteblock Theme', 'guteblock' ); ?>" />
+								<img src="<?php echo esc_url( plugins_url( 'images/img-support.jpg', __FILE__ ) ); ?>" alt="<?php esc_html_e( 'Guteblock Theme', 'guteblock' ); ?>" />
 							</div>
 						</div>
 					</div>
@@ -161,8 +281,8 @@ function guteblock_settings_page() {
 			</div>
 
 			<ul class="gb-menu">
-				<li class="current" data-target="#gb-mailchimp-settings"><a href="#"><i class="fa fa-check"></i><?php esc_html_e( 'Mailchimp Settings', 'guteblock' ); ?></a></li>
-				<li data-target="#gb-recaptcha-settings"><a href="#"><i class="fa fa-check"></i><?php esc_html_e( 'reCAPTCHA Settings', 'guteblock' ); ?></a></li>
+				<li class="current" data-target="#gb-mailchimp-settings"><a href="#"><?php esc_html_e( 'Mailchimp Settings', 'guteblock' ); ?></a></li>
+				<li data-target="#gb-recaptcha-settings"><a href="#"><?php esc_html_e( 'reCAPTCHA Settings', 'guteblock' ); ?></a></li>
 			</ul>
 
 		</div>
@@ -240,6 +360,7 @@ function guteblock_settings_page() {
 										</th>
 										<td>
 											<input type="text" name="recaptcha-site-key" placeholder="" value="<?php echo get_option('guteblock_recaptcha_site_key'); ?>" />
+											<p class="guteblock-settings-description"><a href="https://developers.google.com/recaptcha/intro" target="_blank" rel="noreferrer noopener"><?php esc_html_e( 'How to find this?', 'guteblock' ); ?></a></p>
 										</td>
 									</tr>
 									<tr>
@@ -248,6 +369,7 @@ function guteblock_settings_page() {
 										</th>
 										<td>
 											<input type="text" name="recaptcha-secret-key" placeholder="" value="<?php echo get_option('guteblock_recaptcha_secret_key'); ?>" />
+											<p class="guteblock-settings-description"><a href="https://developers.google.com/recaptcha/intro" target="_blank" rel="noreferrer noopener"><?php esc_html_e( 'How to find this?', 'guteblock' ); ?></a></p>
 										</td>
 									</tr>
 									
@@ -311,4 +433,14 @@ function gb_update_settings($param, $value) {
 	} else {
 		delete_option( $param );
 	}
+}
+
+add_action('admin_head', 'gb_admin_style');
+
+function gb_admin_style() {
+  echo '<style>
+  	#adminmenu .toplevel_page_guteblock div.wp-menu-image.svg {
+		background-size: 24px auto;
+	}
+  </style>';
 }

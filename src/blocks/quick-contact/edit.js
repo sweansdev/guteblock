@@ -97,6 +97,11 @@ class QuickContact extends Component {
 	onChangeHoverButtonBackgroundColor = hoverButtonBackgroundColor => {
 		this.props.setAttributes({ hoverButtonBackgroundColor });
 	};
+	onChangeCaptchaSettings = () => {
+		this.props.setAttributes({
+			enablereCAPTCHA: !this.props.attributes.enablereCAPTCHA
+		});
+	};
 	render() {
 		const { className, attributes, setAttributes } = this.props;
 		const {
@@ -147,7 +152,8 @@ class QuickContact extends Component {
 			buttonBorderRadius,
 			buttonPadding,
 			buttonTextTransform,
-			authorEmailId
+			authorEmailId,
+			enablereCAPTCHA
 		} = attributes;
 
 		const isStyle = RegExp(/is-style-/);
@@ -210,6 +216,11 @@ class QuickContact extends Component {
 				</BlockControls>
 				<InspectorControls>
 					<PanelBody title={__("General Settings", "guteblock")}>
+						<ToggleControl
+							label={__("Enable reCAPTCHA", "guteblock")}
+							onChange={this.onChangeCaptchaSettings}
+							checked={enablereCAPTCHA}
+						/>
 						<ToggleControl
 							label={__("Show Input border", "guteblock")}
 							onChange={this.onChangeShowInputBorder}

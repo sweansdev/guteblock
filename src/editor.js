@@ -14,12 +14,12 @@ import "./blocks/blockquote";
 import "./blocks/icon-list";
 import "./blocks/button";
 import "./blocks/feature-grid";
-//import "./blocks/accordion";
-//import "./blocks/count-up";
-import "./blocks/newsletter";
+import "./blocks/accordion";
+import "./blocks/count-up";
+//import "./blocks/newsletter";
 //import "./blocks/card";
 
-// Pro
+// Upcoming
 import "./blocks/quick-contact";
 //import "./blocks/paypal-donation";
 
