@@ -3,16 +3,15 @@ import $ from "jquery";
 
 
 if (typeof grecaptcha == 'object') { 
-	console.log("test");
 	grecaptcha.ready(function() {
 		grecaptcha
-			.execute(guteblock.recaptcha_site_key, { action: "" })
-			.then(function(token) {
-				var recaptchaResponse = document.getElementById(
-					"recaptchaResponse"
-				);
-				recaptchaResponse.value = token;
-			});
+		.execute(guteblock.recaptcha_site_key, { action: "" })
+		.then(function(token) {
+			var recaptchaResponse = document.getElementById(
+				"recaptchaResponse"
+			);
+			recaptchaResponse.value = token;
+		});
 	});
 }
 

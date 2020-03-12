@@ -37,18 +37,11 @@ function guteblock_quick_contact_submit($attributes) {
             $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $guteblock_recaptcha_secret_key . '&response=' . $recaptcha_response);
             $recaptcha = json_decode($recaptcha);
             // Take action based on the score returned:
-            if (isset($recaptcha->score)) {
+            if (!isset($recaptcha->score) || (isset($recaptcha->score) && $recaptcha->score < 0.5)) {
                 
-                if ($recaptcha->score < 0.5) {
-                    $error_msg = "reCAPTCHA failed. Please try again.";
-                }
-
-            } else {
-
                 $error_msg = "reCAPTCHA failed. Please try again.";
 
             }
-            
             
         }
 
