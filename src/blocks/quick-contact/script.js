@@ -14,7 +14,11 @@ grecaptcha.ready(function() {
 });
 
 // $(document).ready(function() {
-// 	$(".quickContactFormSubmit").submit(function() {
+// 	$(".quickContactFormSubmit").submit(function(response) {
+// 		response.preventDefault();
+// 		$( "#wp-block-guteblock-quick-contact__popup-window" ).slideDown( "slow", function() {
+// 			// Animation complete.
+// 		  });
 // 		$.ajax({
 // 			type: "post",
 // 			url: guteblock.ajaxurl,
@@ -43,26 +47,14 @@ grecaptcha.ready(function() {
 // 			// 	).val()
 // 			// },
 // 			success: function(response) {
-// 				$(
-// 					".wp-block-guteblock-quick-contact__popup-window"
-// 				).addClass(
-// 					"wp-block-guteblock-quick-contact__popup-windowAfter"
-// 				);
-// 				$(".wp-block-guteblock-quick-contact__popup-window").empty(
-// 					response
-// 				);
-// 				$(".wp-block-guteblock-quick-contact__popup-window").append(
-// 					response
-// 				);
-// 				setTimeout(function() {
-// 					$(
-// 						".wp-block-guteblock-quick-contact__popup-window"
-// 					).removeClass(
-// 					"wp-block-guteblock-quick-contact__popup-windowAfter"
-// 					);
-// 					document.getElementById("quickContactMyForm").reset();
-// 				}, 2000);
-// 			}
+// $(".wp-block-guteblock-quick-contact__popup-window").addClass( "wp-block-guteblock-quick-contact__popup-windowAfter");
+// $(".wp-block-guteblock-quick-contact__popup-window").empty(response);
+// $(".wp-block-guteblock-quick-contact__popup-window").append(response);
+// setTimeout(function() {
+// 	$(".wp-block-guteblock-quick-contact__popup-window").removeClass( "wp-block-guteblock-quick-contact__popup-windowAfter");
+// 		// document.getElementById("quickContactMyForm").reset();
+// }, 2000);
+// }
 // 		});
 
 // 		return false;

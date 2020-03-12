@@ -465,12 +465,7 @@ function guteblock_register() {
 function guteblock_quick_contact_submit($attributes) {
 	
 	$data = $_POST;
-	// var_dump($data["quick_contact_form_name_field"]);
-	// var_dump($data["quick_contact_form_email_field"]);
-	// var_dump($data["quick_contact_form_phone_field"]);
-	// var_dump($data["quick_contact_form_website_field"]);
-	// var_dump($data["quick_contact_form_message_field"]);
-	// var_dump($data["recaptcha_response"]);
+	
 	if(isset($data["recaptcha_response"]) && !empty($data["recaptcha_response"])){
 
 		//Build POST request:
@@ -485,9 +480,27 @@ function guteblock_quick_contact_submit($attributes) {
 		if ($recaptcha->score >= 0.5) {
 
 			if( $attributes['authorEmailId'] == "" ) {
-
+				
+				echo '<div class="wp-block-guteblock-quick-contact__popup-window"
+				style="width: 500px;
+				text-align: center;
+				transform: translateY(-100%);
+				transition: .75s ease all;
+				overflow: hidden;
+				opacity: 1;
+				// visibility: hidden;
+				padding: 75px 20px;
+				background-color:#fff;
+				display: block;
+				position: fixed;
+				top: 50%;
+				left: 0;
+				right: 0;
+				margin: 0 auto;
+				border-radius: 5px;
+				box-shadow: 0px 0px 4px 1px #2e2e2e;">';
 				echo "Please Fill the Author Email Id";
-				$pop_up_message_qc="Please Fill the Author Email Id";
+				echo '</div>';
 
 			} else {
 				
@@ -496,23 +509,26 @@ function guteblock_quick_contact_submit($attributes) {
                 $message = $data["quick_contact_form_message_field"];
                 $body = 'The email body content';
                 $headers = array('Content-Type: text/html; charset=UTF-8');
-                wp_mail( $to, $subject, $message, $body, $headers );
-				echo "Message Sent Successfully";
-				$pop_up_message_qc="Message Sent Successfully";
+				wp_mail( $to, $subject, $message, $body, $headers );
 
+				echo '<div class="wp-block-guteblock-quick-contact__popup-window">';
+				echo  "Message Sent Successfully";
+				echo '</div>';
 			}
 
 		} else {
 
-			echo 'captcha parameters missing';
-			$pop_up_message_qc="captcha parameters missing1";
+				echo '<div class="wp-block-guteblock-quick-contact__popup-window">';
+				echo  "captcha parameters missing1";
+				echo '</div>';
 
 		}
 		
 	} else {
 		
-		echo 'captcha parameters missing';
-		$pop_up_message_qc="captcha parameters missing2";
+		echo '<div class="wp-block-guteblock-quick-contact__popup-window">';
+		echo  "captcha parameters missing2";
+		echo '</div>';
 
 	}
 
@@ -523,7 +539,7 @@ function guteblock_render_quick_contact_block($attributes) {
 	if($_POST) {
 		guteblock_quick_contact_submit($attributes);		
 	}
-
+	var_dump($_POST['quick_contact_form_name_field']);
 	if ( $attributes['showInputBorder'] == true ) {
 		$inputBorder = '1px solid '.$attributes['inputBorderColor'];
 	} else {
@@ -768,8 +784,8 @@ function guteblock_render_quick_contact_block($attributes) {
 				$quick_contact .= '</div>';
 			$quick_contact .= '</form>';
 		$quick_contact .= '</div>';
-		$quick_contact .= '<div 
-			class="wp-block-guteblock-quick-contact__popup-window">'.$pop_up_message_qc.'</div>';
+		// $quick_contact .= '<div 
+		// 	class="wp-block-guteblock-quick-contact__popup-window"></div>';
 	return $quick_contact;
 }
 /* Ajax Call in Nwsletter */
