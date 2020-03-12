@@ -272,8 +272,9 @@ function guteblock_register() {
 	));
 
 	$quick_contact_attributes = array(
+
 		"styleIs" => array(
-			"type" => "number",
+			"type" => "string",
 			"default" => 1
 		),
 		"width" => array(
@@ -454,6 +455,14 @@ function guteblock_register() {
 			"type" => "boolean",
 			"default" => false
 		),
+		"emailSubject" => array(
+			"type" => "string",
+			"default" => ""
+		),
+		"responseMessage" => array(
+			"type" => "string",
+			"default" => "Message Sent Successfully"
+		)
 	);
 	guteblock_register_block_type('quick-contact', array(
 		'render_callback' => 'guteblock_render_quick_contact_block',

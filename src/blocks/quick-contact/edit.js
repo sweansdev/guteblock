@@ -14,8 +14,7 @@ import {
 	SelectControl,
 	RangeControl,
 	TextareaControl,
-	Button,
-	PanelRow
+	Button
 } from "@wordpress/components";
 import classnames from "classnames";
 
@@ -124,6 +123,7 @@ class QuickContact extends Component {
 			alignment,
 			info,
 			infoColor,
+			emailSubject,
 			nameField,
 			emailField,
 			phoneField,
@@ -131,6 +131,7 @@ class QuickContact extends Component {
 			enableWebsiteField,
 			websiteField,
 			messageField,
+			responseMessage,
 			buttonTitle,
 			inputVerticalPadding,
 			inputVerticalMargin,
@@ -162,8 +163,6 @@ class QuickContact extends Component {
 			: 1;
 
 		setAttributes({ styleIs: styleName });
-
-		console.log(styleIs);
 
 		const classes = classnames(className, {
 			[`align-${alignment}`]: alignment
@@ -204,7 +203,7 @@ class QuickContact extends Component {
 				? (basicBottomRightBorderRadius = "0")
 				: (basicBottomRightBorderRadius = inputBorderBottomRightRadius);
 		}
-		console.log(authorEmailId);
+
 		return (
 			<>
 				<BlockControls>
@@ -215,6 +214,42 @@ class QuickContact extends Component {
 					/>
 				</BlockControls>
 				<InspectorControls>
+					<PanelBody
+						title={__("Form Configuration", "guteblock")}
+					>
+						<TextControl
+							type="email"
+							label="Email Address"
+							value={authorEmailId}
+							onChange={authorEmailId =>
+								setAttributes({ authorEmailId })
+							}
+						/>
+						<TextControl
+							type="text"
+							label="Subject"
+							placeholder={__(
+								"Type Your Form Subject Here...",
+								"guteblock"
+							)}
+							value={emailSubject}
+							onChange={emailSubject =>
+								setAttributes({ emailSubject })
+							}
+						/>
+					</PanelBody>
+					<PanelBody
+						title={__("Form Response Message", "guteblock")}
+					>
+						<TextControl
+							type="text"
+							label="response Message"
+							value={responseMessage}
+							onChange={responseMessage =>
+								setAttributes({ responseMessage })
+							}
+						/>
+					</PanelBody>
 					<PanelBody title={__("General Settings", "guteblock")}>
 						<ToggleControl
 							label={__("Enable reCAPTCHA", "guteblock")}
@@ -282,16 +317,6 @@ class QuickContact extends Component {
 							"guteblock"
 						)}
 					>
-						<PanelRow>
-							<TextControl
-								type="email"
-								label="Email Address"
-								value={authorEmailId}
-								onChange={authorEmailId =>
-									setAttributes({ authorEmailId })
-								}
-							/>
-						</PanelRow>
 						<ToggleControl
 							label={__("Show Box Shadow", "guteblock")}
 							onChange={this.onChangeShowFormShadow}

@@ -12,9 +12,8 @@ function guteblock_quick_contact_submit($attributes) {
         } else {
             $error_msg = "Something went wrong.";
         }
-    }
-
-
+	}
+	
     if(!$error_msg && $attributes['enablereCAPTCHA']) {
 
         if(!(isset($data["recaptcha_response"]) && !empty($data["recaptcha_response"]))){
@@ -56,12 +55,20 @@ function guteblock_quick_contact_submit($attributes) {
 
         // All good. Proceeding with email.
         $to = $attributes['authorEmailId'];
-        $subject = 'The Quick Contact form';
-        $message = $data["quick_contact_form_message_field"];
+		$subject = $attributes['emailSubject'];
+		$message = "Name :" . $data['quick_contact_form_name_field'] ."<br>";
+		$message .= "Email :" . $data['quick_contact_form_email_field'] ."<br>";
+		if( $data['quick_contact_form_phone_field'] != "" ) {
+			$message .= "Phone :" . $data['quick_contact_form_phone_field'] ."<br>";
+		}
+		if( $data['quick_contact_form_website_field'] != "" ) {
+			$message .= "Website :" . $data['quick_contact_form_website_field'] ."<br>";
+		}
+		$message .= "Message :" . $data['quick_contact_form_message_field'] ."<br>";
         $body = 'The email body content';
         $headers = array('Content-Type: text/html; charset=UTF-8');
         wp_mail( $to, $subject, $message, $body, $headers );        
-        echo '<div class="gb-alert gb-success align'.$attributes['align'].' align-'.$attributes['alignment'].'">Msg sent successfully.</div>';
+        echo '<div class="gb-alert gb-success align'.$attributes['align'].' align-'.$attributes['alignment'].'">'.$attributes['responseMessage'].'</div>';
 
     }
      
@@ -79,7 +86,7 @@ function guteblock_render_quick_contact_block($attributes) {
 	if($_POST) {
 		guteblock_quick_contact_submit($attributes);		
 	}
-
+	
 	if ( $attributes['showInputBorder'] == true ) {
 		$inputBorder = '1px solid '.$attributes['inputBorderColor'];
 	} else {

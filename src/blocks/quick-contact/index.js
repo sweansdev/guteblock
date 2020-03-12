@@ -176,6 +176,18 @@ const attributes = {
 	enablereCAPTCHA: {
 		type: "boolean",
 		default: false
+	},
+	emailSubject: {
+		type: "string",
+		default: "Quick Contact Form"
+	},
+	responseMessage: {
+		type: "string",
+		default: "Message Sent Successfully."
+	},
+	styleIs: {
+		type: "string",
+		default: 1
 	}
 };
 
