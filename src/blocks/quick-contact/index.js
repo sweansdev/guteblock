@@ -15,6 +15,18 @@ const attributes = {
 		type: "string",
 		default: "#000000"
 	},
+	bgGradientTurn: {
+		type: "number",
+		default: -166
+	},
+	bgLinearGradientOne: {
+		type: "string",
+		default: ""
+	},
+	bgLinearGradientTwo: {
+		type: "string",
+		default: ""
+	},
 	horizontalPadding: {
 		type: "number",
 		default: 15
@@ -25,7 +37,7 @@ const attributes = {
 	},
 	formBackgroundColor: {
 		type: "string",
-		default: "#000000"
+		default: ""
 	},
 	borderRadius: {
 		type: "number",
@@ -52,8 +64,7 @@ const attributes = {
 		default: "Quick Contact"
 	},
 	titleColor: {
-		type: "string",
-		default: "#ffffff"
+		type: "string"
 	},
 	titleFontSize: {
 		type: "number",
@@ -80,8 +91,7 @@ const attributes = {
 		default: "Contact us today, and get reply with in 24 hours!"
 	},
 	infoColor: {
-		type: "string",
-		default: "#ffffff"
+		type: "string"
 	},
 	buttonTitle: {
 		type: "string",
@@ -95,19 +105,7 @@ const attributes = {
 		type: "number",
 		default: 15
 	},
-	inputBorderTopLeftRadius: {
-		type: "number",
-		default: 5
-	},
-	inputBorderTopRightRadius: {
-		type: "number",
-		default: 5
-	},
-	inputBorderBottomLeftRadius: {
-		type: "number",
-		default: 5
-	},
-	inputBorderBottomRightRadius: {
+	inputBorderRadius: {
 		type: "number",
 		default: 5
 	},
@@ -117,11 +115,11 @@ const attributes = {
 	},
 	inputTextColor: {
 		type: "string",
-		default: "#ffcebf"
+		default: "#ffffff"
 	},
 	inputBackgroundColor: {
 		type: "string",
-		default: "#000000"
+		default: "#658bde"
 	},
 	inputFontSize: {
 		type: "number",
@@ -129,11 +127,11 @@ const attributes = {
 	},
 	showInputBorder: {
 		type: "boolean",
-		default: true
+		default: false
 	},
 	inputBorderColor: {
 		type: "string",
-		default: "#806760"
+		default: "#edeee9"
 	},
 	buttonTextColor: {
 		type: "string",
@@ -148,16 +146,19 @@ const attributes = {
 		default: false
 	},
 	buttonBackgroundColor: {
-		type: "string",
-		default: "#f24848"
+		type: "string"
 	},
 	buttonWidth: {
 		type: "number",
 		default: 30
 	},
+	buttonTextTransform: {
+		type: "string",
+		default: "Uppercase"
+	},
 	buttonBorderRadius: {
 		type: "number",
-		default: 5
+		default: 50
 	},
 	buttonPadding: {
 		type: "number",
@@ -251,12 +252,17 @@ registerBlockType("guteblock/quick-contact", {
 		},
 		{
 			name: "2",
-			label: __("Advanced", "guteblock"),
+			label: __("Quick Contact Form 2", "guteblock"),
 			isDefault: false
 		},
 		{
 			name: "3",
 			label: __("Quick Contact Form 3", "guteblock"),
+			isDefault: false
+		},
+		{
+			name: "4",
+			label: __("Quick Contact Form 4", "guteblock"),
 			isDefault: false
 		}
 	],

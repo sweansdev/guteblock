@@ -25,8 +25,11 @@ class QuickContact extends Component {
 	onChangeSecretKey = secretKey => {
 		this.props.setAttributes({ secretKey });
 	};
-	onChangeBgColor = bgColor => {
-		this.props.setAttributes({ bgColor });
+	onChangeBgLinearGradientOne = bgLinearGradientOne => {
+		this.props.setAttributes({ bgLinearGradientOne });
+	};
+	onChangeBgLinearGradientTwo = bgLinearGradientTwo => {
+		this.props.setAttributes({ bgLinearGradientTwo });
 	};
 	onChangeTitle = title => {
 		this.props.setAttributes({ title });
@@ -54,9 +57,6 @@ class QuickContact extends Component {
 	};
 	onChangeButtonTitle = buttonTitle => {
 		this.props.setAttributes({ buttonTitle });
-	};
-	onChangeInputBackgroundColor = inputBackgroundColor => {
-		this.props.setAttributes({ inputBackgroundColor });
 	};
 	onChangeInputTextColor = inputTextColor => {
 		this.props.setAttributes({ inputTextColor });
@@ -106,7 +106,9 @@ class QuickContact extends Component {
 		const {
 			styleIs,
 			width,
-			bgColor,
+			bgLinearGradientOne,
+			bgLinearGradientTwo,
+			bgGradientTurn,
 			horizontalPadding,
 			verticalPadding,
 			formBackgroundColor,
@@ -136,15 +138,11 @@ class QuickContact extends Component {
 			inputVerticalPadding,
 			inputVerticalMargin,
 			inputHorizontalPadding,
-			inputBorderBottomLeftRadius,
-			inputBorderBottomRightRadius,
-			inputBorderTopLeftRadius,
-			inputBorderTopRightRadius,
 			inputFontSize,
 			inputTextColor,
-			inputBackgroundColor,
 			showInputBorder,
 			inputBorderColor,
+			inputBorderRadius,
 			buttonTextColor,
 			buttonBackgroundColor,
 			hoverButtonTextColor,
@@ -170,9 +168,11 @@ class QuickContact extends Component {
 		let inputBorder,
 			contactFormShadow,
 			basicInputBorder,
+			basicInputBorderRadius,
+			basicInputBottomBorderRadius,
 			borderBottom,
-			basicBottomLeftBorderRadius,
-			basicBottomRightBorderRadius;
+			buttonBorder,
+			basicInputBackground;
 		{
 			showInputBorder
 				? (inputBorder = `1px solid ${inputBorderColor}`)
@@ -194,16 +194,25 @@ class QuickContact extends Component {
 				: (borderBottom = inputBorder);
 		}
 		{
-			styleName == 3
-				? (basicBottomLeftBorderRadius = "0")
-				: (basicBottomLeftBorderRadius = inputBorderBottomLeftRadius);
+			styleName == 2
+				? (basicInputBorderRadius = 25)
+				: (basicInputBorderRadius = inputBorderRadius);
 		}
 		{
 			styleName == 3
-				? (basicBottomRightBorderRadius = "0")
-				: (basicBottomRightBorderRadius = inputBorderBottomRightRadius);
+				? (basicInputBottomBorderRadius = 0)
+				: (basicInputBottomBorderRadius = basicInputBorderRadius);
 		}
-
+		{
+			styleName == 3
+				? (basicInputBackground = "transparent")
+				: (basicInputBackground = `rgba(255,255,255,0.1)`);
+		}
+		{
+			styleName == 3
+				? (buttonBorder = `2px solid ${inputBorderColor}`)
+				: (buttonBorder = "none");
+		}
 		return (
 			<>
 				<BlockControls>
@@ -261,6 +270,12 @@ class QuickContact extends Component {
 							onChange={this.onChangeShowInputBorder}
 							checked={showInputBorder}
 						/>
+						<p className="description">
+							{__(
+								"Enable Input Border Button For Style 3 Border Color.",
+								"guteblock"
+							)}
+						</p>
 						<ToggleControl
 							label={__(
 								"Show Phone Number Field",
@@ -296,19 +311,42 @@ class QuickContact extends Component {
 						/>
 						<PanelColorSettings
 							title={__(
-								"Background Color Settings",
+								"Linear Background Color Settings",
 								"guteblock"
 							)}
 							colorSettings={[
 								{
-									value: bgColor,
-									onChange: this.onChangeBgColor,
+									value: bgLinearGradientOne,
+									onChange: this
+										.onChangeBgLinearGradientOne,
 									label: __(
-										"Background Color",
+										"Linear Background Color One",
+										"guteblock"
+									)
+								},
+								{
+									value: bgLinearGradientTwo,
+									onChange: this
+										.onChangeBgLinearGradientTwo,
+									label: __(
+										"Linear Background Color Two",
 										"guteblock"
 									)
 								}
 							]}
+						/>
+						<RangeControl
+							label={__(
+								"Linear gradient Turn",
+								"guteblock"
+							)}
+							value={bgGradientTurn}
+							onChange={bgGradientTurn =>
+								setAttributes({ bgGradientTurn })
+							}
+							min={-200}
+							max={100}
+							step={1}
 						/>
 					</PanelBody>
 					<PanelBody
@@ -480,32 +518,26 @@ class QuickContact extends Component {
 							step={1}
 						/>
 					</PanelBody>
-					{styleIs != 3 && (
-						<PanelBody
+					<PanelBody
+						title={__("Description Settings", "guteblock")}
+					>
+						<PanelColorSettings
 							title={__(
-								"Description Settings",
+								"Description Color Settings",
 								"guteblock"
 							)}
-						>
-							<PanelColorSettings
-								title={__(
-									"Description Color Settings",
-									"guteblock"
-								)}
-								colorSettings={[
-									{
-										value: infoColor,
-										onChange: this
-											.onChangeInfoColor,
-										label: __(
-											"Description Color",
-											"guteblock"
-										)
-									}
-								]}
-							/>
-						</PanelBody>
-					)}
+							colorSettings={[
+								{
+									value: infoColor,
+									onChange: this.onChangeInfoColor,
+									label: __(
+										"Description Color",
+										"guteblock"
+									)
+								}
+							]}
+						/>
+					</PanelBody>
 					<PanelBody title={__("Input Settings", "guteblock")}>
 						<RangeControl
 							label={__("Vertical Margin", "guteblock")}
@@ -539,63 +571,16 @@ class QuickContact extends Component {
 							max={30}
 							step={1}
 						/>
-						<RangeControl
-							label={__(
-								"Border Top Left Radius",
-								"guteblock"
-							)}
-							value={inputBorderTopLeftRadius}
-							onChange={inputBorderTopLeftRadius =>
-								setAttributes({
-									inputBorderTopLeftRadius
-								})
-							}
-							min={0}
-							max={100}
-							step={1}
-						/>
-						<RangeControl
-							label={__(
-								"Border Top Right Radius",
-								"guteblock"
-							)}
-							value={inputBorderTopRightRadius}
-							onChange={inputBorderTopRightRadius =>
-								setAttributes({
-									inputBorderTopRightRadius
-								})
-							}
-							min={0}
-							max={100}
-							step={1}
-						/>
-						{styleIs != 3 && (
+						{styleIs == 1 && (
 							<RangeControl
 								label={__(
-									"Border Bottom Left Radius",
+									"Input Border Radius",
 									"guteblock"
 								)}
-								value={inputBorderBottomLeftRadius}
-								onChange={inputBorderBottomLeftRadius =>
+								value={inputBorderRadius}
+								onChange={inputBorderRadius =>
 									setAttributes({
-										inputBorderBottomLeftRadius
-									})
-								}
-								min={0}
-								max={100}
-								step={1}
-							/>
-						)}
-						{styleIs != 3 && (
-							<RangeControl
-								label={__(
-									"Border Bottom Right Radius",
-									"guteblock"
-								)}
-								value={inputBorderBottomRightRadius}
-								onChange={inputBorderBottomRightRadius =>
-									setAttributes({
-										inputBorderBottomRightRadius
+										inputBorderRadius
 									})
 								}
 								min={0}
@@ -630,15 +615,6 @@ class QuickContact extends Component {
 										)
 									},
 									{
-										value: inputBackgroundColor,
-										onChange: this
-											.onChangeInputBackgroundColor,
-										label: __(
-											"Input Background Color",
-											"guteblock"
-										)
-									},
-									{
 										value: inputBorderColor,
 										onChange: this
 											.onChangeInputBorderColor,
@@ -652,7 +628,7 @@ class QuickContact extends Component {
 						) : (
 							<PanelColorSettings
 								title={__(
-									"Color Settings",
+									"Input Color Settings",
 									"guteblock"
 								)}
 								colorSettings={[
@@ -662,15 +638,6 @@ class QuickContact extends Component {
 											.onChangeInputTextColor,
 										label: __(
 											"Input Text Color",
-											"guteblock"
-										)
-									},
-									{
-										value: inputBackgroundColor,
-										onChange: this
-											.onChangeInputBackgroundColor,
-										label: __(
-											"Input Background Color",
 											"guteblock"
 										)
 									}
@@ -769,7 +736,7 @@ class QuickContact extends Component {
 							onChange={buttonWidth =>
 								setAttributes({ buttonWidth })
 							}
-							min={30}
+							min={20}
 							max={100}
 							step={1}
 						/>
@@ -793,7 +760,7 @@ class QuickContact extends Component {
 					className={classes}
 					style={{
 						alignment: alignment,
-						backgroundColor: bgColor,
+						background: `linear-gradient(${bgGradientTurn}deg, ${bgLinearGradientOne}, ${bgLinearGradientTwo})`,
 						paddingTop: verticalPadding,
 						paddingBottom: verticalPadding,
 						paddingLeft: horizontalPadding,
@@ -803,7 +770,7 @@ class QuickContact extends Component {
 					<div
 						className="wp-block-guteblock-quick-contact-form"
 						style={{
-							backgroundColor: formBackgroundColor,
+							// backgroundColor: formBackgroundColor,
 							padding: padding,
 							width: `${width}%`,
 							borderRadius: borderRadius,
@@ -837,23 +804,18 @@ class QuickContact extends Component {
 								"wp-block-guteblock-quick-contact-form_align_center"
 							}
 						>
-							{styleName != 3 && (
-								<RichText
-									className={
-										"wp-block-guteblock-quick-contact-form__info"
-									}
-									tagName="p"
-									value={info}
-									onChange={this.onChangeInfo}
-									placeholder={__(
-										"Info",
-										"guteblock"
-									)}
-									style={{
-										color: infoColor
-									}}
-								/>
-							)}
+							<RichText
+								className={
+									"wp-block-guteblock-quick-contact-form__info"
+								}
+								tagName="p"
+								value={info}
+								onChange={this.onChangeInfo}
+								placeholder={__("Info", "guteblock")}
+								style={{
+									color: infoColor
+								}}
+							/>
 						</div>
 						<div
 							className={
@@ -877,15 +839,15 @@ class QuickContact extends Component {
 									paddingRight: `${inputHorizontalPadding}px`,
 									fontSize: `${inputFontSize}px`,
 									color: inputTextColor,
-									backgroundColor: inputBackgroundColor,
+									backgroundColor: basicInputBackground,
 									borderTop: basicInputBorder,
 									borderBottom: borderBottom,
 									borderLeft: basicInputBorder,
 									borderRight: basicInputBorder,
-									borderTopLeftRadius: `${inputBorderTopLeftRadius}px`,
-									borderTopRightRadius: `${inputBorderTopRightRadius}px`,
-									borderBottomLeftRadius: `${basicBottomLeftBorderRadius}px`,
-									borderBottomRightRadius: `${basicBottomRightBorderRadius}px`
+									borderTopLeftRadius: `${basicInputBorderRadius}px`,
+									borderTopRightRadius: `${basicInputBorderRadius}px`,
+									borderBottomLeftRadius: `${basicInputBottomBorderRadius}px`,
+									borderBottomRightRadius: `${basicInputBottomBorderRadius}px`
 								}}
 								type="text"
 								name="quick_contact_form_name_field"
@@ -914,15 +876,15 @@ class QuickContact extends Component {
 									paddingRight: `${inputHorizontalPadding}px`,
 									fontSize: `${inputFontSize}px`,
 									color: inputTextColor,
-									backgroundColor: inputBackgroundColor,
+									backgroundColor: basicInputBackground,
 									borderTop: basicInputBorder,
 									borderBottom: borderBottom,
 									borderLeft: basicInputBorder,
 									borderRight: basicInputBorder,
-									borderTopLeftRadius: `${inputBorderTopLeftRadius}px`,
-									borderTopRightRadius: `${inputBorderTopRightRadius}px`,
-									borderBottomLeftRadius: `${basicBottomLeftBorderRadius}px`,
-									borderBottomRightRadius: `${basicBottomRightBorderRadius}px`
+									borderTopLeftRadius: `${basicInputBorderRadius}px`,
+									borderTopRightRadius: `${basicInputBorderRadius}px`,
+									borderBottomLeftRadius: `${basicInputBottomBorderRadius}px`,
+									borderBottomRightRadius: `${basicInputBottomBorderRadius}px`
 								}}
 								type="email"
 								name="quick_contact_form_email_field"
@@ -952,15 +914,15 @@ class QuickContact extends Component {
 										paddingRight: `${inputHorizontalPadding}px`,
 										fontSize: `${inputFontSize}px`,
 										color: inputTextColor,
-										backgroundColor: inputBackgroundColor,
+										backgroundColor: basicInputBackground,
 										borderTop: basicInputBorder,
 										borderBottom: borderBottom,
 										borderLeft: basicInputBorder,
 										borderRight: basicInputBorder,
-										borderTopLeftRadius: `${inputBorderTopLeftRadius}px`,
-										borderTopRightRadius: `${inputBorderTopRightRadius}px`,
-										borderBottomLeftRadius: `${basicBottomLeftBorderRadius}px`,
-										borderBottomRightRadius: `${basicBottomRightBorderRadius}px`
+										borderTopLeftRadius: `${basicInputBorderRadius}px`,
+										borderTopRightRadius: `${basicInputBorderRadius}px`,
+										borderBottomLeftRadius: `${basicInputBottomBorderRadius}px`,
+										borderBottomRightRadius: `${basicInputBottomBorderRadius}px`
 									}}
 									type="text"
 									name="quick_contact_form_phone_field"
@@ -991,15 +953,15 @@ class QuickContact extends Component {
 										paddingRight: `${inputHorizontalPadding}px`,
 										fontSize: `${inputFontSize}px`,
 										color: inputTextColor,
-										backgroundColor: inputBackgroundColor,
+										backgroundColor: basicInputBackground,
 										borderTop: basicInputBorder,
 										borderBottom: borderBottom,
 										borderLeft: basicInputBorder,
 										borderRight: basicInputBorder,
-										borderTopLeftRadius: `${inputBorderTopLeftRadius}px`,
-										borderTopRightRadius: `${inputBorderTopRightRadius}px`,
-										borderBottomLeftRadius: `${basicBottomLeftBorderRadius}px`,
-										borderBottomRightRadius: `${basicBottomRightBorderRadius}px`
+										borderTopLeftRadius: `${basicInputBorderRadius}px`,
+										borderTopRightRadius: `${basicInputBorderRadius}px`,
+										borderBottomLeftRadius: `${basicInputBottomBorderRadius}px`,
+										borderBottomRightRadius: `${basicInputBottomBorderRadius}px`
 									}}
 									type="text"
 									name="quick_contact_form_website_field"
@@ -1029,15 +991,15 @@ class QuickContact extends Component {
 									paddingRight: `${inputHorizontalPadding}px`,
 									fontSize: `${inputFontSize}px`,
 									color: inputTextColor,
-									backgroundColor: inputBackgroundColor,
+									backgroundColor: basicInputBackground,
 									borderTop: basicInputBorder,
 									borderBottom: borderBottom,
 									borderLeft: basicInputBorder,
 									borderRight: basicInputBorder,
-									borderTopLeftRadius: `${inputBorderTopLeftRadius}px`,
-									borderTopRightRadius: `${inputBorderTopRightRadius}px`,
-									borderBottomLeftRadius: `${basicBottomLeftBorderRadius}px`,
-									borderBottomRightRadius: `${basicBottomRightBorderRadius}px`
+									borderTopLeftRadius: `${basicInputBorderRadius}px`,
+									borderTopRightRadius: `${basicInputBorderRadius}px`,
+									borderBottomLeftRadius: `${basicInputBottomBorderRadius}px`,
+									borderBottomRightRadius: `${basicInputBottomBorderRadius}px`
 								}}
 								name="quick_contact_form_message_field"
 								value={messageField}
@@ -1065,7 +1027,8 @@ class QuickContact extends Component {
 									borderRadius: `${buttonBorderRadius}px`,
 									padding: buttonPadding,
 									textTransform: buttonTextTransform,
-									alignment: alignment
+									alignment: alignment,
+									border: `${buttonBorder}`
 								}}
 							>
 								<RichText

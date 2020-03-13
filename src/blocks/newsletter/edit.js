@@ -182,15 +182,21 @@ class Newsletter extends Component {
 				</BlockControls>
 				<InspectorControls>
 					<PanelBody title={__("General Settings", "guteblock")}>
-					<ToggleControl
-						// value={doubleOptIn}
-						label={__("Enable Double Opt-in", "guteblock")}
-						onChange={this.onChangeEnableDoubleOptIn}
-						checked={doubleOptIn}
-					/>
-					<p className="description">
-								{ __( 'Send contacts an opt-in confirmation email when they subscribe to your list.', 'atomic-blocks' ) }
-							</p>
+						<ToggleControl
+							// value={doubleOptIn}
+							label={__(
+								"Enable Double Opt-in",
+								"guteblock"
+							)}
+							onChange={this.onChangeEnableDoubleOptIn}
+							checked={doubleOptIn}
+						/>
+						<p className="description">
+							{__(
+								"Send contacts an opt-in confirmation email when they subscribe to your list.",
+								"guteblock"
+							)}
+						</p>
 						{styleName != 1 && (
 							<PanelColorSettings
 								title={__(
@@ -661,7 +667,7 @@ class Newsletter extends Component {
 				>
 					<div className="wp-block-guteblock-newsletter__container">
 						<TextControl
-						type="email"
+							type="email"
 							className={
 								"wp-block-guteblock-newsletter__input"
 							}
@@ -728,7 +734,9 @@ class Newsletter extends Component {
 										style={{}}
 										tagName="span"
 										value={buttonTitle}
-										onChange={this .onChangeButtonTitle}
+										onChange={
+											this.onChangeButtonTitle
+										}
 									/>
 								</div>
 							)}

@@ -106,27 +106,35 @@ function guteblock_render_quick_contact_block($attributes) {
 	}
 
 	if( $attributes['styleIs'] == 3 ) {
-		$borderBottom = '2px solid '.$attributes['inputBorderColor'];
+		$borderBottom = '1px solid '.$attributes['inputBorderColor'];
 	} else {
 		$borderBottom = $inputBorder;
 	}
-
-	if( $attributes['styleIs'] == 3 ) {
-		$basicBottomLeftBorderRadius = 0;
+	if( $attributes['styleIs'] == 2 ) {
+		$basicInputBorderRadius = 25;
 	} else {
-		$basicBottomLeftBorderRadius = $attributes['inputBorderBottomLeftRadius'];
+		$basicInputBorderRadius = $attributes['inputBorderRadius'];
+	}
+	if( $attributes['styleIs'] == 3 ) {
+		$basicInputBottomBorderRadius = 0;
+	} else {
+		$basicInputBottomBorderRadius = $basicInputBorderRadius;
+	}
+	if( $attributes['styleIs'] == 3 ) {
+		$basicInputBackground = "transparent";
+	} else {
+		$basicInputBackground = "rgba(255,255,255,0.1)";
+	}
+	if( $attributes['styleIs'] == 3 ) {
+		$buttonBorder = '2px solid'.$attributes['inputBorderColor'];
+	} else {
+		$buttonBorder = "none";
 	}
 
-	if( $attributes['styleIs'] == 3 ) {
-		$basicBottomRightBorderRadius = 0;
-	} else {
-		$basicBottomRightBorderRadius = $attributes['inputBorderBottomRightRadius'];
-	}
-
-	$quick_contact = '<div class="wp-block-guteblock-quick-contact align'.$attributes['align'].' align-' .$attributes['alignment'].'" 
+	$quick_contact = '<div class="wp-block-guteblock-quick-contact align'.$attributes['align'].' is-style-'.$attributes['styleIs'].' align-' .$attributes['alignment'].'" 
 	style="
 	text-align:'.$attributes['alignment'].';
-	background-color:'.$attributes['bgColor'].';
+	background:linear-gradient( '.$attributes['bgGradientTurn'].'deg, '.$attributes['bgLinearGradientOne'].', '.$attributes['bgLinearGradientTwo'].');
 	padding-left:'.$attributes['horizontalPadding'].'px;
 	padding-right:'.$attributes['horizontalPadding'].'px;
 	padding-top:'.$attributes['verticalPadding'].'px;
@@ -175,15 +183,15 @@ function guteblock_render_quick_contact_block($attributes) {
 						padding-right: '.$attributes['inputHorizontalPadding'].'px; 
 						font-size: '.$attributes['inputFontSize'].'px;
 						color: '.$attributes['inputTextColor'].';
-						background-color: '.$attributes['inputBackgroundColor'].';
+						background-color: '.$basicInputBackground.';
 						border-top: '.$basicInputBorder.';
 						border-bottom: '.$borderBottom.';
 						border-left: '.$basicInputBorder.';
 						border-right: '.$basicInputBorder.';
-						border-top-left-radius: '.$attributes['inputBorderTopLeftRadius'].'px;
-						border-top-right-radius: '.$attributes['inputBorderTopRightRadius'].'px; 
-						border-bottom-left-radius: '.$basicBottomLeftBorderRadius.'px; 
-						border-bottom-right-radius: '.$basicBottomRightBorderRadius.'px;"
+						border-top-left-radius: '.$basicInputBorderRadius.'px;
+						border-top-right-radius: '.$basicInputBorderRadius.'px; 
+						border-bottom-left-radius: '.$basicInputBottomBorderRadius.'px; 
+						border-bottom-right-radius: '.$basicInputBottomBorderRadius.'px;"
 						type="text"
 						required
 						name="quick_contact_form_name_field">';
@@ -201,15 +209,15 @@ function guteblock_render_quick_contact_block($attributes) {
 						padding-right: '.$attributes['inputHorizontalPadding'].'px; 
 						font-size: '.$attributes['inputFontSize'].'px;
 						color: '.$attributes['inputTextColor'].';
-						background-color: '.$attributes['inputBackgroundColor'].';
+						background-color:'.$basicInputBackground.';
 						border-top: '.$basicInputBorder.';
 						border-bottom: '.$borderBottom.';
 						border-left: '.$basicInputBorder.';
 						border-right: '.$basicInputBorder.';
-						border-top-left-radius: '.$attributes['inputBorderTopLeftRadius'].'px;
-						border-top-right-radius: '.$attributes['inputBorderTopRightRadius'].'px; 
-						border-bottom-left-radius: '.$basicBottomLeftBorderRadius.'px; 
-						border-bottom-right-radius: '.$basicBottomRightBorderRadius.'px;"
+						border-top-left-radius: '.$basicInputBorderRadius.'px;
+						border-top-right-radius: '.$basicInputBorderRadius.'px; 
+						border-bottom-left-radius: '.$basicInputBottomBorderRadius.'px; 
+						border-bottom-right-radius: '.$basicInputBottomBorderRadius.'px;"
 						type="email"
 						required
 						name="quick_contact_form_email_field">';
@@ -228,15 +236,15 @@ function guteblock_render_quick_contact_block($attributes) {
 						padding-right: '.$attributes['inputHorizontalPadding'].'px; 
 						font-size: '.$attributes['inputFontSize'].'px;
 						color: '.$attributes['inputTextColor'].';
-						background-color: '.$attributes['inputBackgroundColor'].';
+						background-color: '.$basicInputBackground.';
 						border-top: '.$basicInputBorder.';
 						border-bottom: '.$borderBottom.';
 						border-left: '.$basicInputBorder.';
 						border-right: '.$basicInputBorder.';
-						border-top-left-radius: '.$attributes['inputBorderTopLeftRadius'].'px;
-						border-top-right-radius: '.$attributes['inputBorderTopRightRadius'].'px; 
-						border-bottom-left-radius: '.$basicBottomLeftBorderRadius.'px; 
-						border-bottom-right-radius: '.$basicBottomRightBorderRadius.'px;"
+						border-top-left-radius: '.$basicInputBorderRadius.'px;
+						border-top-right-radius: '.$basicInputBorderRadius.'px; 
+						border-bottom-left-radius: '.$basicInputBottomBorderRadius.'px; 
+						border-bottom-right-radius: '.$basicInputBottomBorderRadius.'px;"
 						type="text"
 						name="quick_contact_form_phone_field">';
 				$quick_contact .= '</div>';
@@ -255,15 +263,15 @@ function guteblock_render_quick_contact_block($attributes) {
 						padding-right: '.$attributes['inputHorizontalPadding'].'px; 
 						font-size: '.$attributes['inputFontSize'].'px;
 						color: '.$attributes['inputTextColor'].';
-						background-color: '.$attributes['inputBackgroundColor'].';
+						background-color: '.$basicInputBackground.';
 						border-top: '.$basicInputBorder.';
 						border-bottom: '.$borderBottom.';
 						border-left: '.$basicInputBorder.';
 						border-right: '.$basicInputBorder.';
-						border-top-left-radius: '.$attributes['inputBorderTopLeftRadius'].'px;
-						border-top-right-radius: '.$attributes['inputBorderTopRightRadius'].'px; 
-						border-bottom-left-radius: '.$basicBottomLeftBorderRadius.'px; 
-						border-bottom-right-radius: '.$basicBottomRightBorderRadius.'px;"
+						border-top-left-radius: '.$basicInputBorderRadius.'px;
+						border-top-right-radius: '.$basicInputBorderRadius.'px; 
+						border-bottom-left-radius: '.$basicInputBottomBorderRadius.'px; 
+						border-bottom-right-radius: '.$basicInputBottomBorderRadius.'px;"
 						type="text"
 						name="quick_contact_form_website_field">';
 				$quick_contact .= '</div>';
@@ -281,15 +289,15 @@ function guteblock_render_quick_contact_block($attributes) {
 						padding-right: '.$attributes['inputHorizontalPadding'].'px; 
 						font-size: '.$attributes['inputFontSize'].'px;
 						color: '.$attributes['inputTextColor'].';
-						background-color: '.$attributes['inputBackgroundColor'].';
+						background-color: '.$basicInputBackground.';
 						border-top: '.$basicInputBorder.';
 						border-bottom: '.$borderBottom.';
 						border-left: '.$basicInputBorder.';
 						border-right: '.$basicInputBorder.';
-						border-top-left-radius: '.$attributes['inputBorderTopLeftRadius'].'px;
-						border-top-right-radius: '.$attributes['inputBorderTopRightRadius'].'px; 
-						border-bottom-left-radius: '.$basicBottomLeftBorderRadius.'px; 
-						border-bottom-right-radius: '.$basicBottomRightBorderRadius.'px;"
+						border-top-left-radius: '.$basicInputBorderRadius.'px;
+						border-top-right-radius: '.$basicInputBorderRadius.'px; 
+						border-bottom-left-radius: '.$basicInputBottomBorderRadius.'px; 
+						border-bottom-right-radius: '.$basicInputBottomBorderRadius.'px;"
 						name="quick_contact_form_message_field"
 						required
 						>';
@@ -325,6 +333,7 @@ function guteblock_render_quick_contact_block($attributes) {
 						border-radius: '.$attributes['buttonBorderRadius'].'px;
 						padding: '.$attributes['buttonPadding'].'px;
 						text-transform: '.$attributes['buttonTextTransform'].';
+						border: '.$buttonBorder.';
 						">
 						<span>'.$attributes['buttonTitle'].'</span>
 					</button>';

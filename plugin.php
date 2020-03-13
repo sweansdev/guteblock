@@ -281,9 +281,15 @@ function guteblock_register() {
 			"type" => "number",
 			"default" => 100
 		),
-		"bgColor" => array(
-			"type" => "string",
-			"default" => "#000000"
+		"bgGradientTurn" => array(
+			"type" => "number",
+			"default" => -166
+		),
+		"bgLinearGradientOne" => array(
+			"type" => "string"
+		),
+		"bgLinearGradientTwo" => array(
+			"type" => "string"
 		),
 		"horizontalPadding" => array(
 			"type" => "number",
@@ -295,7 +301,7 @@ function guteblock_register() {
 		),
 		"formBackgroundColor" => array(
 			"type" => "string",
-			"default" => "#000000"
+			"default" => ""
 		),
 		"borderRadius" => array(
 			"type" => "number",
@@ -323,7 +329,6 @@ function guteblock_register() {
 		),
 		"titleColor" => array(
 			"type" => "string",
-			"default" => "#ffffff"
 		),
 		"titleFontSize" => array(
 			"type" => "number",
@@ -350,8 +355,7 @@ function guteblock_register() {
 			"default" => "Contact us today, and get reply with in 24 hours!"
 		),
 		"infoColor" => array(
-			"type" => "string",
-			"default" => "#ffffff"
+			"type" => "string"
 		),
 		"contactFormShadow" => array(
 			"type" => "number",
@@ -391,11 +395,7 @@ function guteblock_register() {
 		),
 		"inputTextColor" => array(
 			"type" => "string",
-			"default" => "#ffcebf"
-		),
-		"inputBackgroundColor" => array(
-			"type" => "string",
-			"default" => "#000000"
+			"default" => "#ffffff"
 		),
 		"inputFontSize" => array(
 			"type" => "number",
@@ -403,11 +403,11 @@ function guteblock_register() {
 		),
 		"showInputBorder" => array(
 			"type" => "boolean",
-			"default" => true
+			"default" => false
 		),
 		"inputBorderColor" => array(
 			"type" => "string",
-			"default" => "#806760"
+			"default" => "#edeee9"
 		),
 		"buttonTextColor" => array(
 			"type" => "string",
@@ -423,7 +423,6 @@ function guteblock_register() {
 		),
 		"buttonBackgroundColor" => array(
 			"type" => "string",
-			"default" => "#f24848"
 		),
 		"buttonWidth" => array(
 			"type" => "number",
@@ -431,11 +430,11 @@ function guteblock_register() {
 		),
 		"buttonBorderRadius" => array(
 			"type" => "number",
-			"default" => 5
+			"default" => 50
 		),
 		"buttonTextTransform" => array(
 			"type" => "string",
-			"default" => "uppercase"
+			"default" => "Uppercase"
 		),
 		"buttonPadding" => array(
 			"type" => "number",
