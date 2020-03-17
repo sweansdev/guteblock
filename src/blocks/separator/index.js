@@ -146,23 +146,6 @@ registerBlockType("guteblock/separator", {
 	},
 	attributes,
 	edit,
-	styles: [
-		{
-			name: "color",
-			label: __("Fill Color", "guteblock"),
-			isDefault: true
-		},
-		{
-			name: "image",
-			label: __("Fill Image", "guteblock"),
-			isDefault: false
-		},
-		{
-			name: "video",
-			label: __("Fill Video", "guteblock"),
-			isDefault: false
-		}
-	],
 	save: ({ attributes }) => {
 		const {
 			title,

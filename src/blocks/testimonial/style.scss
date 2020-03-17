@@ -74,6 +74,12 @@ $break-tab: 960px;
 		.testimonial__outer {
 			float: left;
 			width: 48%;
+			@media screen and (max-width: $break-tab) {
+				width: 40%;
+			}
+			@media screen and (max-width: $break-mobile) {
+				width: 90%;
+			}
 		}
 		.testimonial__outer:nth-child(2n) {
 			float: right;
