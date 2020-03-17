@@ -8,7 +8,7 @@ import "./blocks/drop-cap";
 import "./blocks/notification";
 import "./blocks/share-icons";
 import "./blocks/author-profile";
-// import "./blocks/cta";
+import "./blocks/cta";
 import "./blocks/spacer-divider";
 import "./blocks/blockquote";
 import "./blocks/icon-list";
@@ -20,7 +20,7 @@ import "./blocks/count-up";
 //import "./blocks/card";
 
 // Upcoming
-import "./blocks/quick-contact";
+// import "./blocks/quick-contact";
 //import "./blocks/paypal-donation";
 
 import "./common/css/style.editor.scss";

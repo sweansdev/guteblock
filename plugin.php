@@ -373,19 +373,7 @@ function guteblock_register() {
 			"type" => "number",
 			"default" => 15
 		),
-		"inputBorderTopLeftRadius" => array(
-			"type" => "number",
-			"default" => 5
-		),
-		"inputBorderTopRightRadius" => array(
-			"type" => "number",
-			"default" => 5
-		),
-		"inputBorderBottomLeftRadius" => array(
-			"type" => "number",
-			"default" => 5
-		),
-		"inputBorderBottomRightRadius" => array(
+		"inputBorderRadius" => array(
 			"type" => "number",
 			"default" => 5
 		),
@@ -401,13 +389,9 @@ function guteblock_register() {
 			"type" => "number",
 			"default" => 15
 		),
-		"showInputBorder" => array(
-			"type" => "boolean",
-			"default" => false
-		),
 		"inputBorderColor" => array(
 			"type" => "string",
-			"default" => "#edeee9"
+			"default" => "#feffed"
 		),
 		"buttonTextColor" => array(
 			"type" => "string",
@@ -439,6 +423,10 @@ function guteblock_register() {
 		"buttonPadding" => array(
 			"type" => "number",
 			"default" => 10
+		),
+		"verticalButtonMargin" => array(
+			"type" => "number",
+			"default" => 15
 		),
 		"hoverButtonBackgroundColor" => array(
 			"type" => "string"

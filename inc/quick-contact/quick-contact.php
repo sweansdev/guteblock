@@ -87,11 +87,6 @@ function guteblock_render_quick_contact_block($attributes) {
 		guteblock_quick_contact_submit($attributes);		
 	}
 	
-	if ( $attributes['showInputBorder'] == true ) {
-		$inputBorder = '1px solid '.$attributes['inputBorderColor'];
-	} else {
-		$inputBorder = "none";
-	}
 
 	if ( $attributes['showFormShadow'] == true ) {
 		$contactFormShadow = '0px 0px '.$attributes['formShadow'].'px 0px '.$attributes['formShadowColor'];
@@ -100,15 +95,9 @@ function guteblock_render_quick_contact_block($attributes) {
 	}
 
 	if( $attributes['styleIs'] == 3 ) {
-		$basicInputBorder = "none";
-	} else {
-		$basicInputBorder = $inputBorder;
-	}
-
-	if( $attributes['styleIs'] == 3 ) {
 		$borderBottom = '1px solid '.$attributes['inputBorderColor'];
 	} else {
-		$borderBottom = $inputBorder;
+		$basicInputBorder = "none";
 	}
 	if( $attributes['styleIs'] == 2 ) {
 		$basicInputBorderRadius = 25;
@@ -334,6 +323,8 @@ function guteblock_render_quick_contact_block($attributes) {
 						padding: '.$attributes['buttonPadding'].'px;
 						text-transform: '.$attributes['buttonTextTransform'].';
 						border: '.$buttonBorder.';
+						margin-top:'.$attributes['verticalButtonMargin'].'px;
+						margin-bottom:'.$attributes['verticalButtonMargin'].'px;
 						">
 						<span>'.$attributes['buttonTitle'].'</span>
 					</button>';
