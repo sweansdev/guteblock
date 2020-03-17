@@ -6,7 +6,7 @@ import edit from "./edit.js";
 import classnames from "classnames";
 import { Button } from "@wordpress/components";
 const attributes = {
-	containerWidth: {
+	contentOuterWidth: {
 		type: "number",
 		default: 90
 	},
@@ -217,7 +217,7 @@ registerBlockType("guteblock/cta", {
 	edit,
 	save: ({ className, attributes }) => {
 		const {
-			containerWidth,
+			contentOuterWidth,
 			title,
 			alignment,
 			paddingTop,
@@ -261,7 +261,6 @@ registerBlockType("guteblock/cta", {
 					paddingBottom: paddingBottom,
 					backgroundColor: backgroundColor,
 					backgroundImage: `url(${imageUrl})`,
-					backgroundSize: "cover",
 					alignment: alignment
 				}}
 			>
@@ -276,7 +275,7 @@ registerBlockType("guteblock/cta", {
 				)}
 				<div
 					className="wp-block-guteblock-cta__contentOuter"
-					style={{ maxWidth: `${containerWidth}%` }}
+					style={{ maxWidth: `${contentOuterWidth}%` }}
 				>
 					<div
 						className="wp-block-guteblock-cta__container"

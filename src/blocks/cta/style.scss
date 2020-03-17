@@ -3,6 +3,8 @@ $break-inter: 768px;
 $break-tab: 960px;
 .wp-block-guteblock-cta {
 	position: relative;
+	background-position: center;
+	background-size: cover;
 	&.background-fixed {
 		background-attachment: fixed;
 	}
@@ -45,6 +47,7 @@ $break-tab: 960px;
 	.wp-block-guteblock-cta__button {
 		border-radius: 100px;
 		background-color: #15d4d4;
+		transition: 1s ease all;
 	}
 	&.is-style-right {
 		text-align: right;
@@ -56,6 +59,16 @@ $break-tab: 960px;
 			color: #000;
 			border-radius: 0px;
 			background-color: #fff;
+		}
+	}
+	@media screen and (max-width: $break-tab) {
+		&__container {
+			width: 65%;
+		}
+	}
+	@media screen and (max-width: $break-mobile) {
+		&__container {
+			width: 75%;
 		}
 	}
 }

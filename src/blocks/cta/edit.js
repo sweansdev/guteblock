@@ -91,7 +91,7 @@ class CallToAction extends Component {
 	render() {
 		const { className, attributes, setAttributes } = this.props;
 		const {
-			containerWidth,
+			contentOuterWidth,
 			title,
 			alignment,
 			imageID,
@@ -158,9 +158,9 @@ class CallToAction extends Component {
 								"Container Outer Width",
 								"guteblock"
 							)}
-							value={containerWidth}
-							onChange={containerWidth =>
-								setAttributes({ containerWidth })
+							value={contentOuterWidth}
+							onChange={contentOuterWidth =>
+								setAttributes({ contentOuterWidth })
 							}
 							min={50}
 							max={100}
@@ -521,7 +521,6 @@ class CallToAction extends Component {
 						paddingBottom: paddingBottom,
 						backgroundColor: backgroundColor,
 						backgroundImage: `url(${imageUrl})`,
-						backgroundSize: "cover",
 						alignment: alignment
 					}}
 				>
@@ -536,7 +535,7 @@ class CallToAction extends Component {
 					)}
 					<div
 						className="wp-block-guteblock-cta__contentOuter"
-						style={{ maxWidth: `${containerWidth}%` }}
+						style={{ maxWidth: `${contentOuterWidth}%` }}
 					>
 						<div
 							className="wp-block-guteblock-cta__container"
