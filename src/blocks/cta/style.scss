@@ -1,10 +1,5 @@
-$break-mobile: 480px;
-$break-inter: 768px;
-$break-tab: 960px;
 .wp-block-guteblock-cta {
 	position: relative;
-	background-position: center;
-	background-size: cover;
 	&.background-fixed {
 		background-attachment: fixed;
 	}
@@ -47,7 +42,6 @@ $break-tab: 960px;
 	.wp-block-guteblock-cta__button {
 		border-radius: 100px;
 		background-color: #15d4d4;
-		transition: 1s ease all;
 	}
 	&.is-style-right {
 		text-align: right;
@@ -61,14 +55,23 @@ $break-tab: 960px;
 			background-color: #fff;
 		}
 	}
-	@media screen and (max-width: $break-tab) {
-		&__container {
-			width: 65%;
+	&.is-style-left {
+		.wp-block-guteblock-cta__content_section {
+			width: 50%;
+			display: inline-block;
 		}
-	}
-	@media screen and (max-width: $break-mobile) {
-		&__container {
-			width: 75%;
+		.wp-block-guteblock-cta__image_section {
+			width: 50%;
+			display: inline-block;
+		}
+		.wp-block-guteblock-cta__title {
+			font-size: 55px;
+			color: #000;
+		}
+		.wp-block-guteblock-cta__button {
+			color: #fff;
+			background-color: #000;
+			border-radius: 0px;
 		}
 	}
 }

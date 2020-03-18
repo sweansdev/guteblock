@@ -4,7 +4,7 @@ Tags: Guteblock, blocks, block editor, gutenberg blocks, page builder, gutenberg
 Requires at least: 5.0
 Tested up to: 5.3
 Requires PHP: 5.3
-Stable tag: 1.0.10
+Stable tag: 1.1.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -20,7 +20,7 @@ This is our first ever launch and rapid developments are on its way. In case of 
 
 Guteblock gives you: 
 
-- 18 creative Building Blocks for Gutenberg to design and customize your pages as per your needs
+- 20 creative Building Blocks for Gutenberg to design and customize your pages as per your needs
 - Unique styles available for blocks
 - Amazing customization features
 - Exclusive container block for Team Members, which permits the users to rearrange the team members.
@@ -47,17 +47,17 @@ Guteblock gives you:
 - Feature Grid
 - Accordion
 - Count Up
+- Newsletter
+- Cards
 
 
 ## Guteblock Coming Soon
 
 - Advanced Columns
-- Cards
 - Google Maps
 - Custom Header
 - Image Box
 - Inline Notice
-- Newsletter
 - Pricing Table
 - Video Box
 - Video Popup
@@ -100,6 +100,15 @@ Definitely! You can use Guteblock with other block plugins.
 
 
 == Changelog ==
+
+= 1.1.0 =
+
+* Bug Fixes
+
+= 1.0.11 =
+
+* New: Card Block
+* New: Newsletter Block
 
 = 1.0.10 =
 

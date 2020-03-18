@@ -68,6 +68,11 @@ class CallToAction extends Component {
 		});
 	};
 
+	onSelectAuthorImage = ({ id, url }) => {
+		this.props.setAttributes({ author_image_id: id });
+		this.props.setAttributes({ author_image: url });
+	};
+
 	onChangeButtonTextColor = buttonTextColor => {
 		this.props.setAttributes({ buttonTextColor });
 	};
@@ -91,7 +96,7 @@ class CallToAction extends Component {
 	render() {
 		const { className, attributes, setAttributes } = this.props;
 		const {
-			contentOuterWidth,
+			containerWidth,
 			title,
 			alignment,
 			imageID,
@@ -158,9 +163,9 @@ class CallToAction extends Component {
 								"Container Outer Width",
 								"guteblock"
 							)}
-							value={contentOuterWidth}
-							onChange={contentOuterWidth =>
-								setAttributes({ contentOuterWidth })
+							value={containerWidth}
+							onChange={containerWidth =>
+								setAttributes({ containerWidth })
 							}
 							min={50}
 							max={100}
@@ -300,8 +305,8 @@ class CallToAction extends Component {
 							onChange={titleFontSize =>
 								setAttributes({ titleFontSize })
 							}
-							min={1}
-							max={10}
+							min={35}
+							max={50}
 							step={0.1}
 						/>
 						<SelectControl
@@ -402,8 +407,8 @@ class CallToAction extends Component {
 							onChange={buttonFontSize =>
 								setAttributes({ buttonFontSize })
 							}
-							min={0}
-							max={10}
+							min={20}
+							max={50}
 							step={1}
 						/>
 						<PanelColorSettings
@@ -521,6 +526,7 @@ class CallToAction extends Component {
 						paddingBottom: paddingBottom,
 						backgroundColor: backgroundColor,
 						backgroundImage: `url(${imageUrl})`,
+						backgroundSize: "cover",
 						alignment: alignment
 					}}
 				>
@@ -535,7 +541,7 @@ class CallToAction extends Component {
 					)}
 					<div
 						className="wp-block-guteblock-cta__contentOuter"
-						style={{ maxWidth: `${contentOuterWidth}%` }}
+						style={{ maxWidth: `${containerWidth}%` }}
 					>
 						<div
 							className="wp-block-guteblock-cta__container"
@@ -553,7 +559,7 @@ class CallToAction extends Component {
 								}
 								style={{
 									color: titleColor,
-									fontSize: `${titleFontSize}rem`,
+									fontSize: `${titleFontSize}px`,
 									textTransform: titleTextTransform
 								}}
 								tagName="h2"
@@ -569,7 +575,7 @@ class CallToAction extends Component {
 									style={{
 										textTransform: buttonTextTransform,
 										color: buttonTextColor,
-										fontSize: `${buttonFontSize}rem`,
+										fontSize: `${buttonFontSize}px`,
 										marginTop: `${buttonVerticalMargin}px`,
 										marginBottom: `${buttonVerticalMargin}px`,
 										marginLeft: `${buttonHorizontalMargin}px`,

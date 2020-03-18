@@ -20,9 +20,15 @@ function guteblock_render_post_grid_block($attributes) {
 		$content_fontsize = 14;
 	}
 
+	if(isset($attributes['className'])) {
+		$additional_classes = $attributes['className'];
+	} else {
+		$additional_classes = "";
+	}
+
 	$query = new WP_Query($args);
 	if($query->have_posts()) {
-		$posts = '<div class="wp-block-guteblock-post-grid align'.$attributes['align'].' align-'.$attributes['alignment'].' has-'.$attributes['columns'].'-columns">';
+		$posts = '<div class="wp-block-guteblock-post-grid align'.$attributes['align'].' align-'.$attributes['alignment'].' has-'.$attributes['columns'].'-columns '.$additional_classes.'">';
 		while($query->have_posts()) {
 			$query->the_post();
 			$posts .= '<div class="wp-block-guteblock-post-grid__single-post">';

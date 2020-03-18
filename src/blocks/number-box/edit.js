@@ -49,12 +49,11 @@ class NumberBoxesEdit extends Component {
 		});
 	};
 
-	updateNumberbox = (type, value) => {
+	updateNumberbox = (index, type, value) => {
 		const { setAttributes, attributes } = this.props;
 		const { numberboxes } = attributes;
-		const { selectedBox } = this.state;
 		let new_numberboxes = [...numberboxes];
-		new_numberboxes[selectedBox][type] = value;
+		new_numberboxes[index][type] = value;
 		setAttributes({ numberboxes: new_numberboxes });
 	};
 
@@ -281,6 +280,7 @@ class NumberBoxesEdit extends Component {
 										tagName="h4"
 										onChange={title =>
 											this.updateNumberbox(
+												index,
 												"title",
 												title
 											)
@@ -302,6 +302,7 @@ class NumberBoxesEdit extends Component {
 										tagName="p"
 										onChange={content =>
 											this.updateNumberbox(
+												index,
 												"content",
 												content
 											)

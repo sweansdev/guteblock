@@ -96,6 +96,7 @@ class FeatureGridsEdit extends Component {
 	render() {
 		const { className, attributes, setAttributes } = this.props;
 		const {
+			align,
 			alignment,
 			featureGrids,
 			grid_border_radius,
@@ -132,7 +133,12 @@ class FeatureGridsEdit extends Component {
 			verticalMargin
 		} = attributes;
 
+		if (!align) {
+			this.props.setAttributes({ align: "full" });
+		}
+
 		const classes = classnames(className, {
+			[`align${align}`]: align,
 			[`align-${alignment}`]: alignment,
 			[`has-shadow`]: shadow
 		});
@@ -141,6 +147,8 @@ class FeatureGridsEdit extends Component {
 		const styleName = isStyle.test(attributes.className)
 			? attributes.className.replace(isStyle, "")
 			: null;
+
+		console.log(styleName);
 
 		return (
 			<>

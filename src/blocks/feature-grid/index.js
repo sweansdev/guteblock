@@ -275,6 +275,7 @@ registerBlockType("guteblock/feature-grid", {
 	edit,
 	save: ({ attributes }) => {
 		const {
+			align,
 			alignment,
 			featureGrids,
 			grid_border_radius,
@@ -311,6 +312,7 @@ registerBlockType("guteblock/feature-grid", {
 		} = attributes;
 
 		const classes = classnames({
+			[`align${align}`]: align,
 			[`align-${alignment}`]: alignment
 		});
 

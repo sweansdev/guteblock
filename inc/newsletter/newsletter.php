@@ -66,6 +66,10 @@ function guteblock_newsletter_submit() {
 
 function guteblock_render_newsletter_block($attributes) {
 
+	if(!isset($attributes['styleIs'])) {
+		$attributes['styleIs'] = 1;
+	}
+
 	if ( $attributes['styleIs'] == 3 ) {
 		$btnBottomLeftThreeOne = $attributes['borderBottomLeftRadiusTwo'];
 	}
@@ -114,9 +118,14 @@ function guteblock_render_newsletter_block($attributes) {
 	else{
 		$basicBorderRightRadius = 0;
 	}
+	if(isset($attributes['className'])) {
+		$additional_classes = $attributes['className'];
+	} else {
+		$additional_classes = "";
+	}
 	
 	$balancedPaddingRight = $attributes['horizontalOuterPadding'] + 4.5 * $attributes['fontSize'] + 2 * $attributes['buttonHorizontalPadding'];
-	$newsletter .= '<div class="wp-block-guteblock-newsletter align'.$attributes['align'].' is-style-'.$attributes['styleIs'].' align-'.$attributes['alignment'].'" 
+	$newsletter = '<div class="wp-block-guteblock-newsletter '.$additional_classes.' align'.$attributes['align'].' is-style-'.$attributes['styleIs'].' align-'.$attributes['alignment'].'" 
 	style="background-color:'.$bg.';
 	padding-left:'.$attributes['horizontalOuterPadding'].'px;
 	padding-right:'.$attributes['horizontalOuterPadding'].'px;

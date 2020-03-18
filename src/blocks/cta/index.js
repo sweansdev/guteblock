@@ -6,7 +6,7 @@ import edit from "./edit.js";
 import classnames from "classnames";
 import { Button } from "@wordpress/components";
 const attributes = {
-	contentOuterWidth: {
+	containerWidth: {
 		type: "number",
 		default: 90
 	},
@@ -66,7 +66,7 @@ const attributes = {
 	},
 	titleFontSize: {
 		type: "number",
-		default: 3
+		default: 35
 	},
 	titleTextTransform: {
 		type: "string",
@@ -84,7 +84,7 @@ const attributes = {
 	},
 	buttonFontSize: {
 		type: "number",
-		default: 1
+		default: 20
 	},
 	buttonBorderRadius: {
 		type: "number"
@@ -204,12 +204,17 @@ registerBlockType("guteblock/cta", {
 	styles: [
 		{
 			name: "basic",
-			label: __("Content Left", "guteblock"),
+			label: __("Basic", "guteblock"),
 			isDefault: true
 		},
 		{
 			name: "right",
 			label: __("Content Right", "guteblock"),
+			isDefault: false
+		},
+		{
+			name: "left",
+			label: __("Content Left", "guteblock"),
 			isDefault: false
 		}
 	],
@@ -217,7 +222,7 @@ registerBlockType("guteblock/cta", {
 	edit,
 	save: ({ className, attributes }) => {
 		const {
-			contentOuterWidth,
+			containerWidth,
 			title,
 			alignment,
 			paddingTop,
@@ -261,6 +266,7 @@ registerBlockType("guteblock/cta", {
 					paddingBottom: paddingBottom,
 					backgroundColor: backgroundColor,
 					backgroundImage: `url(${imageUrl})`,
+					backgroundSize: "cover",
 					alignment: alignment
 				}}
 			>
@@ -275,7 +281,7 @@ registerBlockType("guteblock/cta", {
 				)}
 				<div
 					className="wp-block-guteblock-cta__contentOuter"
-					style={{ maxWidth: `${contentOuterWidth}%` }}
+					style={{ maxWidth: `${containerWidth}%` }}
 				>
 					<div
 						className="wp-block-guteblock-cta__container"
@@ -291,7 +297,7 @@ registerBlockType("guteblock/cta", {
 							className={"wp-block-guteblock-cta__title"}
 							style={{
 								color: titleColor,
-								fontSize: `${titleFontSize}rem`,
+								fontSize: `${titleFontSize}px`,
 								textTransform: titleTextTransform
 							}}
 							tagName="h2"
@@ -299,7 +305,7 @@ registerBlockType("guteblock/cta", {
 						/>
 						{enableButton && (
 							<Button
-								// target="_blank"
+								target="_blank"
 								rel="noopener noreferrer"
 								className={
 									"wp-block-guteblock-cta__button"
@@ -307,7 +313,7 @@ registerBlockType("guteblock/cta", {
 								style={{
 									textTransform: buttonTextTransform,
 									color: buttonTextColor,
-									fontSize: `${buttonFontSize}rem`,
+									fontSize: buttonFontSize,
 									marginTop: `${buttonVerticalMargin}px`,
 									marginBottom: `${buttonVerticalMargin}px`,
 									marginLeft: `${buttonHorizontalMargin}px`,

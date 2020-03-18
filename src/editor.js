@@ -16,12 +16,8 @@ import "./blocks/button";
 import "./blocks/feature-grid";
 import "./blocks/accordion";
 import "./blocks/count-up";
-//import "./blocks/newsletter";
-//import "./blocks/card";
-
-// Upcoming
-// import "./blocks/quick-contact";
-//import "./blocks/paypal-donation";
+import "./blocks/newsletter";
+import "./blocks/card";
 
 import "./common/css/style.editor.scss";
 

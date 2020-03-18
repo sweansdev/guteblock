@@ -282,7 +282,7 @@ function guteblock_settings_page() {
 
 			<ul class="gb-menu">
 				<li class="current" data-target="#gb-mailchimp-settings"><a href="#"><?php esc_html_e( 'Mailchimp Settings', 'guteblock' ); ?></a></li>
-				<li data-target="#gb-recaptcha-settings"><a href="#"><?php esc_html_e( 'reCAPTCHA Settings', 'guteblock' ); ?></a></li>
+				<!-- <li data-target="#gb-recaptcha-settings"><a href="#"><?php esc_html_e( 'reCAPTCHA Settings', 'guteblock' ); ?></a></li> -->
 			</ul>
 
 		</div>
@@ -349,7 +349,7 @@ function guteblock_settings_page() {
 					
 					</div>
 
-					<div id="gb-recaptcha-settings" class="content-panel">
+					<!-- <div id="gb-recaptcha-settings" class="content-panel">
 					
 						<div class="tab-content">
 							<table class="form-table">
@@ -380,9 +380,9 @@ function guteblock_settings_page() {
 						<p class="submit">
 							<input type="submit" class="sw-btn-submit" value="Save Settings" />	
 						</p>
+					</div> -->
 
-					</form>
-				</div>
+				</form>				
 			</div>
 		</div>
 	</div>
@@ -418,10 +418,10 @@ function handle_form_data() {
 	gb_update_settings( 'guteblock_mailchimp_success_response_do', $settings['mailchimp-success-response-do']);
 
 	// Saving site key
-	gb_update_settings( 'guteblock_recaptcha_site_key', $settings['recaptcha-site-key']);
+	// gb_update_settings( 'guteblock_recaptcha_site_key', $settings['recaptcha-site-key']);
 
 	// Saving secret key
-	gb_update_settings( 'guteblock_recaptcha_secret_key', $settings['recaptcha-secret-key']);
+	// gb_update_settings( 'guteblock_recaptcha_secret_key', $settings['recaptcha-secret-key']);
 
 	return;
 

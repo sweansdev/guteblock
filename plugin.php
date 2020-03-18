@@ -5,7 +5,7 @@
  * Description: Guteblock is an exquisite collection of blocks redefining the use of Gutenberg (the brand-new WordPress Block Editor)
  * Author: Sweans
  * Author URI: https://www.sweans.com/
- * Version: 1.0.10
+ * Version: 1.1.0
  * Text Domain: guteblock
  * Tested up to: 5.3
  * License: GPL3
@@ -84,7 +84,7 @@ function guteblock_register() {
 	);
 
 	$guteblock_recaptcha_site_key = get_option( 'guteblock_recaptcha_site_key' );
-	wp_localize_script( 'guteblock-script', 'guteblock', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ), 'siteurl' => get_bloginfo( 'url' ), 'recaptcha_site_key' => $guteblock_recaptcha_site_key));
+	wp_localize_script( 'guteblock-script', 'guteblock', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ), 'siteurl' => get_bloginfo( 'url' )));
 
 	wp_register_style(
 		'guteblock-style',
@@ -281,15 +281,9 @@ function guteblock_register() {
 			"type" => "number",
 			"default" => 100
 		),
-		"bgGradientTurn" => array(
-			"type" => "number",
-			"default" => -166
-		),
-		"bgLinearGradientOne" => array(
-			"type" => "string"
-		),
-		"bgLinearGradientTwo" => array(
-			"type" => "string"
+		"bgColor" => array(
+			"type" => "string",
+			"default" => "#000000"
 		),
 		"horizontalPadding" => array(
 			"type" => "number",
@@ -301,7 +295,7 @@ function guteblock_register() {
 		),
 		"formBackgroundColor" => array(
 			"type" => "string",
-			"default" => ""
+			"default" => "#000000"
 		),
 		"borderRadius" => array(
 			"type" => "number",
@@ -329,6 +323,7 @@ function guteblock_register() {
 		),
 		"titleColor" => array(
 			"type" => "string",
+			"default" => "#ffffff"
 		),
 		"titleFontSize" => array(
 			"type" => "number",
@@ -355,7 +350,8 @@ function guteblock_register() {
 			"default" => "Contact us today, and get reply with in 24 hours!"
 		),
 		"infoColor" => array(
-			"type" => "string"
+			"type" => "string",
+			"default" => "#ffffff"
 		),
 		"contactFormShadow" => array(
 			"type" => "number",
@@ -373,7 +369,19 @@ function guteblock_register() {
 			"type" => "number",
 			"default" => 15
 		),
-		"inputBorderRadius" => array(
+		"inputBorderTopLeftRadius" => array(
+			"type" => "number",
+			"default" => 5
+		),
+		"inputBorderTopRightRadius" => array(
+			"type" => "number",
+			"default" => 5
+		),
+		"inputBorderBottomLeftRadius" => array(
+			"type" => "number",
+			"default" => 5
+		),
+		"inputBorderBottomRightRadius" => array(
 			"type" => "number",
 			"default" => 5
 		),
@@ -383,15 +391,23 @@ function guteblock_register() {
 		),
 		"inputTextColor" => array(
 			"type" => "string",
-			"default" => "#ffffff"
+			"default" => "#ffcebf"
+		),
+		"inputBackgroundColor" => array(
+			"type" => "string",
+			"default" => "#000000"
 		),
 		"inputFontSize" => array(
 			"type" => "number",
 			"default" => 15
 		),
+		"showInputBorder" => array(
+			"type" => "boolean",
+			"default" => true
+		),
 		"inputBorderColor" => array(
 			"type" => "string",
-			"default" => "#feffed"
+			"default" => "#806760"
 		),
 		"buttonTextColor" => array(
 			"type" => "string",
@@ -407,6 +423,7 @@ function guteblock_register() {
 		),
 		"buttonBackgroundColor" => array(
 			"type" => "string",
+			"default" => "#f24848"
 		),
 		"buttonWidth" => array(
 			"type" => "number",
@@ -414,19 +431,15 @@ function guteblock_register() {
 		),
 		"buttonBorderRadius" => array(
 			"type" => "number",
-			"default" => 50
+			"default" => 5
 		),
 		"buttonTextTransform" => array(
 			"type" => "string",
-			"default" => "Uppercase"
+			"default" => "uppercase"
 		),
 		"buttonPadding" => array(
 			"type" => "number",
 			"default" => 10
-		),
-		"verticalButtonMargin" => array(
-			"type" => "number",
-			"default" => 15
 		),
 		"hoverButtonBackgroundColor" => array(
 			"type" => "string"
@@ -461,5 +474,3 @@ function guteblock_register() {
 require_once( plugin_dir_path(__FILE__) . '/inc/newsletter/newsletter.php' );
 
 require_once( plugin_dir_path(__FILE__) . '/inc/post-grid/post-grid.php' );
-
-require_once( plugin_dir_path(__FILE__) . '/inc/quick-contact/quick-contact.php' );

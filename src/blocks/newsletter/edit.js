@@ -194,7 +194,7 @@ class Newsletter extends Component {
 						<p className="description">
 							{__(
 								"Send contacts an opt-in confirmation email when they subscribe to your list.",
-								"guteblock"
+								"atomic-blocks"
 							)}
 						</p>
 						{styleName != 1 && (
