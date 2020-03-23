@@ -121,7 +121,7 @@ class SeparatorEdit extends Component {
 				<InspectorControls>
 					<PanelBody title={__("Spacing", "guteblock")}>
 						<RangeControl
-							label={__("Padding Top", "guteblock")}
+							label={__("Padding Top(px)", "guteblock")}
 							value={paddingTop}
 							onChange={paddingTop =>
 								setAttributes({ paddingTop })
@@ -132,7 +132,7 @@ class SeparatorEdit extends Component {
 						/>
 
 						<RangeControl
-							label={__("Padding Bottom", "guteblock")}
+							label={__("Padding Bottom(px)", "guteblock")}
 							value={paddingBottom}
 							onChange={paddingBottom =>
 								setAttributes({ paddingBottom })

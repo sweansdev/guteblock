@@ -195,7 +195,7 @@ registerBlockType("guteblock/cta", {
 		</svg>
 	),
 	category: "guteblock",
-	keywords: [__("call to action", "guteblock"), __("button", "guteblock")],
+	keywords: [__("call to action", "guteblock"), __("cta", "guteblock")],
 	supports: {
 		reusable: false,
 		html: false,
@@ -204,17 +204,12 @@ registerBlockType("guteblock/cta", {
 	styles: [
 		{
 			name: "basic",
-			label: __("Basic", "guteblock"),
+			label: __("Content Left", "guteblock"),
 			isDefault: true
 		},
 		{
 			name: "right",
 			label: __("Content Right", "guteblock"),
-			isDefault: false
-		},
-		{
-			name: "left",
-			label: __("Content Left", "guteblock"),
 			isDefault: false
 		}
 	],

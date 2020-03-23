@@ -6,61 +6,73 @@ add_action("wp_ajax_nopriv_guteblock_newsletter_submit", "guteblock_newsletter_s
 
 function guteblock_newsletter_submit() {
 
+	$error_msg = "";
+
 	$data = [
 		'email'     => $_POST["email"],
-		'subscriber_status' => $_POST["double_optin"],
-		// 'status'    => 'subscribed'
+		'subscriber_status' => $_POST["double_optin"]
 	];
 	
 	$apiKey = get_option( 'guteblock_mailchimp_api_key'); 
 	$listId = get_option( 'guteblock_mailchimp_list_id' );
 
-	$memberId = md5(strtolower($data['email']));
-	$dataCenter = substr($apiKey,strpos($apiKey,'-')+1);
-	$url = 'https://' . $dataCenter . '.api.mailchimp.com/3.0/lists/' . $listId . '/members/' . $memberId;
-	if($data['email'] != ""){
-		if($data['subscriber_status'] == 0 ) {
-			$status = "subscribed";
-		}
-		else {
-			$status = "pending";
-		}
-	}else{
-		$status = "no mail";
+	if( empty($apiKey) || empty($listId) ){
+		$error_msg = "Please configure 
+		Mailchimp API Key and List ID in the settings.";
+		echo '<div class="gb-alert gb-error">'.$error_msg.'</div>';
 	}
-	$json = json_encode([
-		'email_address' => $data['email'],
-		'status'        => $status
-	]);
-	
-	$ch = curl_init($url);
-	curl_setopt($ch, CURLOPT_USERPWD, 'user:' . $apiKey);
-	curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
-	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-	curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
-	$result = curl_exec($ch);
-	$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-	curl_close($ch);
-	
-	if($status == "no mail") {
+	else {
 
-		echo "Please Enter Your Email";
-
-	} else {
-
-		if($status == "pending") {
-			echo get_option( 'guteblock_mailchimp_success_response_do' );
+		$memberId = md5(strtolower($data['email']));
+		$dataCenter = substr($apiKey,strpos($apiKey,'-')+1);
+		$url = 'https://' . $dataCenter . '.api.mailchimp.com/3.0/lists/' . $listId . '/members/' . $memberId;
+		if($data['email'] != ""){
+			if($data['subscriber_status'] == 0 ) {
+				$status = "subscribed";
+			}
+			else {
+				$status = "pending";
+			}
+		}else{
+			$status = "no mail";
 		}
-		else{
-			echo get_option( 'guteblock_mailchimp_success_response' );
+		$json = json_encode([
+			'email_address' => $data['email'],
+			'status'        => $status
+		]);
+		
+		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_USERPWD, 'user:' . $apiKey);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+		$result = curl_exec($ch);
+		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		curl_close($ch);
+		
+		if($status == "no mail") {
+
+			$error_msg = "Please Enter Your Email";
+			echo '<div class="gb-alert gb-error">'.$error_msg.'</div>';
+
+		} else {
+
+			if($status == "pending") {
+				$error_msg = get_option( 'guteblock_mailchimp_success_response_do' );
+				echo '<div class="gb-alert gb-error">'.$error_msg.'</div>';
+			}
+			else{
+				$error_msg = get_option( 'guteblock_mailchimp_success_response' );
+				echo '<div class="gb-alert gb-success">'.$error_msg.'</div>';
+			}
+			
 		}
-		
-	}
-		
-	return;
+	}	
+	
+	die();
 
 }
 
@@ -125,14 +137,14 @@ function guteblock_render_newsletter_block($attributes) {
 	}
 	
 	$balancedPaddingRight = $attributes['horizontalOuterPadding'] + 4.5 * $attributes['fontSize'] + 2 * $attributes['buttonHorizontalPadding'];
-	$newsletter = '<div class="wp-block-guteblock-newsletter '.$additional_classes.' align'.$attributes['align'].' is-style-'.$attributes['styleIs'].' align-'.$attributes['alignment'].'" 
+	$newsletter = '<div class="wp-block-guteblock-newsletter__popup-window align'.$attributes['align'].'"></div>';
+	$newsletter .= '<div class="wp-block-guteblock-newsletter '.$additional_classes.' align'.$attributes['align'].' is-style-'.$attributes['styleIs'].' align-'.$attributes['alignment'].'" 
 	style="background-color:'.$bg.';
 	padding-left:'.$attributes['horizontalOuterPadding'].'px;
 	padding-right:'.$attributes['horizontalOuterPadding'].'px;
 	padding-top:'.$attributes['verticalOuterPadding'].'px;
 	padding-bottom:'.$attributes['verticalOuterPadding'].'px;
 	text-align:'.$attributes['alignment'].'">';
-	
 	$newsletter .= '<div class="wp-block-guteblock-newsletter__container">';
 		$newsletter .= '<form action="" method="post" class="newsletterSubmit" id="newsletterMyForm">';
 			$newsletter .= 	'<input type="email" placeholder="'.$placeholder.'" class="wp-block-guteblock-newsletter__input" style="
@@ -179,8 +191,6 @@ function guteblock_render_newsletter_block($attributes) {
 			}
 			$newsletter .= '</button>';
 			$newsletter .= '</form>';
-			$newsletter .= '<div class="wp-block-guteblock-newsletter__popup-window">';
-			$newsletter .= '</div>';
 		$newsletter .= '</div>';
 	$newsletter .= '</div>';
 	return $newsletter;

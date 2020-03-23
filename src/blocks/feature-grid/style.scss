@@ -75,9 +75,9 @@ $break-tab: 960px;
 		transition: 0.5s ease;
 	}
 
-	.wp-block-guteblock-feature-grid__button_text {
-		font-size: 13px;
-	}
+	// .wp-block-guteblock-feature-grid__button_text {
+	// 	font-size: 13px;
+	// }
 
 	.wp-block-guteblock-feature-grid__button_link {
 		float: left;
@@ -115,7 +115,7 @@ $break-tab: 960px;
 			font-size: 11px;
 			transition: 0.5s ease;
 		}
-	
+
 		.wp-block-guteblock-feature-grid__button:hover {
 			opacity: 0.7 !important;
 			transition: 0.5s ease;

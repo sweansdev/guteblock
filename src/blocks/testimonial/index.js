@@ -58,33 +58,6 @@ const attributes = {
 				content: ""
 			}
 		]
-		// source: "query",
-		// selector: ".wp-block-guteblock-testimonial__outer",
-		// query: {
-		// 	authorImageID: {
-		// 		source: "attribute",
-		// 		selector: "img",
-		// 		attribute: "data-id"
-		// 	},
-		// 	authorImageUrl: {
-		// 		source: "attribute",
-		// 		selector: "img",
-		// 		attribute: "src"
-		// 	},
-		// 	authorImageAlt: {
-		// 		source: "attribute",
-		// 		selector: "img",
-		// 		attribute: "alt"
-		// 	},
-		// 	title: {
-		// 		source: "html",
-		// 		selector: "h4",
-		// 	},
-		// 	content: {
-		// 		source: "html",
-		// 		selector: "p"
-		// 	}
-		// }
 	}
 };
 

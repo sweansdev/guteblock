@@ -69,9 +69,7 @@ class Newsletter extends Component {
 			}
 		};
 	};
-	// onChangeEnableDoubleOptIn = doubleOptIn => {
-	// 	this.props.setAttributes({ doubleOptIn });
-	// };
+
 	onChangeEnableDoubleOptIn = () => {
 		this.props.setAttributes({
 			doubleOptIn: !this.props.attributes.doubleOptIn
@@ -194,7 +192,7 @@ class Newsletter extends Component {
 						<p className="description">
 							{__(
 								"Send contacts an opt-in confirmation email when they subscribe to your list.",
-								"atomic-blocks"
+								"guteblock"
 							)}
 						</p>
 						{styleName != 1 && (
@@ -238,7 +236,7 @@ class Newsletter extends Component {
 						{styleName != 2 && (
 							<RangeControl
 								label={__(
-									"Border Left Radius",
+									"Border Left Radius(px)",
 									"guteblock"
 								)}
 								value={TopLeft}
@@ -253,7 +251,7 @@ class Newsletter extends Component {
 						{styleName != 2 && (
 							<RangeControl
 								label={__(
-									"Border Right Radius",
+									"Border Right Radius(px)",
 									"guteblock"
 								)}
 								value={borderRightRadius}
@@ -269,7 +267,7 @@ class Newsletter extends Component {
 						)}
 						<RangeControl
 							label={__(
-								"Vertical Outer Padding",
+								"Vertical Outer Padding(px)",
 								"guteblock"
 							)}
 							value={verticalOuterPadding}
@@ -282,7 +280,7 @@ class Newsletter extends Component {
 						/>
 						<RangeControl
 							label={__(
-								"Horizontal Outer Padding",
+								"Horizontal Outer Padding(px)",
 								"guteblock"
 							)}
 							value={horizontalOuterPadding}
@@ -297,7 +295,7 @@ class Newsletter extends Component {
 						/>
 						<RangeControl
 							label={__(
-								"Vertical Inner Padding",
+								"Vertical Inner Padding(px)",
 								"guteblock"
 							)}
 							value={verticalInnerPadding}
@@ -309,7 +307,7 @@ class Newsletter extends Component {
 							step={1}
 						/>
 						<RangeControl
-							label={__("Font Size", "guteblock")}
+							label={__("Font Size(px)", "guteblock")}
 							value={fontSize}
 							onChange={fontSize =>
 								setAttributes({ fontSize })
@@ -333,7 +331,7 @@ class Newsletter extends Component {
 						{styleName == 1 && (
 							<RangeControl
 								label={__(
-									"Border Top Left Radius",
+									"Border Top Left Radius(px)",
 									"guteblock"
 								)}
 								value={borderTopLeftRadius}
@@ -350,7 +348,7 @@ class Newsletter extends Component {
 						{styleName == 1 && (
 							<RangeControl
 								label={__(
-									"Border Bottom Left Radius",
+									"Border Bottom Left Radius(px)",
 									"guteblock"
 								)}
 								value={btnBottomLeft}
@@ -366,7 +364,7 @@ class Newsletter extends Component {
 						)}
 						<RangeControl
 							label={__(
-								"Button Horizontal Padding",
+								"Button Horizontal Padding(px)",
 								"guteblock"
 							)}
 							value={buttonHorizontalPadding}
@@ -497,7 +495,7 @@ class Newsletter extends Component {
 								/>
 								<RangeControl
 									label={__(
-										"Button Text Letter Spacing",
+										"Button Text Letter Spacing(px)",
 										"guteblock"
 									)}
 									value={buttonLetterSpacing}

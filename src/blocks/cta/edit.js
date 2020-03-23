@@ -160,7 +160,7 @@ class CallToAction extends Component {
 						/>
 						<RangeControl
 							label={__(
-								"Container Outer Width",
+								"Container Outer Width(%)",
 								"guteblock"
 							)}
 							value={containerWidth}

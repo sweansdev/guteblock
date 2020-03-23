@@ -55,23 +55,4 @@
 			background-color: #fff;
 		}
 	}
-	&.is-style-left {
-		.wp-block-guteblock-cta__content_section {
-			width: 50%;
-			display: inline-block;
-		}
-		.wp-block-guteblock-cta__image_section {
-			width: 50%;
-			display: inline-block;
-		}
-		.wp-block-guteblock-cta__title {
-			font-size: 55px;
-			color: #000;
-		}
-		.wp-block-guteblock-cta__button {
-			color: #fff;
-			background-color: #000;
-			border-radius: 0px;
-		}
-	}
 }

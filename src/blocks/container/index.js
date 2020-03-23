@@ -18,6 +18,70 @@ const attributes = {
 	alignment: {
 		type: "string",
 		default: "left"
+	},
+	background_color: {
+		type: "string",
+		default: "#ece5bb"
+	},
+	background_border_radius: {
+		type: "string",
+		default: "5"
+	},
+	background_box_shadow: {
+		type: "boolean",
+		default: true
+	},
+	background_box_shadow_color: {
+		type: "string",
+		default: "#9d9d9d"
+	},
+	background_box_x_axis: {
+		type: "number",
+		default: 2
+	},
+	background_box_y_axis: {
+		type: "number",
+		default: 5
+	},
+	gradeint_background: {
+		type: "boolean",
+		default: true
+	},
+	button_gradeint_color_1: {
+		type: "string",
+		default: "#602ecd"
+	},
+	button_gradeint_color_2: {
+		type: "string",
+		default: "#45cae9"
+	},
+	button_gradient_direction: {
+		type: "string",
+		default: "90"
+	},
+	container_padding: {
+		type: "boolean",
+		default: false
+	},
+	container_margin: {
+		type: "boolean",
+		default: false
+	},
+	margin_top: {
+		type: "number",
+		default: 10
+	},
+	margin_bottom: {
+		type: "number",
+		default: 15
+	},
+	padding_top: {
+		type: "number",
+		default: 30
+	},
+	padding_bottom: {
+		type: "number",
+		default: 30
 	}
 };
 
@@ -120,16 +184,84 @@ registerBlockType("guteblock/container", {
 	attributes,
 	edit,
 	save: ({ attributes }) => {
-		const { alignment } = attributes;
+		const {
+			alignment,
+			background_color,
+			background_border_radius,
+			background_box_x_axis,
+			background_box_y_axis,
+			background_box_shadow_color,
+			background_box_shadow,
+			button_gradeint_color_1,
+			button_gradeint_color_2,
+			button_gradient_direction,
+			gradeint_background,
+			margin_top,
+			margin_bottom,
+			padding_top,
+			padding_bottom
+		} = attributes;
 
 		const classes = classnames({
 			[`align-${alignment}`]: alignment
 		});
 
-		return (
-			<div className={classes}>
-				<InnerBlocks.Content />
-			</div>
-		);
+		let BoxShadowColor;
+		{
+			background_box_shadow
+				? (BoxShadowColor = background_box_shadow_color)
+				: (BoxShadowColor = "transparent");
+		}
+		let BoxShadowX;
+		{
+			background_box_shadow
+				? (BoxShadowX = background_box_x_axis)
+				: (BoxShadowX = "0");
+		}
+		let BoxShadowY;
+		{
+			background_box_shadow
+				? (BoxShadowY = background_box_y_axis)
+				: (BoxShadowY = "0");
+		}
+
+		let Container;
+		{
+			gradeint_background === true
+				? (Container = (
+						<div
+							className={classes}
+							style={{
+								borderRadius: `${background_border_radius}px`,
+								boxShadow: `0px ${BoxShadowX}px ${BoxShadowY}px ${BoxShadowColor}`,
+								background: `linear-gradient(${button_gradient_direction}deg, ${button_gradeint_color_1}, ${button_gradeint_color_2})`,
+								marginTop: `${margin_top}px`,
+								marginBottom: `${margin_bottom}px`,
+								paddingTop: `${padding_top}px`,
+								paddingBottom: `${padding_bottom}px`
+							}}
+						>
+							<InnerBlocks.Content />
+						</div>
+				  ))
+				: (Container = (
+						<div
+							className={classes}
+							style={{
+								backgroundColor: background_color,
+								borderRadius: `${background_border_radius}px`,
+								boxShadow: `0px ${BoxShadowX}px ${BoxShadowY}px ${BoxShadowColor}`,
+								marginTop: `${margin_top}px`,
+								marginBottom: `${margin_bottom}px`,
+								paddingTop: `${padding_top}px`,
+								paddingBottom: `${padding_bottom}px`
+							}}
+						>
+							<InnerBlocks.Content />
+						</div>
+				  ));
+		}
+
+		return Container;
 	}
 });

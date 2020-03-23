@@ -5,7 +5,7 @@
  * Description: Guteblock is an exquisite collection of blocks redefining the use of Gutenberg (the brand-new WordPress Block Editor)
  * Author: Sweans
  * Author URI: https://www.sweans.com/
- * Version: 1.1.0
+ * Version: 1.1.1
  * Text Domain: guteblock
  * Tested up to: 5.3
  * License: GPL3
@@ -270,207 +270,22 @@ function guteblock_register() {
 		'render_callback' => 'guteblock_render_newsletter_block',
 		'attributes' => $newsletter_attributes
 	));
-
-	$quick_contact_attributes = array(
-
-		"styleIs" => array(
-			"type" => "string",
-			"default" => 1
-		),
-		"width" => array(
-			"type" => "number",
-			"default" => 100
-		),
-		"bgColor" => array(
-			"type" => "string",
-			"default" => "#000000"
-		),
-		"horizontalPadding" => array(
-			"type" => "number",
-			"default" => 15
-		),
-		"verticalPadding" => array(
-			"type" => "number",
-			"default" => 15
-		),
-		"formBackgroundColor" => array(
-			"type" => "string",
-			"default" => "#000000"
-		),
-		"borderRadius" => array(
-			"type" => "number",
-			"default" => 0
-		),
-		"padding" => array(
-			"type" => "number",
-			"default" => 20
-		),
-		"showFormShadow" => array(
-			"type" => "boolean",
-			"default" => false
-		),
-		"formShadow" => array(
-			"type" => "number",
-			"default" => 2
-		),
-		"formShadowColor" => array(
-			"type" => "string",
-			"default" => "#806760"
-		),
-		"title" => array(
-			"type" => "string",
-			"default" => "Quick Contact"
-		),
-		"titleColor" => array(
-			"type" => "string",
-			"default" => "#ffffff"
-		),
-		"titleFontSize" => array(
-			"type" => "number",
-			"default" => 35
-		),
-		"titleTextTransform" => array(
-			"type" => "string",
-			"default" => "Uppercase"
-		),
-		"titleVerticalPadding" => array(
-			"type" => "number",
-			"default" => 0
-		),
-		"align" => array(
-			"type" => "string",
-			"default" => "wide"
-		),
-		"alignment" => array(
-			"type" => "string",
-			"default" => "center"
-		),
-		"info" => array(
-			"type" => "string",
-			"default" => "Contact us today, and get reply with in 24 hours!"
-		),
-		"infoColor" => array(
-			"type" => "string",
-			"default" => "#ffffff"
-		),
-		"contactFormShadow" => array(
-			"type" => "number",
-			"default" => 0
-		),
-		"buttonTitle" => array(
-			"type" => "string",
-			"default" => "send"
-		),
-		"inputVerticalMargin" => array(
-			"type" => "number",
-			"default" => 5
-		),
-		"inputVerticalPadding" => array(
-			"type" => "number",
-			"default" => 15
-		),
-		"inputBorderTopLeftRadius" => array(
-			"type" => "number",
-			"default" => 5
-		),
-		"inputBorderTopRightRadius" => array(
-			"type" => "number",
-			"default" => 5
-		),
-		"inputBorderBottomLeftRadius" => array(
-			"type" => "number",
-			"default" => 5
-		),
-		"inputBorderBottomRightRadius" => array(
-			"type" => "number",
-			"default" => 5
-		),
-		"inputHorizontalPadding" => array(
-			"type" => "number",
-			"default" => 15
-		),
-		"inputTextColor" => array(
-			"type" => "string",
-			"default" => "#ffcebf"
-		),
-		"inputBackgroundColor" => array(
-			"type" => "string",
-			"default" => "#000000"
-		),
-		"inputFontSize" => array(
-			"type" => "number",
-			"default" => 15
-		),
-		"showInputBorder" => array(
-			"type" => "boolean",
-			"default" => true
-		),
-		"inputBorderColor" => array(
-			"type" => "string",
-			"default" => "#806760"
-		),
-		"buttonTextColor" => array(
-			"type" => "string",
-			"default" => "#ffffff"
-		),
-		"enablePhoneField" => array(
-			"type" => "boolean",
-			"default" => false
-		),
-		"enableWebsiteField" => array(
-			"type" => "boolean",
-			"default" => false
-		),
-		"buttonBackgroundColor" => array(
-			"type" => "string",
-			"default" => "#f24848"
-		),
-		"buttonWidth" => array(
-			"type" => "number",
-			"default" => 30
-		),
-		"buttonBorderRadius" => array(
-			"type" => "number",
-			"default" => 5
-		),
-		"buttonTextTransform" => array(
-			"type" => "string",
-			"default" => "uppercase"
-		),
-		"buttonPadding" => array(
-			"type" => "number",
-			"default" => 10
-		),
-		"hoverButtonBackgroundColor" => array(
-			"type" => "string"
-		),
-		"hoverButtonTextColor" => array(
-			"type" => "string"
-		),
-		"authorEmailId" => array(
-			"type" => "string",
-			"default" => ""
-		),
-		"enablereCAPTCHA" => array(
-			"type" => "boolean",
-			"default" => false
-		),
-		"emailSubject" => array(
-			"type" => "string",
-			"default" => ""
-		),
-		"responseMessage" => array(
-			"type" => "string",
-			"default" => "Message Sent Successfully"
-		)
-	);
-	guteblock_register_block_type('quick-contact', array(
-		'render_callback' => 'guteblock_render_quick_contact_block',
-		'attributes' => $quick_contact_attributes
-	));
 	
 }
 
 require_once( plugin_dir_path(__FILE__) . '/inc/newsletter/newsletter.php' );
 
 require_once( plugin_dir_path(__FILE__) . '/inc/post-grid/post-grid.php' );
+
+
+function guteblock_activate(){
+    register_uninstall_hook( __FILE__, 'guteblock_uninstall' );
+}
+register_activation_hook( __FILE__, 'guteblock_activate' );
+ 
+function guteblock_uninstall(){
+	delete_option('guteblock_mailchimp_api_key');
+	delete_option('guteblock_mailchimp_list_id');
+	delete_option('guteblock_mailchimp_success_response');
+	delete_option('guteblock_mailchimp_success_response_do');
+}

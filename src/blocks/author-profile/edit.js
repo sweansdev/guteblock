@@ -78,11 +78,11 @@ class AuthorProfileEdit extends Component {
 			textColor
 		} = attributes;
 
-		const isStyle = RegExp(/is-style-/)
+		const isStyle = RegExp(/is-style-/);
 		const styleName = isStyle.test(attributes.className)
-			? attributes.className.replace(isStyle, '')
-			: null
-		
+			? attributes.className.replace(isStyle, "")
+			: null;
+
 		const classes = classnames(className, {
 			[`align-${alignment}`]: alignment
 		});
@@ -121,37 +121,79 @@ class AuthorProfileEdit extends Component {
 					/>
 				</BlockControls>
 				<InspectorControls>
-					<PanelColorSettings
-						title={__("Color Settings", "guteblock")}
-						colorSettings={[
-							{
-								value: backgroundColor,
-								onChange: this.onChangeBackgroundColor,
-								label: __(
-									"Background Color",
-									"guteblock"
-								)
-							},
-							{
-								value: imageBorderColor,
-								onChange: this.onChangeImageBorderColor,
-								label: __(
-									"Image Border Color",
-									"guteblock"
-								)
-							},
-							{
-								value: titleColor,
-								onChange: this.onChangeTitleColor,
-								label: __("Title Color", "guteblock")
-							},
-							{
-								value: textColor,
-								onChange: this.onChangeTextColor,
-								label: __("Text Color", "guteblock")
-							}
-						]}
-					/>
+					{styleName != 2 ? (
+						<PanelColorSettings
+							title={__("Color Settings", "guteblock")}
+							colorSettings={[
+								{
+									value: backgroundColor,
+									onChange: this
+										.onChangeBackgroundColor,
+									label: __(
+										"Background Color",
+										"guteblock"
+									)
+								},
+								{
+									value: imageBorderColor,
+									onChange: this
+										.onChangeImageBorderColor,
+									label: __(
+										"Image Border Color",
+										"guteblock"
+									)
+								},
+								{
+									value: titleColor,
+									onChange: this.onChangeTitleColor,
+									label: __(
+										"Title Color",
+										"guteblock"
+									)
+								},
+								{
+									value: textColor,
+									onChange: this.onChangeTextColor,
+									label: __(
+										"Text Color",
+										"guteblock"
+									)
+								}
+							]}
+						/>
+					) : (
+						<PanelColorSettings
+							title={__("Color Settings", "guteblock")}
+							colorSettings={[
+								{
+									value: backgroundColor,
+									onChange: this
+										.onChangeBackgroundColor,
+									label: __(
+										"Background Color",
+										"guteblock"
+									)
+								},
+								{
+									value: titleColor,
+									onChange: this.onChangeTitleColor,
+									label: __(
+										"Title Color",
+										"guteblock"
+									)
+								},
+								{
+									value: textColor,
+									onChange: this.onChangeTextColor,
+									label: __(
+										"Text Color",
+										"guteblock"
+									)
+								}
+							]}
+						/>
+					)}
+
 					<PanelBody
 						title={__("Social Links", "guteblock")}
 						initialOpen={socialInitialOpen}
@@ -250,8 +292,12 @@ class AuthorProfileEdit extends Component {
 												}}
 											>
 												<img
-													src={author_image}
-													alt={author_name}
+													src={
+														author_image
+													}
+													alt={
+														author_name
+													}
 													onClick={open}
 													data-id={
 														author_image_id
@@ -273,16 +319,16 @@ class AuthorProfileEdit extends Component {
 								);
 							}}
 						/>
-						{(styleName != 2) && (
-							<SocialLinks 
+						{styleName != 2 && (
+							<SocialLinks
 								social_facebook={social_facebook}
 								social_twitter={social_twitter}
 								social_instagram={social_instagram}
 								social_pinterest={social_pinterest}
 								social_youtube={social_youtube}
-								social_linkedin={social_linkedin}									  
+								social_linkedin={social_linkedin}
 							/>
-						)}								
+						)}
 						<div className="wp-block-guteblock-author-profile__contentOuter">
 							<RichText
 								className={
@@ -291,15 +337,20 @@ class AuthorProfileEdit extends Component {
 								tagName="h4"
 								onChange={this.onChangeAuthorName}
 								value={author_name}
-								placeholder={__("Author Name", "guteblock")}
+								placeholder={__(
+									"Author Name",
+									"guteblock"
+								)}
 								style={{ color: titleColor }}
-							/>								
+							/>
 							<RichText
 								className={
 									"wp-block-guteblock-author-profile__authorDescription"
 								}
 								tagName="p"
-								onChange={this.onChangeAuthorDescription}
+								onChange={
+									this.onChangeAuthorDescription
+								}
 								value={author_description}
 								placeholder={__(
 									"Author Description",
@@ -307,19 +358,18 @@ class AuthorProfileEdit extends Component {
 								)}
 								style={{ color: textColor }}
 							/>
-							{(styleName == 2) && (
-								<SocialLinks 
+							{styleName == 2 && (
+								<SocialLinks
 									social_facebook={social_facebook}
 									social_twitter={social_twitter}
 									social_instagram={social_instagram}
 									social_pinterest={social_pinterest}
 									social_youtube={social_youtube}
-									social_linkedin={social_linkedin}									  
+									social_linkedin={social_linkedin}
 								/>
 							)}
 						</div>
 						<div className="clear"></div>
-
 					</div>
 				</div>
 			</>

@@ -113,6 +113,11 @@ class TestimonialsEdit extends Component {
 			? attributes.className.replace(isStyle, "")
 			: null;
 
+		// const isStyle = RegExp(/is-style-/);
+		// if(attributes.className.split(" ")) {
+
+		// }
+
 		return (
 			<>
 				<BlockControls>
@@ -123,41 +128,6 @@ class TestimonialsEdit extends Component {
 					/>
 				</BlockControls>
 				<InspectorControls>
-					<PanelBody title={__("Settings", "guteblock")}>
-						<ToggleControl
-							label={__("Shadow", "guteblock")}
-							onChange={this.toggleShadow}
-							checked={shadow}
-						/>
-
-						<RangeControl
-							label={__(
-								"Grid Border Radius (px)",
-								"guteblock"
-							)}
-							value={grid_border_radius}
-							onChange={grid_border_radius =>
-								setAttributes({ grid_border_radius })
-							}
-							min={0}
-							max={100}
-							step={1}
-						/>
-
-						<RangeControl
-							label={__(
-								"Image Border Radius (%)",
-								"guteblock"
-							)}
-							value={image_border_radius}
-							onChange={image_border_radius =>
-								setAttributes({ image_border_radius })
-							}
-							min={0}
-							max={100}
-							step={1}
-						/>
-					</PanelBody>
 					<PanelColorSettings
 						title={__("Color Settings", "guteblock")}
 						colorSettings={[
@@ -214,6 +184,44 @@ class TestimonialsEdit extends Component {
 							backgroundColor={grid_background}
 						/>
 					</PanelColorSettings>
+					<PanelBody title={__("Settings", "guteblock")}>
+						<ToggleControl
+							label={__("Shadow", "guteblock")}
+							onChange={this.toggleShadow}
+							checked={shadow}
+						/>
+
+						<RangeControl
+							label={__(
+								"Grid Border Radius (px)",
+								"guteblock"
+							)}
+							value={grid_border_radius}
+							onChange={grid_border_radius =>
+								setAttributes({ grid_border_radius })
+							}
+							min={0}
+							max={100}
+							step={1}
+						/>
+						{styleName != "multiple" && (
+							<RangeControl
+								label={__(
+									"Image Border Radius (%)",
+									"guteblock"
+								)}
+								value={image_border_radius}
+								onChange={image_border_radius =>
+									setAttributes({
+										image_border_radius
+									})
+								}
+								min={0}
+								max={100}
+								step={1}
+							/>
+						)}
+					</PanelBody>
 				</InspectorControls>
 
 				<div
